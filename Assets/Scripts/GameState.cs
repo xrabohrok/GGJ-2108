@@ -35,4 +35,18 @@ public class GameState : MonoBehaviour {
     {
 		
 	}
+
+    Control ChangeControl (Control con)
+    {
+        if (con == Control.Hack)
+        {
+            con = Control.Robot;
+        }
+        else if (con == Control.Robot)
+        {
+            con = Control.Hack;
+        }
+
+        return con;
+    }
 }
