@@ -8,6 +8,9 @@ namespace BabyMap
     //The abstract keyword enables you to create classes and class members that are incomplete and must be implemented in a derived class.
     public abstract class MovingObject : MonoBehaviour
     {
+        public BoardManager board;
+        public IntVector2 position;
+
         public float moveTime = 0.1f;           //Time it will take object to move, in seconds.
         public LayerMask blockingLayer;         //Layer on which collision will be checked.
 
@@ -28,68 +31,53 @@ namespace BabyMap
 
             //By storing the reciprocal of the move time we can use it by multiplying instead of dividing, this is more efficient.
             inverseMoveTime = 1f / moveTime;
+
+            // Haha I'm sorry -mw
+            board = GameObject.Find("TheMap").GetComponent<BoardManager>();
         }
 
+        protected BoardManager.TileType Move(int xDir, int yDir)
+        {
+            return this.Move(new IntVector2(xDir, yDir));
+        }
 
         //Move returns true if it is able to move and false if not. 
         //Move takes parameters for x direction, y direction and a RaycastHit2D to check collision.
-        // "out" keyword = pass by reference
-        protected bool Move(int xDir, int yDir, out RaycastHit2D hit)
+        protected BoardManager.TileType Move(IntVector2 direction)
         {
-            //Store start position to move from, based on objects current transform position.
-            Vector2 start = transform.position;
-
             // Calculate end position based on the direction parameters passed in when calling Move.
-            Vector2 end = start + new Vector2(xDir, yDir);
+            IntVector2 end = this.position + direction;
 
-            //Disable the boxCollider so that linecast doesn't hit this object's own collider.
-            boxCollider.enabled = false;
-
-            //Cast a line from start point to end point checking collision on blockingLayer.
-            hit = Physics2D.Linecast(start, end, blockingLayer);
-
-            //Re-enable boxCollider after linecast
-            boxCollider.enabled = true;
-
-            //Check if anything was hit
-            if (hit.transform == null)
+            if(board.fullMap[end.x, end.y] == BoardManager.TileType.wall)
             {
-                //If nothing was hit, start SmoothMovement co-routine passing in the Vector2 end as destination
-                StartCoroutine(SmoothMovement(end));
+                StartCoroutine(SmoothMovement(new Vector3(end.x, end.y, 0f)));
+                this.position = end;
             }
 
-            return hit.transform;
+            return board.fullMap[end.x, end.y];
         }
 
-        public void MoveRandomly<T>()
-            where T : Component
+        public void MoveRandomly()
         {
-            int xDir, yDir;
-            bool canMove = false;
-            RaycastHit2D hit;
-            T hitComponent = null;
+            IntVector2 direction;
+            BoardManager.TileType nextTile = BoardManager.TileType.wall;
 
             // While we can't move (because of walls)
-            while (!canMove && !hitComponent)
+            while (nextTile == BoardManager.TileType.wall)
             {
-                xDir = Random.Range(-1, 2);
-                yDir = Random.Range(-1, 2);
-                if (xDir != 0)
-                    yDir = 0;
-                Debug.Log(xDir + " " + yDir);
+                direction = new IntVector2(Random.Range(-1, 2), Random.Range(-1, 2));
+
+                // Don't move diagonally.
+                if (direction.x != 0)
+                    direction.y = 0;
 
                 //Set canMove to true if Move was successful, false if failed.
-                canMove = Move(xDir, yDir, out hit);
-
-                //Get a component reference to the component of type T attached to the object that was hit
-                if (hit)
-                    hitComponent = hit.transform.GetComponent<T>();
+                nextTile = Move(direction);
             }
-
-            //If canMove is false and hitComponent is not equal to null, meaning MovingObject is blocked and has hit something it can interact with.
-            if (!canMove && hitComponent != null)
-                //Call the OnCantMove function and pass it hitComponent as a parameter.
-                OnCantMove(hitComponent);
+            
+            // Handle if we walked into a hazard or goal.
+            if (nextTile != BoardManager.TileType.floor)
+                OnCantMove(nextTile);
         }
 
         //Co-routine for moving units from one space to next, takes a parameter end to specify where to move to.
@@ -146,7 +134,6 @@ namespace BabyMap
 
         //The abstract modifier indicates that the thing being modified has a missing or incomplete implementation.
         //OnCantMove will be overriden by functions in the inheriting classes.
-        protected abstract void OnCantMove<T>(T component)
-            where T : Component;
+        protected abstract void OnCantMove(BoardManager.TileType type);
     }
 }
