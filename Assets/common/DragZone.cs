@@ -26,7 +26,7 @@ public class DragZone : MonoBehaviour
 	            var draggable = clicked.GetComponent<Draggable>();
 	            if (draggable != null)
 	            {
-	                draggable.snapTo(this.transform.position);
+	                draggable.snapTo(this.transform.position, this);
 	            }
 	        }
 	    }

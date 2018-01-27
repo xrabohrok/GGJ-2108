@@ -10,10 +10,16 @@ public class Draggable : MonoBehaviour
     private bool draggable;
     private Clickable clicker;
     private Vector3 lastGoodPos;
+    private DragZone currentDragZone;
 
     public bool isDraggable
     {
         get { return draggable; }
+    }
+
+    public DragZone CurrentDragZone
+    {
+        get { return currentDragZone; }
     }
 
     public void draggableEnable()
@@ -36,6 +42,7 @@ public class Draggable : MonoBehaviour
         });
         clicker.setClickReleaseCallback(() =>
         {
+            currentDragZone = null;
             if (requireDragZone)
             {
                 if (clicker.selectionSet().All(c => c.GetComponent<DragZone>() == null))
@@ -48,9 +55,10 @@ public class Draggable : MonoBehaviour
 
 	}
 
-    public void snapTo(Vector3 newPos)
+    public void snapTo(Vector3 newPos, DragZone dragZone)
     {
         this.transform.position = new Vector3(newPos.x, newPos.y, this.transform.position.z);
+        currentDragZone = dragZone;
     }
 	
 	// Update is called once per frame
