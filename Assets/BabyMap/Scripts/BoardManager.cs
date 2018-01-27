@@ -30,12 +30,8 @@ namespace BabyMap
         public int rows;                                            //Number of rows in our game board.
         public Count wallCount = new Count(5, 9);                       //Lower and upper limit for our random number of walls per level.
         public Count foodCount = new Count(1, 5);                       //Lower and upper limit for our random number of food items per level.
-        public GameObject exit;                                         //Prefab to spawn for exit.
+        public IntVector2 exit;
         //public GameObject[] floorTiles;                                 //Array of floor prefabs.
-        //public GameObject[] wallTiles;                                  //Array of wall prefabs.
-        //public GameObject[] foodTiles;                                  //Array of food prefabs.
-        //public GameObject[] enemyTiles;                                 //Array of enemy prefabs.
-        //public GameObject[] outerWallTiles;                             //Array of outer tile prefabs.
 
         private Transform boardHolder;                                  //A variable to store a reference to the transform of our Board object.
         private List<Vector3> gridPositions = new List<Vector3>();	//A list of possible locations to place tiles.
@@ -169,30 +165,17 @@ namespace BabyMap
 
 
         //SetupScene initializes our level and calls the previous functions to lay out the game board
-        public void SetupScene(int level)
+        public void SetupScene()
         {
             //Creates the outer walls and floor.
             BoardSetup();
 
             //Reset our list of gridpositions.
             InitialiseList();
+            
+            this.exit = new IntVector2(columns - 1, rows - 1);
 
-            //Instantiate a random number of wall tiles based on minimum and maximum, at randomized positions.
-           // LayoutObjectAtRandom(wallTiles, wallCount.minimum, wallCount.maximum);
-
-            //Instantiate a random number of food tiles based on minimum and maximum, at randomized positions.
-           // LayoutObjectAtRandom(foodTiles, foodCount.minimum, foodCount.maximum);
-
-            //Determine number of enemies based on current level number, based on a logarithmic progression
-            int enemyCount = (int)Mathf.Log(level, 2f);
-
-            //Instantiate a random number of enemies based on minimum and maximum, at randomized positions.
-            //LayoutObjectAtRandom(enemyTiles, enemyCount, enemyCount);
-
-            //Instantiate the exit tile in the upper right hand corner of our game board
-            Instantiate(exit, new Vector3(columns - 1, rows - 1, 0f), Quaternion.identity);
-
-            //Create2DTileArray();
+            Create2DTileArray();
         }
 
         public enum TileType
@@ -200,27 +183,28 @@ namespace BabyMap
             floor, wall, hazard, goalPoint
         }
 
-        //public void Create2DTileArray()
-        //{
-        //    this.fullMap = new TileType[this.rows, this.columns];
+        public void Create2DTileArray()
+        {
+            this.fullMap = new TileType[this.rows, this.columns];
 
-        //    foreach (GameObject tile in this.floorTiles)
-        //        this.fullMap[(int)tile.transform.position.x, (int)tile.transform.position.y] = TileType.floor;
+            // When Rich is done with creating the map manually, pull the info from it to here.
+            //foreach (GameObject tile in this.floorTiles)
+            //    this.fullMap[(int)tile.transform.position.x, (int)tile.transform.position.y] = TileType.floor;
 
-        //    foreach (GameObject tile in this.wallTiles)
-        //        this.fullMap[(int)tile.transform.position.x, (int)tile.transform.position.y] = TileType.wall;
+            //foreach (GameObject tile in this.wallTiles)
+            //    this.fullMap[(int)tile.transform.position.x, (int)tile.transform.position.y] = TileType.wall;
 
-        //    foreach (GameObject tile in this.enemyTiles)
-        //        this.fullMap[(int)tile.transform.position.x, (int)tile.transform.position.y] = TileType.hazard;
+            //foreach (GameObject tile in this.enemyTiles)
+            //    this.fullMap[(int)tile.transform.position.x, (int)tile.transform.position.y] = TileType.hazard;
 
-        //    for (int i = 0; i < columns; i++)
-        //    {
-        //        for (int j = 0; j < rows; j++)
-        //        {
-        //            this.CreateVertices(new IntVector2(i, j));
-        //        }
-        //    }
-        //}
+            for (int i = 0; i < columns; i++)
+            {
+                for (int j = 0; j < rows; j++)
+                {
+                    this.CreateVertices(new IntVector2(i, j));
+                }
+            }
+        }
 
         public List<Vector3> Djikstras(IntVector2 startPos, IntVector2 endPos)
         {
@@ -296,14 +280,14 @@ namespace BabyMap
         {
             //Location, cost of edge.
             Dictionary<IntVector2, int> edges = new Dictionary<IntVector2, int>();
-            if (location.X > 0)
+            if (location.X > 0 && fullMap[location.x - 1, location.y] == TileType.floor)
                 edges.Add(new IntVector2(location.X - 1, location.Y), 10);
-            if (location.X < this.columns - 1)
+            if (location.X < this.columns - 1 && fullMap[location.x + 1, location.y] == TileType.floor)
                 edges.Add(new IntVector2(location.X + 1, location.Y), 10);
 
-            if (location.Y > 0)
+            if (location.Y > 0 && fullMap[location.x, location.y - 1] == TileType.floor)
                 edges.Add(new IntVector2(location.X, location.Y - 1), 10);
-            if (location.Y < this.rows - 1)
+            if (location.Y < this.rows - 1 && fullMap[location.x, location.y + 1] == TileType.floor)
                 edges.Add(new IntVector2(location.X, location.Y + 1), 10);
 
             this.vertices[location] = edges;
