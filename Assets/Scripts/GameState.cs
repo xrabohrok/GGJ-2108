@@ -38,6 +38,8 @@ public class GameState : MonoBehaviour {
     {
         if (instance == null)
             instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
     }
 
 	// Use this for initialization
