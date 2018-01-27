@@ -48,7 +48,7 @@ namespace BabyMap
             // Calculate end position based on the direction parameters passed in when calling Move.
             IntVector2 end = this.position + direction;
 
-            if(board.fullMap[end.x, end.y] == BoardManager.TileType.wall)
+            if(board.fullMap[end.x, end.y] == BoardManager.TileType.floor)
             {
                 StartCoroutine(SmoothMovement(new Vector3(end.x, end.y, 0f)));
                 this.position = end;
@@ -107,28 +107,20 @@ namespace BabyMap
 
         //The virtual keyword means AttemptMove can be overridden by inheriting classes using the override keyword.
         //AttemptMove takes a generic parameter T to specify the type of component we expect our unit to interact with if blocked (Player for Enemies, Wall for Player).
-        protected virtual void AttemptMove<T>(int xDir, int yDir)
-            where T : Component
+        protected virtual void AttemptMove(int xDir, int yDir)
         {
-            //Hit will store whatever our linecast hits when Move is called.
-            RaycastHit2D hit;
+            IntVector2 direction = new IntVector2(xDir, yDir);
+
+            // Don't move diagonally.
+            if (direction.x != 0)
+                direction.y = 0;
 
             //Set canMove to true if Move was successful, false if failed.
-            bool canMove = Move(xDir, yDir, out hit);
+            BoardManager.TileType nextTile = Move(direction);
 
-            //Check if nothing was hit by linecast
-            if (hit.transform == null)
-                //If nothing was hit, return and don't execute further code.
-                return;
-
-            //Get a component reference to the component of type T attached to the object that was hit
-            T hitComponent = hit.transform.GetComponent<T>();
-
-            //If canMove is false and hitComponent is not equal to null, meaning MovingObject is blocked and has hit something it can interact with.
-            if (!canMove && hitComponent != null)
-
-                //Call the OnCantMove function and pass it hitComponent as a parameter.
-                OnCantMove(hitComponent);
+            // Handle if we walked into a hazard or goal.
+            if (nextTile != BoardManager.TileType.floor)
+                OnCantMove(nextTile);
         }
 
 
