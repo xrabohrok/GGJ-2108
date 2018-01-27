@@ -13,7 +13,9 @@ public class GameState : MonoBehaviour {
    // enum Control {Robot, Hack};
 
     public static GameState instance = null;
+    //refers to the Hacking Game Board
     public GameObject hackGame;
+    //refers to the Robot Game Board
     public GameObject robotGame;
     public Text controlSwitchText;
     Animator anim;
@@ -24,8 +26,9 @@ public class GameState : MonoBehaviour {
     public AudioClip robotMusic;
     public AudioClip hackMusic;
 
-
+    //Health before robot dies
     private int robotHealth = 5;
+    //Player moves
     private int playerMoves = 5;
     
 
@@ -57,6 +60,11 @@ public class GameState : MonoBehaviour {
         if (robotHealth <= 0)
         {
             GameOver();
+        }
+
+        if (playerMoves <= 0)
+        {
+            ChangeToHack();
         }
 	}
 
