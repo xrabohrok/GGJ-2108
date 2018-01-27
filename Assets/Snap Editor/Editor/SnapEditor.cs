@@ -735,7 +735,7 @@ public class SnapEditor : EditorWindow
             }
 
             Selection.activeObject = null;
-            if (Event.current.type != EventType.repaint && Event.current.type != EventType.layout) Event.current.Use();
+            if (Event.current.type != EventType.Repaint && Event.current.type != EventType.Layout) Event.current.Use();
         }
     }
 
