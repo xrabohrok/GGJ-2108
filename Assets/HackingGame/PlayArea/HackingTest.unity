@@ -393,6 +393,109 @@ MonoBehaviour:
   horizontalCount: 6
   spacing: 1.5
   size: 0.5
+  drawSet:
+  - top: 1
+    right: 0
+    down: 1
+    left: 1
+    leak: 1
+    tile: {fileID: 21300002, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 0
+    right: 1
+    down: 1
+    left: 1
+    leak: 1
+    tile: {fileID: 21300006, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 1
+    right: 1
+    down: 1
+    left: 0
+    leak: 1
+    tile: {fileID: 21300010, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 1
+    right: 1
+    down: 0
+    left: 1
+    leak: 1
+    tile: {fileID: 21300014, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 1
+    right: 1
+    down: 1
+    left: 1
+    leak: 1
+    tile: {fileID: 21300018, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 0
+    right: 1
+    down: 1
+    left: 0
+    leak: 1
+    tile: {fileID: 21300022, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 1
+    right: 1
+    down: 0
+    left: 0
+    leak: 1
+    tile: {fileID: 21300026, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 1
+    right: 0
+    down: 0
+    left: 1
+    leak: 1
+    tile: {fileID: 21300030, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 0
+    right: 0
+    down: 1
+    left: 1
+    leak: 1
+    tile: {fileID: 21300034, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 0
+    right: 0
+    down: 0
+    left: 1
+    leak: 0
+    tile: {fileID: 21300038, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 0
+    right: 0
+    down: 1
+    left: 0
+    leak: 0
+    tile: {fileID: 21300042, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 0
+    right: 1
+    down: 0
+    left: 0
+    leak: 0
+    tile: {fileID: 21300046, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 1
+    right: 0
+    down: 0
+    left: 0
+    leak: 0
+    tile: {fileID: 21300050, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 0
+    right: 1
+    down: 0
+    left: 1
+    leak: 1
+    tile: {fileID: 21300070, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 1
+    right: 0
+    down: 1
+    left: 0
+    leak: 0
+    tile: {fileID: 21300080, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 0
+    right: 0
+    down: 0
+    left: 0
+    leak: 0
+    tile: {fileID: 0}
+  - top: 0
+    right: 0
+    down: 0
+    left: 0
+    leak: 0
+    tile: {fileID: 0}
 --- !u!4 &1761401212
 Transform:
   m_ObjectHideFlags: 0
@@ -400,7 +503,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1761401210}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -8.22, y: 1.61, z: -0.01171875}
+  m_LocalPosition: {x: -10.41, y: 0.59, z: -0.01171875}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

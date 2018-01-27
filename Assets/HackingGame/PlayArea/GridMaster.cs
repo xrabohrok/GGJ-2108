@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ public class GridMaster : MonoBehaviour
     public float size = 10.0f;
 
     private List<List<GameObject>> arrayedRefs;
+    public List<TileDef> drawSet;
 
 #if UNITY_EDITOR
     private float lastSize;
@@ -81,5 +83,16 @@ public class GridMaster : MonoBehaviour
         lastSpacing = spacing;
 #endif
 
+    }
+
+    [Serializable]
+    public class TileDef
+    {
+        public bool top;
+        public bool right;
+        public bool down;
+        public bool left;
+        public bool leak;
+        public Sprite tile;
     }
 }
