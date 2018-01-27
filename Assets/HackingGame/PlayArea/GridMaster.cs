@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class GridMaster : MonoBehaviour
 {
@@ -13,9 +15,12 @@ public class GridMaster : MonoBehaviour
 
     public float spacing = 5.0f;
     public float size = 10.0f;
+    public Transform tilePrefab;
 
     private List<List<GameObject>> arrayedRefs;
     public List<TileDef> drawSet;
+
+    public List<DragZone> spawns;
 
 #if UNITY_EDITOR
     private float lastSize;
@@ -54,6 +59,22 @@ public class GridMaster : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
+        foreach (var spawn in spawns)
+        {
+            if (spawn.CurrentDraggable == null)
+            {
+                var ind = Mathf.FloorToInt(Random.value * drawSet.Count);
+                Debug.Log(ind);
+                var draw = drawSet[ind];
+                var newTile = GameObject.Instantiate(tilePrefab, spawn.transform.position, Quaternion.identity);
+                var tile = newTile.GetComponent<CircuitTile>();
+                tile.Initializer(draw.left, draw.right, draw.top, draw.down, draw.leak,
+                    draw.tile, draw.poweredTile);
+                spawn.setDraggable(tile.gameObject.GetComponent<Draggable>());
+            }
+        }
+
+
 
 #if UNITY_EDITOR
         if (lastHCount != horizontalCount ||
@@ -94,5 +115,6 @@ public class GridMaster : MonoBehaviour
         public bool left;
         public bool leak;
         public Sprite tile;
+        public Sprite poweredTile;
     }
 }

@@ -14,14 +14,6 @@ public class HackingGameDriver : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-	    if (draggedThing != null)
-	    {
-	        draggedThing.move(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-	    }
 
-	    if (Input.GetMouseButtonUp(0))
-	    {
-	        draggedThing = null;
-	    }
     }
 }

@@ -7,6 +7,12 @@ public class DragZone : MonoBehaviour
 {
     private bool lastClick;
     private Clickable clicker;
+    private Draggable currentDraggable;
+
+    public Draggable CurrentDraggable
+    {
+        get { return currentDraggable; }
+    }
 
     // Use this for initialization
 	void Start ()
@@ -27,5 +33,10 @@ public class DragZone : MonoBehaviour
                 draggable.snapTo(this.transform.position, this);
             }
         }
+    }
+
+    public void setDraggable(Draggable draggable)
+    {
+        currentDraggable = draggable;
     }
 }

@@ -58,7 +58,12 @@ public class Draggable : MonoBehaviour
     public void snapTo(Vector3 newPos, DragZone dragZone)
     {
         this.transform.position = new Vector3(newPos.x, newPos.y, this.transform.position.z);
+        if (currentDragZone != null)
+        {
+            currentDragZone.setDraggable(null);
+        }
         currentDragZone = dragZone;
+        dragZone.setDraggable(this);
     }
 	
 	// Update is called once per frame
