@@ -31,8 +31,6 @@ public class GameState : MonoBehaviour {
     //Player moves
     private int playerMoves = 5;
 
-
-
     //Awake is always called before
     void Awake()
     {
@@ -43,26 +41,18 @@ public class GameState : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-
-
         //TODO add in reference to robot on grid
         //hackGame = GameObject.Find("<HACKING BOARD>");
         //TODO add in reference to hacking minigame
         //robotGame = GameObject.Find("<ROBOT GAME>");
 
         controlSwitchText.text = "Controlling Robot";
-       
-
-
     }
 
 	
 	// Update is called once per frame
 	void Update ()
     {
-		
-	
-
 
         if (robotHealth <= 0)
         {
@@ -110,7 +100,5 @@ public class GameState : MonoBehaviour {
             // .. then reload the currently loaded level.
             SceneManager.LoadScene("Game");
         }
-
     }
-
 }
