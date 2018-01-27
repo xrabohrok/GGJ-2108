@@ -79,4 +79,9 @@ public class Clickable : MonoBehaviour
     {
         return clickMaster.hoverElements;
     }
+
+    public void die()
+    {
+        clickMaster.deRegister(this);
+    }
 }

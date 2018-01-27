@@ -75,4 +75,9 @@ public class Draggable : MonoBehaviour
 	        this.transform.position = new Vector3( mouseWorldPoint.x, mouseWorldPoint.y, 0);
 	    }
 	}
+
+    public void funeralRites()
+    {
+        clicker.die();
+    }
 }
