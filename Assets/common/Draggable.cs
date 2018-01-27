@@ -41,16 +41,17 @@ public class Draggable : MonoBehaviour
             lastGoodPos = this.transform.position;
         });
         clicker.setClickReleaseCallback(() =>
-        {
-            currentDragZone = null;
-            if (requireDragZone)
             {
                 if (clicker.selectionSet().All(c => c.GetComponent<DragZone>() == null))
                 {
-                    this.transform.position = lastGoodPos;
+                    if (requireDragZone)
+                    {
+                        this.transform.position = lastGoodPos;
+                    }
                 }
+
             }
-        });
+        );
 	    draggable = true;
 
 	}

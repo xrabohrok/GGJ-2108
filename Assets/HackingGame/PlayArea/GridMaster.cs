@@ -64,13 +64,13 @@ public class GridMaster : MonoBehaviour
             if (spawn.CurrentDraggable == null)
             {
                 var ind = Mathf.FloorToInt(Random.value * drawSet.Count);
-                Debug.Log(ind);
                 var draw = drawSet[ind];
                 var newTile = GameObject.Instantiate(tilePrefab, spawn.transform.position, Quaternion.identity);
                 var tile = newTile.GetComponent<CircuitTile>();
+                spawn.setDraggable(tile.gameObject.GetComponent<Draggable>());
+                tile.GetComponent<Draggable>().snapTo(spawn.transform.position, spawn);
                 tile.Initializer(draw.left, draw.right, draw.top, draw.down, draw.leak,
                     draw.tile, draw.poweredTile);
-                spawn.setDraggable(tile.gameObject.GetComponent<Draggable>());
             }
         }
 
