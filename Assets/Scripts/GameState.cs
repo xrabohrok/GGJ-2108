@@ -1,23 +1,4 @@
-<<<<<<< HEAD
-﻿using System.Collections;
-using System.Collections.Generic;
-using System;
-using UnityEngine;
-
-public class GameState : MonoBehaviour {
-
-    enum Control {Robot, Hack};
-
-    public static GameState instance = null;
-
-    //TODO hide mouse 
-    //TODO add in reference to robot on grid
-    //TODO add in reference to hacking minigame
-    private int robotHealth;
-    private int playerMoves;
-    private int inControl;
-=======
-﻿//GameState.cs
+//GameState.cs
 //Used to keep track of state of robot and hacking gameboard
 
 using System.Collections;
@@ -49,8 +30,7 @@ public class GameState : MonoBehaviour {
     private int robotHealth = 5;
     //Player moves
     private int playerMoves = 5;
-    
->>>>>>> 87c0837db0f592241eba50b95f2cdc35a7982d81
+
 
 
     //Awake is always called before
@@ -63,10 +43,8 @@ public class GameState : MonoBehaviour {
 	// Use this for initialization
 	void Start ()
     {
-<<<<<<< HEAD
-		
-	}
-=======
+
+
         //TODO add in reference to robot on grid
         //hackGame = GameObject.Find("<HACKING BOARD>");
         //TODO add in reference to hacking minigame
@@ -77,29 +55,15 @@ public class GameState : MonoBehaviour {
 
 
     }
->>>>>>> 87c0837db0f592241eba50b95f2cdc35a7982d81
+
 	
 	// Update is called once per frame
 	void Update ()
     {
-<<<<<<< HEAD
 		
-	}
+	
 
-    Control ChangeControl (Control con)
-    {
-        if (con == Control.Hack)
-        {
-            con = Control.Robot;
-        }
-        else if (con == Control.Robot)
-        {
-            con = Control.Hack;
-        }
 
-        return con;
-    }
-=======
         if (robotHealth <= 0)
         {
             GameOver();
@@ -149,6 +113,4 @@ public class GameState : MonoBehaviour {
 
     }
 
-
->>>>>>> 87c0837db0f592241eba50b95f2cdc35a7982d81
 }
