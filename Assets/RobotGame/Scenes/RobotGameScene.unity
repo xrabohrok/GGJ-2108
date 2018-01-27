@@ -113,6 +113,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1001 &1082123105
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4646237744140222, guid: 7e19c8bf2da5c3a429f3761e6f612e0c, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 5.2508025
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646237744140222, guid: 7e19c8bf2da5c3a429f3761e6f612e0c, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -0.9614849
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646237744140222, guid: 7e19c8bf2da5c3a429f3761e6f612e0c, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -9.842972
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646237744140222, guid: 7e19c8bf2da5c3a429f3761e6f612e0c, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646237744140222, guid: 7e19c8bf2da5c3a429f3761e6f612e0c, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646237744140222, guid: 7e19c8bf2da5c3a429f3761e6f612e0c, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646237744140222, guid: 7e19c8bf2da5c3a429f3761e6f612e0c, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4646237744140222, guid: 7e19c8bf2da5c3a429f3761e6f612e0c, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1086050609275564, guid: 7e19c8bf2da5c3a429f3761e6f612e0c, type: 2}
+      propertyPath: m_Name
+      value: tile
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7e19c8bf2da5c3a429f3761e6f612e0c, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1089695410
 GameObject:
   m_ObjectHideFlags: 0
@@ -165,7 +211,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 9.12
+  orthographic size: 6.35
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -188,7 +234,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1089695410}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
+  m_LocalPosition: {x: 7.17, y: 4.1, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -222,8 +268,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b713f1ac5f49e2247937323a705eb058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 4
-  rows: 4
+  columns: 12
+  rows: 10
   wallCount:
     minimum: 5
     maximum: 9

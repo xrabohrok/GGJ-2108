@@ -26,8 +26,8 @@ namespace BabyMap
         }
 
 
-        public int columns = 8;                                         //Number of columns in our game board.
-        public int rows = 4;                                            //Number of rows in our game board.
+        public int columns;                                         //Number of columns in our game board.
+        public int rows;                                            //Number of rows in our game board.
         public Count wallCount = new Count(5, 9);                       //Lower and upper limit for our random number of walls per level.
         public Count foodCount = new Count(1, 5);                       //Lower and upper limit for our random number of food items per level.
         public GameObject exit;                                         //Prefab to spawn for exit.
@@ -42,6 +42,8 @@ namespace BabyMap
 
         public TileType[,] fullMap;
         private Dictionary<IntVector2, Dictionary<IntVector2, int>> vertices = new Dictionary<IntVector2, Dictionary<IntVector2, int>>();
+
+        private String[,] room; 
 
 
         //Clears our list gridPositions and prepares it to generate a new board.
@@ -69,89 +71,63 @@ namespace BabyMap
             //Instantiate Board and set boardHolder to its transform.
             boardHolder = new GameObject("Board").transform;
 
-
-
             GameObject instance;
 
+            room = new String[columns, rows];
 
-            for (int x = 0; x < columns + 1; x++)
+            int topOfRoom = rows - 1;
+            int rightOfRoom = columns - 1;
+
+            room[0, topOfRoom] = "robotRoom_topHorizontal_wall";
+            room[1, topOfRoom] = "robotRoom_topHorizontal_wall";
+            room[2, topOfRoom] = "robotRoom_rightDown_wall";
+
+            for(int i = 5; i <columns; i++)
             {
-                for (int y = 0; y < rows + 1; y++)
-                {
-                    if (y == 0)
-                    {
-                        if (x == 0)
-                        {
-                            instance = Instantiate(Resources.Load("robotRoom_leftUp_wall"), new Vector3(x, y, 0f), Quaternion.Euler(180, 0, 0)) as GameObject;
-                            instance.transform.SetParent(boardHolder);
-                        }
-                        else if (x == columns)
-                        {
-                            instance = Instantiate(Resources.Load("robotRoom_rightUp_wall"), new Vector3(x, y, 0f), Quaternion.Euler(180, 180, 0)) as GameObject;
-                            instance.transform.SetParent(boardHolder);
-                        }
-                        else
-                        {
-                            instance = Instantiate(Resources.Load("robotRoom_bottomHorizontal_wall"), new Vector3(x, y, 0f), Quaternion.Euler(180, 0, 0)) as GameObject;
-                            instance.transform.SetParent(boardHolder);
-                        }
-
-                    }
-                    else if (y == columns)
-                    {
-                        if (x == 0)
-                        {
-                            instance = Instantiate(Resources.Load("robotRoom_leftDown_wall"), new Vector3(x, y, 0f), Quaternion.Euler(0, 0, 0)) as GameObject;
-                            instance.transform.SetParent(boardHolder);
-                        }
-                        else if (x == columns)
-                        {
-                            instance = Instantiate(Resources.Load("robotRoom_rightDown_wall"), new Vector3(x, y, 0f), Quaternion.Euler(0, 180, 0)) as GameObject;
-                            instance.transform.SetParent(boardHolder);
-                        }
-                        else
-                        {
-                            instance = Instantiate(Resources.Load("robotRoom_topHorizontal_wall"), new Vector3(x, y, 0f), Quaternion.Euler(0, 0, 0)) as GameObject;
-                            instance.transform.SetParent(boardHolder);
-                        }
-                    }
-                    else{
-                        if (x == 0)
-                        {
-                            instance = Instantiate(Resources.Load("robotRoom_leftVertical_wall"), new Vector3(x, y, 0f), Quaternion.Euler(180, 0, 0)) as GameObject;
-                            instance.transform.SetParent(boardHolder);
-                        }
-                        else if (x == columns)
-                        {
-                            instance = Instantiate(Resources.Load("robotRoom_rightVertical_wall"), new Vector3(x, y, 0f), Quaternion.Euler(180, 180, 0)) as GameObject;
-                            instance.transform.SetParent(boardHolder);
-                        }
-                    }
-                }
+                room[i, topOfRoom] = "robotRoom_topHorizontal_wall";
             }
 
-            ////Loop along x axis, starting from -1 (to fill corner) with floor or outerwall edge tiles.
-            //for (int x = -1; x < columns + 1; x++)
-            //{
-            //    //Loop along y axis, starting from -1 to place floor or outerwall tiles.
-            //    for (int y = -1; y < rows + 1; y++)
-            //    {
-            //        //Choose a random tile from our array of floor tile prefabs and prepare to instantiate it.
-            //        GameObject toInstantiate = floorTiles[Random.Range(0, floorTiles.Length)];
+            for (int i = 2; i < topOfRoom; i ++) {
+                room[2, i] = "robotRoom_rightVertical_wall";
+            }
 
-            //        //Check if we current position is at board edge, if so choose a random outer wall prefab from our array of outer wall tiles.
-            //        if (x == -1 || x == columns || y == -1 || y == rows)
-            //            toInstantiate = outerWallTiles[Random.Range(0, outerWallTiles.Length)];
+            for (int i = 0; i < 6; i++)
+            {
+                room[5, i] = "robotRoom_leftVertical_wall";
+            }
 
-            //        //Instantiate the GameObject instance using the prefab chosen for toInstantiate at the Vector3 corresponding to current grid position in loop, cast it to GameObject.
-            //        GameObject instance =
-            //            Instantiate(toInstantiate, new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+            room[5, 2] = "robotRoom_leftDown_wall";
 
-            //        //Set the parent of our newly instantiated object instance to boardHolder, this is just organizational to avoid cluttering hierarchy.
-            //        instance.transform.SetParent(boardHolder);
-            //    }
-            //}
+            room[6, 2] = "robotRoom_topHorizontal_wall";
+            room[7, 2] = "robotRoom_topHorizontal_wall";
+
+            for(int i = 8; i < columns; i++)
+            {
+                room[i, 5] = "robotRoom_bottomHorizontal_wall";
+            }
+
+          
+
+            for (int y = 0; y < rows; y++)
+            {
+                for (int x = 0; x < columns; x++)
+                {
+                    instance = Instantiate(Resources.Load("robotRoom_floor"), new Vector3(x, y, 0f), Quaternion.identity) as GameObject;
+                    instance.transform.SetParent(boardHolder);
+
+
+                    if (room[x,y] != null)
+                    {
+                        instance = Instantiate(Resources.Load(room[x, y]), new Vector3(x, y, 0f), Quaternion.Euler(0,0,0)) as GameObject;
+                        instance.transform.SetParent(boardHolder);
+                    }
+                }
+
+            }
         }
+
+
+        
 
 
         //RandomPosition returns a random position from our list gridPositions.
