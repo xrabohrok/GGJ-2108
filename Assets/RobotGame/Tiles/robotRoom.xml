@@ -1,0 +1,10 @@
+<TextureAtlas imagePath="robotRoom.png">
+	<SubTexture name="robotRoom_0000_floor.png" x="34" y="0" width="32" height="32"/>
+	<SubTexture name="robotRoom_0001_hori-wlal.png" x="68" y="0" width="32" height="32"/>
+	<SubTexture name="robotRoom_0002_vert-wall.png" x="34" y="68" width="32" height="32"/>
+	<SubTexture name="robotRoom_0003_vvv.png" x="34" y="34" width="32" height="32"/>
+	<SubTexture name="robotRoom_0004____.png" x="68" y="34" width="32" height="32"/>
+	<SubTexture name="robotRoom_0005_^^^.png" x="0" y="68" width="32" height="32"/>
+	<SubTexture name="robotRoom_0006____.png" x="0" y="34" width="32" height="32"/>
+	<SubTexture name="robotRoom_0007_corner.png" x="0" y="0" width="32" height="32"/>
+</TextureAtlas>
