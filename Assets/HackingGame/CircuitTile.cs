@@ -10,6 +10,7 @@ class CircuitTile : MonoBehaviour
     private bool leakable;
     private Sprite offSprite;
     private Sprite onSprite;
+    public bool sourcedPower = false;
 
     void Start()
     {

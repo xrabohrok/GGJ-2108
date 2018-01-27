@@ -391,6 +391,35 @@ MonoBehaviour:
     leak: 0
     tile: {fileID: 21300080, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
     poweredTile: {fileID: 21300078, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  poweredSet:
+  - top: 0
+    right: 1
+    down: 0
+    left: 0
+    leak: 0
+    tile: {fileID: 21300054, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+    poweredTile: {fileID: 21300052, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 1
+    right: 0
+    down: 0
+    left: 0
+    leak: 0
+    tile: {fileID: 21300058, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+    poweredTile: {fileID: 21300056, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 0
+    right: 0
+    down: 0
+    left: 1
+    leak: 0
+    tile: {fileID: 21300058, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+    poweredTile: {fileID: 21300060, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+  - top: 0
+    right: 0
+    down: 1
+    left: 0
+    leak: 0
+    tile: {fileID: 21300066, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+    poweredTile: {fileID: 21300064, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
   spawns:
   - {fileID: 615349708}
 --- !u!4 &1761401212
