@@ -1,4 +1,7 @@
-﻿using System.Collections;
+﻿//GameState.cs
+//Used to keep track of state of robot and hacking gameboard
+
+using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
@@ -62,6 +65,7 @@ public class GameState : MonoBehaviour {
         Cursor.visible = false;
 
         controlSwitchText.text = "Controlling Robot";
+        //TODO: set up activate && deactivate
         //hackController.SetActive(false);
         //robotController.SetActive(true);
         // hackGame.SetActive(true);
@@ -74,10 +78,10 @@ public class GameState : MonoBehaviour {
         Cursor.visible = true;
 
         controlSwitchText.text = "Hacking";
+        //TODO: set up activate && deactivate
         //hackController.SetActive(true);
         //robotController.SetActive(false);
 
-        
         //robotGame.SetActive(true);
 
     }
@@ -89,7 +93,7 @@ public class GameState : MonoBehaviour {
         if (restartTimer >= restartDelay)
         {
             // .. then reload the currently loaded level.
-            SceneManager.LoadScene(0);
+            SceneManager.LoadScene("Game");
         }
 
     }
