@@ -70,8 +70,8 @@ namespace BabyMap
                 //MoveRandomly();
             }
 
-            GameObject exit = GameManager.instance.boardScript.exit;
-            IntVector2 exitPos = new IntVector2(Mathf.RoundToInt(exit.transform.position.x), Mathf.RoundToInt(exit.transform.position.y));
+            IntVector2 exit = GameManager.instance.boardScript.exit;
+            IntVector2 exitPos = new IntVector2(Mathf.RoundToInt(exit.x), Mathf.RoundToInt(exit.y));
             IntVector2 position = new IntVector2(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
 
 

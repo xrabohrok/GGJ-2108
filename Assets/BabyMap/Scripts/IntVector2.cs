@@ -59,7 +59,10 @@ namespace BabyMap
 
         public static IntVector2 operator +(IntVector2 a, IntVector2 b)
         {
-            return new IntVector2(a.X + b.X, a.Y + b.Y);
+            if (a != null && b != null)
+                return new IntVector2(a.X + b.X, a.Y + b.Y);
+            else
+                throw new NullReferenceException("Don't add things that don't exist.");
         }
 
         public static IntVector2 operator -(IntVector2 a, IntVector2 b)
