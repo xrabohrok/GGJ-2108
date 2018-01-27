@@ -31,9 +31,8 @@ namespace BabyMap
 
             //By storing the reciprocal of the move time we can use it by multiplying instead of dividing, this is more efficient.
             inverseMoveTime = 1f / moveTime;
-
-            // Haha I'm sorry -mw
-            board = GameObject.Find("TheMap").GetComponent<BoardManager>();
+            
+            board = GameManager.instance.GetComponent<BoardManager>();
         }
 
         protected BoardManager.TileType Move(int xDir, int yDir)
