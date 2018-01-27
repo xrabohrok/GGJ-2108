@@ -15,6 +15,7 @@ public class ClickMaster : MonoBehaviour {
     void Start()
     {
         clickables = new List<Clickable>();
+        hovered = new List<Clickable>();
     }
 	
 	// Update is called once per frame
@@ -38,22 +39,30 @@ public class ClickMaster : MonoBehaviour {
             }
         }
 
-        //what was the mouse not over anymore?
-	    var diff = new List<Clickable>();
 	    foreach (var clickable in lastHovered)
 	    {
 	        if (!(hovered.Contains(clickable)))
 	        {
-	            diff.Add(clickable);
+	            clickable.ReportExitHover();
+            }
+	    }
+
+	    if (Input.GetMouseButtonDown(0))
+	    {
+	        foreach (var clicked in hovered)
+	        {
+	            clicked.ReportMouseDown();
 	        }
 	    }
 
-        //tell those things that they are not part of the mouse anymore
-	    foreach (var clickable in diff)
+	    if (Input.GetMouseButtonUp(0))
 	    {
-	        clickable.ReportExitHover();
+	        foreach (var clicked in hovered)
+	        {
+	            clicked.ReportMouseUp();
+	        }
 	    }
-	}
+    }
 
     public void register(Clickable clickable)
     {

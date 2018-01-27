@@ -9,10 +9,16 @@ public class Clickable : MonoBehaviour
     private ClickMaster clickMaster;
 
     private bool hoveredOver;
+    private bool clicked;
 
     public Collider2D Collider
     {
         get { return collider; }
+    }
+
+    public bool Clicked
+    {
+        get { return clicked; }
     }
 
     // Use this for initialization
@@ -35,5 +41,15 @@ public class Clickable : MonoBehaviour
     public void ReportExitHover()
     {
         hoveredOver = false;
+    }
+
+    public void ReportMouseDown()
+    {
+        clicked = true;
+    }
+
+    public void ReportMouseUp()
+    {
+        clicked = false;
     }
 }
