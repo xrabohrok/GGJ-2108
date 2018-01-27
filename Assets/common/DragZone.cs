@@ -12,25 +12,20 @@ public class DragZone : MonoBehaviour
 	void Start ()
 	{
 	    clicker = GetComponent<Clickable>();
+        clicker.setClickReleaseCallback(SnapDraggablesToPos);
 	}
 	
-	// Update is called once per frame
-	void Update () {
 
-        //we were clicked and released
-	    if (lastClick && !clicker.Clicked)
-	    {
-	        //if there is a tile that is draggable in the mouse set, take it and grab it
-	        foreach (var clicked in clicker.selectionSet())
-	        {
-	            var draggable = clicked.GetComponent<Draggable>();
-	            if (draggable != null)
-	            {
-	                draggable.snapTo(this.transform.position, this);
-	            }
-	        }
-	    }
-
-	    lastClick = clicker.Clicked;
-	}
+    private void SnapDraggablesToPos()
+    {
+//if there is a tile that is draggable in the mouse set, take it and grab it
+        foreach (var clicked in clicker.selectionSet())
+        {
+            var draggable = clicked.GetComponent<Draggable>();
+            if (draggable != null)
+            {
+                draggable.snapTo(this.transform.position, this);
+            }
+        }
+    }
 }
