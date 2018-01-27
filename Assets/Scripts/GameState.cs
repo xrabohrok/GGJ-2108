@@ -6,12 +6,17 @@ using UnityEngine;
 
 public class GameState : MonoBehaviour {
 
-    enum Control {Robot, Hack};
+   // enum Control {Robot, Hack};
 
     public static GameState instance = null;
     public GameObject hackGame;
     public GameObject robotGame;
     public Text controlSwitchText;
+
+    //Used for music change
+    public AudioClip robotMusic;
+    public AudioClip hackMusic;
+
 
     private int robotHealth = 5;
     private int playerMoves = 5;
@@ -35,7 +40,9 @@ public class GameState : MonoBehaviour {
 
         controlSwitchText.text = "Controlling Robot";
 
-	}
+
+
+    }
 	
 	// Update is called once per frame
 	void Update ()
@@ -62,6 +69,8 @@ public class GameState : MonoBehaviour {
         controlSwitchText.text = "Hacking";
         //hackController.SetActive(true);
         //robotController.SetActive(false);
+
+        
         //robotGame.SetActive(true);
 
     }
