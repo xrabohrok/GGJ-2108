@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour {
 
@@ -12,6 +13,9 @@ public class GameState : MonoBehaviour {
     public GameObject hackGame;
     public GameObject robotGame;
     public Text controlSwitchText;
+    Animator anim;
+    public float restartDelay = 5f;
+    float restartTimer;
 
     //Used for music change
     public AudioClip robotMusic;
@@ -39,7 +43,7 @@ public class GameState : MonoBehaviour {
         //robotGame = GameObject.Find("<ROBOT GAME>");
 
         controlSwitchText.text = "Controlling Robot";
-
+       
 
 
     }
@@ -47,7 +51,10 @@ public class GameState : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-
+        if (robotHealth <= 0)
+        {
+            GameOver();
+        }
 	}
 
     void ChangeToRobot()
@@ -72,6 +79,18 @@ public class GameState : MonoBehaviour {
 
         
         //robotGame.SetActive(true);
+
+    }
+
+    void GameOver()
+    {
+        anim.SetTrigger("GameOver");
+        restartTimer += Time.deltaTime;
+        if (restartTimer >= restartDelay)
+        {
+            // .. then reload the currently loaded level.
+            SceneManager.LoadScene(0);
+        }
 
     }
 
