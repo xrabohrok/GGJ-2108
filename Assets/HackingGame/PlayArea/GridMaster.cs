@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -32,6 +33,11 @@ public class GridMaster : MonoBehaviour
     private int lastHCount;
     private float lastSpacing;
     private Vector3 offset;
+    private bool functioning;
+    public bool FunctioningCircuit
+    {
+        get { return functioning; }
+    }
 #endif
 
     // Use this for initialization
@@ -59,13 +65,14 @@ public class GridMaster : MonoBehaviour
                 );
                 var tilePos = relativePos + this.transform.position - offset;
                 var thingy = GameObject.Instantiate(GoodSlotPrefab, tilePos, Quaternion.identity);
+                thingy.name = "tile:(" + i.ToString() + " , " + j.ToString() + ")";
                 arrayedRefs[j].Add(thingy.gameObject);
             }
         }
 
         //of these, choose two that are not on the edge, these are the points that will be connected
-        var sourceY = Mathf.FloorToInt( Random.value * (verticalCount - 1)) + 1;
-        var sourceX = Mathf.FloorToInt(Random.value * (horizontalCount - 1)) + 1;
+        var sourceY = Mathf.FloorToInt( Random.value * (verticalCount - 2)) + 1;
+        var sourceX = Mathf.FloorToInt(Random.value * (horizontalCount - 2)) + 1;
 
         int sinkX = sourceX;
         while (sinkX == sourceX)
@@ -104,22 +111,93 @@ public class GridMaster : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
-        foreach (var spawn in spawns)
+        handleTileSpawner();
+
+        //initial pass (clear trees)
+        for (int j = 0; j < verticalCount; j++)
         {
-            if (spawn.CurrentDraggable == null)
+            for (int i = 0; i < horizontalCount; i++)
             {
-                var ind = Mathf.FloorToInt(Random.value * drawSet.Count);
-                var draw = drawSet[ind];
-                var newTile = GameObject.Instantiate(tilePrefab, spawn.transform.position, Quaternion.identity);
-                var tile = newTile.GetComponent<CircuitTile>();
-                spawn.setDraggable(tile.gameObject.GetComponent<Draggable>());
-                tile.GetComponent<Draggable>().snapTo(spawn.transform.position, spawn);
-                tile.Initializer(draw.left, draw.right, draw.top, draw.down, draw.leak,
-                    draw.tile, draw.poweredTile);
+                var thingy = getCircuitRef(j, i);
+                if (thingy != null)
+                {
+                    thingy.clearLinks();
+                    thingy.setUnpowered();
+                }
             }
         }
 
+        //build tree
+        for (int j = 0; j < verticalCount; j++)
+        {
+            for (int i = 0; i < horizontalCount; i++)
+            {
+                var thisTile = getCircuitRef(j, i);
+                if(thisTile != null)
+                {
 
+                    //up
+                    if (thisTile.ports[0] && j < verticalCount - 1)
+                    {
+                        linkNeighbors(thisTile, i, j + 1);
+                    }                
+                    //right
+                    if (thisTile.ports[1] && i < horizontalCount - 1)
+                    {
+                        linkNeighbors(thisTile, i + 1, j);
+                    }                
+                    //down
+                    if (thisTile.ports[1] && j > 0)
+                    {
+                        linkNeighbors(thisTile, i, j-1);
+                    }                
+                    //left
+                    if (thisTile.ports[1] && i > 0)
+                    {
+                        linkNeighbors(thisTile, i- 1, j);
+                    }
+                }
+            }
+        }
+
+        //crawl tree
+        var goal = sink.GetComponent<CircuitTile>();
+        var unprocessed = new List<CircuitTile>();
+        var processed = new List<CircuitTile>();
+        unprocessed.Add(source.GetComponent<CircuitTile>());
+        var misses = 0;
+        functioning = false;
+        while (unprocessed.Any())
+        {
+            var current = unprocessed[0];
+            current.setPowered();
+
+            if (current == goal)
+            {
+                functioning = true;
+            }
+
+            //count busted links
+            var openPorts = 0;
+            foreach (var currentPort in current.ports)
+            {
+                if (currentPort)
+                {
+                    openPorts++;
+                }
+            }
+            misses += openPorts - current.neighbors.Count;
+
+            foreach (var neighbor in current.neighbors)
+            {
+                if (!unprocessed.Contains(neighbor) && !processed.Contains(neighbor))
+                {
+                    unprocessed.Add(neighbor);
+                }
+            }
+            unprocessed.Remove(current);
+            processed.Add(current);
+        }
 
 #if UNITY_EDITOR
         if (lastHCount != horizontalCount ||
@@ -149,6 +227,44 @@ public class GridMaster : MonoBehaviour
         lastSpacing = spacing;
 #endif
 
+    }
+
+    private void linkNeighbors(CircuitTile thisTile, int i, int j)
+    {
+        var neighbor = getCircuitRef(i, j);
+        if (neighbor != null)
+        {
+            thisTile.addLink(neighbor);
+            neighbor.addLink(thisTile);
+        }
+    }
+
+    private CircuitTile getCircuitRef(int j, int i)
+    {
+        var thisDraggable = arrayedRefs[j][i].GetComponent<DragZone>().CurrentDraggable;
+        if (thisDraggable != null)
+        {
+            return thisDraggable.GetComponent<CircuitTile>();
+        }
+        return null;
+    }
+
+    private void handleTileSpawner()
+    {
+        foreach (var spawn in spawns)
+        {
+            if (spawn.CurrentDraggable == null)
+            {
+                var ind = Mathf.FloorToInt(Random.value * drawSet.Count);
+                var draw = drawSet[ind];
+                var newTile = GameObject.Instantiate(tilePrefab, spawn.transform.position, Quaternion.identity);
+                var tile = newTile.GetComponent<CircuitTile>();
+                spawn.setDraggable(tile.gameObject.GetComponent<Draggable>());
+                tile.GetComponent<Draggable>().snapTo(spawn.transform.position, spawn);
+                tile.Initializer(draw.left, draw.right, draw.top, draw.down, draw.leak,
+                    draw.tile, draw.poweredTile);
+            }
+        }
     }
 
     [Serializable]
