@@ -8,10 +8,16 @@ public class ClickMaster : MonoBehaviour {
     private Vector3 mouseLoc;
     public Vector3 MouseLoc { get { return mouseLoc; }  }
     private List<Clickable> lastHovered;
-    public List<Clickable> clickables { get; set;  }
-    public List<Clickable> hovered { get; set; }
+    private List<Clickable> clickables { get; set;  }
 
-	// Use this for initialization
+    private List<Clickable> hovered;
+
+    public List<Clickable> hoverElements
+    {
+        get { return hovered; }
+    }
+
+    // Use this for initialization
     void Start()
     {
         clickables = new List<Clickable>();
@@ -67,5 +73,10 @@ public class ClickMaster : MonoBehaviour {
     public void register(Clickable clickable)
     {
         clickables.Add(clickable);
+    }
+
+    public void deRegister(Clickable clickable)
+    {
+        clickables.Remove(clickable);
     }
 }

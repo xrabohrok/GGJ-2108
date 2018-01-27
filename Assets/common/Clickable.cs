@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 [RequireComponent(typeof(Collider2D))]
 public class Clickable : MonoBehaviour
@@ -51,5 +52,10 @@ public class Clickable : MonoBehaviour
     public void ReportMouseUp()
     {
         clicked = false;
+    }
+
+    public List<Clickable> selectionSet()
+    {
+        return clickMaster.hoverElements;
     }
 }

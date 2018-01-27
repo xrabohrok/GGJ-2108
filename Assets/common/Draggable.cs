@@ -30,6 +30,11 @@ public class Draggable : MonoBehaviour
 	    clicker = GetComponent<Clickable>();
 	    draggable = true;
 	}
+
+    public void snapTo(Vector3 newPos)
+    {
+        this.transform.position = new Vector3(newPos.x, newPos.y, this.transform.position.z);
+    }
 	
 	// Update is called once per frame
 	void Update () {
