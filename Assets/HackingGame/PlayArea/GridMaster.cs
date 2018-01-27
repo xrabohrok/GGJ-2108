@@ -20,6 +20,7 @@ public class GridMaster : MonoBehaviour
     private int lastVCount;
     private int lastHCount;
     private float lastSpacing;
+    private Vector3 offset;
 #endif
 
     // Use this for initialization
@@ -27,7 +28,7 @@ public class GridMaster : MonoBehaviour
 		//center offset
 	    var voffset = (size * verticalCount + spacing * (verticalCount - 1))/2;
 	    var hoffset = (size * horizontalCount + spacing * (horizontalCount - 1))/2;
-        var offset = new Vector3(hoffset, voffset, 0);
+        offset = new Vector3(hoffset, voffset, 0);
 
         arrayedRefs = new List<List<GameObject>>();
 	    for (int j = 0; j < verticalCount; j++)
@@ -58,7 +59,20 @@ public class GridMaster : MonoBehaviour
             lastSpacing != spacing ||
             lastVCount != verticalCount)
         {
-            
+            for (int j = 0; j < verticalCount; j++)
+            {
+                arrayedRefs.Add(new List<GameObject>());
+                for (int i = 0; i < horizontalCount; i++)
+                {
+                    var relativePos = new Vector3(
+                        size * i + spacing * i,
+                        size * j + spacing * j,
+                        0
+                    );
+                    var tilePos = relativePos + this.transform.position - offset;
+                    arrayedRefs[j][i].transform.position = tilePos;
+                }
+            }
         }
 
         lastSize = size;
