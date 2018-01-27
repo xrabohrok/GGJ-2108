@@ -1,13 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 [RequireComponent(typeof(Clickable))]
 public class Draggable : MonoBehaviour
 {
-
+    public bool requireDragZone;
     private bool draggable;
     private Clickable clicker;
+    private Vector3 lastGoodPos;
 
     public bool isDraggable
     {
@@ -28,7 +30,22 @@ public class Draggable : MonoBehaviour
 	void Start ()
 	{
 	    clicker = GetComponent<Clickable>();
+        clicker.setClickDownCallback(() =>
+        {
+            lastGoodPos = this.transform.position;
+        });
+        clicker.setClickReleaseCallback(() =>
+        {
+            if (requireDragZone)
+            {
+                if (clicker.selectionSet().All(c => c.GetComponent<DragZone>() == null))
+                {
+                    this.transform.position = lastGoodPos;
+                }
+            }
+        });
 	    draggable = true;
+
 	}
 
     public void snapTo(Vector3 newPos)
