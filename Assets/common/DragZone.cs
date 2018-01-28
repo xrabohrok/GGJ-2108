@@ -6,7 +6,8 @@ public class DragZone : MonoBehaviour
     private bool lastClick;
     private Clickable clicker;
     private Draggable currentDraggable;
-    private bool locked;
+//    private bool locked;
+    public bool locked;
 
     public Draggable CurrentDraggable
     {
@@ -64,6 +65,7 @@ public class DragZone : MonoBehaviour
         if (currentDraggable != null)
         {
             GameObject.Destroy(currentDraggable.gameObject);
+            UnlockDraggable();
         }
     }
 
