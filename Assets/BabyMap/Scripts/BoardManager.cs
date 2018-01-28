@@ -76,33 +76,36 @@ namespace BabyMap
 
             room[0, topOfRoom] = "robotRoom_topHorizontal_wall";
             room[1, topOfRoom] = "robotRoom_topHorizontal_wall";
-            room[2, topOfRoom] = "robotRoom_rightDown_wall";
+            room[2, topOfRoom] = "robotRoom_leftVertical_wall";
 
-            for(int i = 5; i <columns; i++)
+            room[5, topOfRoom] = "robotRoom_rightBlind_wall";
+            for (int i = 6; i <columns; i++)
             {
                 room[i, topOfRoom] = "robotRoom_topHorizontal_wall";
             }
 
-            for (int i = 2; i < topOfRoom; i ++) {
-                room[2, i] = "robotRoom_rightVertical_wall";
+            room[2, 2] = "robotRoom_downCorner_wall";
+            for (int i = 3; i < topOfRoom; i ++) {
+                room[2, i] = "robotRoom_leftVertical_wall";
             }
 
-            for (int i = 0; i < 6; i++)
+            for (int i = 0; i < 5; i++)
             {
                 room[5, i] = "robotRoom_leftVertical_wall";
             }
+            room[5, 5] = "robotRoom_topBlind_wall";
 
             room[5, 2] = "robotRoom_leftDown_wall";
 
             room[6, 2] = "robotRoom_topHorizontal_wall";
-            room[7, 2] = "robotRoom_topHorizontal_wall";
+            room[7, 2] = "robotRoom_leftCorner_wall";
 
-            for(int i = 8; i < columns; i++)
+            room[8, 5] = "robotRoom_rightBlind_wall";
+            for (int i = 9; i < columns; i++)
             {
-                room[i, 5] = "robotRoom_bottomHorizontal_wall";
+                room[i, 5] = "robotRoom_topHorizontal_wall";
             }
 
-          
 
             for (int y = 0; y < rows; y++)
             {
