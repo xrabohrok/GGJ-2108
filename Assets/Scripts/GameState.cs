@@ -70,6 +70,7 @@ public class GameState : MonoBehaviour {
 
          clankyHP = GameObject.Find("BBIntegrityValueText").GetComponent<Text>();
          movesLeft = GameObject.Find("MovesLeftValueText").GetComponent<Text>();
+        robotDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Default";
 
     }
 
@@ -81,6 +82,7 @@ public class GameState : MonoBehaviour {
             ChangeToHack();
         }
 
+
     }
 	// Update is called once per frame
 	void Update ()
@@ -88,7 +90,7 @@ public class GameState : MonoBehaviour {
         movesLeft.text = playerMoves.ToString();
         clankyHP.text = robotHealth.ToString();
 
-    if (GameObject.Find("HackingGame").GetComponent<GridMaster>().FunctioningCircuit)
+    if (GameObject.Find("HackingGame").GetComponent<GridMaster>().FunctioningCircuit && !currentlyRobotGame)
         {
             ChangeToRobot();
         }
@@ -103,14 +105,14 @@ public class GameState : MonoBehaviour {
 
     void ChangeToRobot()
     {
+        this.currentlyRobotGame = true;
         robotDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Default";
         hackerDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Player";
 
         Cursor.visible = false;
 
-        this.currentlyRobotGame = true;
-        playerMoves = GameObject.Find("HackingGame").GetComponent<GridMaster>().Misses + 5;
-
+        
+         playerMoves = GameObject.Find("HackingGame").GetComponent<GridMaster>().Misses;
         //TODO: set up activate && deactivate
         //hackController.SetActive(false);
         //robotController.SetActive(true);
@@ -120,6 +122,8 @@ public class GameState : MonoBehaviour {
 
     void ChangeToHack()
     {
+
+        this.currentlyRobotGame = false;
         hackerDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Default";
         robotDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Player";
         Cursor.visible = true;
@@ -130,7 +134,7 @@ public class GameState : MonoBehaviour {
         //robotController.SetActive(false);
 
         //robotGame.SetActive(true);
-        this.currentlyRobotGame = false;
+       
 
     }
 

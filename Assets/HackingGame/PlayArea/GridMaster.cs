@@ -60,6 +60,7 @@ public class GridMaster : MonoBehaviour
 
     public void resetBoard()
     {
+  
         nukeBoard();
         generateBoard();
     }
