@@ -42,10 +42,10 @@ public class Draggable : MonoBehaviour
         });
         clicker.setClickReleaseCallback(() =>
             {
-                if (clicker.selectionSet().All(c => c.GetComponent<DragZone>() == null))
+                if (requireDragZone)
                 {
-                    var zone = clicker.selectionSet().First(c => c.GetComponent<DragZone>() != null);
-                    if (requireDragZone || !zone.GetComponent<DragZone>().Locked)
+                    var result = clicker.selectionSet().First(c => c.GetComponent<DragZone>() != null);
+                    if (result == null || result.GetComponent<DragZone>().Locked)
                     {
                         this.transform.position = lastGoodPos;
                     }
@@ -53,7 +53,6 @@ public class Draggable : MonoBehaviour
 
             }
         );
-//	    draggable = true;
 
 	}
 
@@ -67,6 +66,7 @@ public class Draggable : MonoBehaviour
                 currentDragZone.setDraggable(null);
             }
             currentDragZone = dragZone;
+            lastGoodPos = dragZone.transform.position;
             dragZone.setDraggable(this);
         }
     }

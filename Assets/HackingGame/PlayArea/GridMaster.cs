@@ -136,6 +136,7 @@ public class GridMaster : MonoBehaviour
         currPiece.snapTo(sourcePos.transform.position, sourcePos);
         sourcePos.LockDraggable();
         var currTile = poweredSet[dir];
+        currPiece.GetComponent<SpriteRenderer>().sortingOrder--;
         var circuit = currPiece.GetComponent<CircuitTile>();
         circuit.Initializer(currTile.left, currTile.right, currTile.top, currTile.down,
             false, currTile.tile, currTile.poweredTile);
