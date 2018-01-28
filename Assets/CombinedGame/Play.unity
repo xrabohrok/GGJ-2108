@@ -182,13 +182,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd6a895055a1c244b19f6d076995840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hackGame: {fileID: 0}
+  hackGame: {fileID: 1166442670}
   robotGame: {fileID: 0}
   currentlyRobotGame: 0
   controlSwitchText: {fileID: 0}
   restartDelay: 5
   robotMusic: {fileID: 0}
   hackMusic: {fileID: 0}
+--- !u!1 &1166442670 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1942265872907532, guid: 5b318e4ac869fa54999d6aa6e396ab1b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1540654868}
 --- !u!1 &1222635029
 GameObject:
   m_ObjectHideFlags: 0

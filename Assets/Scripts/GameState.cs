@@ -49,15 +49,14 @@ public class GameState : MonoBehaviour {
 	void Start ()
     {
 
-
         //TODO add in reference to robot on grid
         //hackGame = GameObject.Find("<HACKING BOARD>");
         //TODO add in reference to hacking minigame
         //robotGame = GameObject.Find("<ROBOT GAME>");
-        
+
         //Text needs initialized before this will work and I don't know how to do that. -mw
         //controlSwitchText.text = "Controlling Robot";
-       
+
 
 
     }
@@ -67,7 +66,17 @@ public class GameState : MonoBehaviour {
 	void Update ()
     {
 		
-	
+	if (GameObject.Find("HackingGame").GetComponent<GridMaster>().FunctioningCircuit)
+        {
+            playerMoves = GameObject.Find("HackingGame").GetComponent<GridMaster>().Misses;
+            ChangeToRobot();
+        }
+
+        if (!GameObject.Find("HackingGame").GetComponent<GridMaster>().FunctioningCircuit)
+        {
+    
+            ChangeToHack();
+        }
 
 
         if (robotHealth <= 0)
