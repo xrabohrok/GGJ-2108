@@ -77,10 +77,10 @@ public class GameState : MonoBehaviour {
     public void PlayerMoved()
     {
         playerMoves--;
-        if (playerMoves <= 0 && currentlyRobotGame)
-        {
-            ChangeToHack();
-        }
+        //if (playerMoves <= 0 && currentlyRobotGame)
+        //{
+         //   ChangeToHack();
+        //}
 
 
     }
@@ -100,8 +100,12 @@ public class GameState : MonoBehaviour {
             GameOver();
         }
 
-       
-	}
+        if (playerMoves <= 0 && currentlyRobotGame)
+        {
+            ChangeToHack();
+        }
+
+    }
 
     void ChangeToRobot()
     {
