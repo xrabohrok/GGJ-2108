@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using UnityEditor;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -36,6 +34,7 @@ public class GridMaster : MonoBehaviour
     private bool functioning;
     private int sourceY;
     private int sourceX;
+
     public bool FunctioningCircuit
     {
         get { return functioning; }
