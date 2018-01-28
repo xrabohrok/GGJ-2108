@@ -52,7 +52,7 @@ public class Draggable : MonoBehaviour
 
             }
         );
-	    draggable = true;
+//	    draggable = true;
 
 	}
 

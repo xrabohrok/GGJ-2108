@@ -91,10 +91,13 @@ public class GridMaster : MonoBehaviour
         var dir = Mathf.FloorToInt(Random.value * 4);
         source = Instantiate(tilePrefab, arrayedRefs[sourceY][sourceX].transform.position, Quaternion.identity).gameObject;
         setupSourcedTile(sourceY, sourceX, dir, source.GetComponent<Draggable>(), true);
+        source.GetComponent<Draggable>().draggableDisable();
 
         dir = Mathf.FloorToInt(Random.value * 4);
         sink = Instantiate(tilePrefab, arrayedRefs[sinkX][sinkY].transform.position, Quaternion.identity).gameObject;
         setupSourcedTile(sinkY, sinkX, dir, sink.GetComponent<Draggable>(), false);
+        sink.GetComponent<Draggable>().draggableDisable();
+
     }
 
     private void setupSourcedTile(int indexX, int indexY, int dir, Draggable tile, bool sourcePowered)
@@ -260,7 +263,9 @@ public class GridMaster : MonoBehaviour
                 var newTile = GameObject.Instantiate(tilePrefab, spawn.transform.position, Quaternion.identity);
                 var tile = newTile.GetComponent<CircuitTile>();
                 spawn.setDraggable(tile.gameObject.GetComponent<Draggable>());
-                tile.GetComponent<Draggable>().snapTo(spawn.transform.position, spawn);
+                var draggin = tile.GetComponent<Draggable>();
+                draggin.draggableEnable();
+                draggin.snapTo(spawn.transform.position, spawn);
                 tile.Initializer(draw.left, draw.right, draw.top, draw.down, draw.leak,
                     draw.tile, draw.poweredTile);
             }

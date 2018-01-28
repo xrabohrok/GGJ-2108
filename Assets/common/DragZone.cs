@@ -7,8 +7,7 @@ public class DragZone : MonoBehaviour
 {
     private bool lastClick;
     private Clickable clicker;
-    public Draggable currentDraggable;
-//    private Draggable currentDraggable;
+    private Draggable currentDraggable;
 
     public Draggable CurrentDraggable
     {
