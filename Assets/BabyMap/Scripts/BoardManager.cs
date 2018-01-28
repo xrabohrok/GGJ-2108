@@ -62,7 +62,7 @@ namespace BabyMap
 
 
         //Sets up the outer walls and floor (background) of the game board.
-        void BoardSetup()
+        public void BoardSetup()
         {
             //Instantiate Board and set boardHolder to its transform.
             boardHolder = new GameObject("Board").transform;
