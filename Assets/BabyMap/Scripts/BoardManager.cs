@@ -32,6 +32,16 @@ namespace BabyMap
             else if (instance != this)
                 Destroy(gameObject);
 
+            this.fullMap = new TileType[this.columns, this.rows];
+            for(int i = 0; i < this.columns; i++)
+            {
+                for(int j = 0; j < this.rows; j++)
+                {
+                    this.fullMap[i, j] = TileType.floor;
+                }
+            }
+
+
             this.BoardSetup();
         }
 
@@ -69,35 +79,48 @@ namespace BabyMap
             int rightOfRoom = columns - 1;
 
             room[0, topOfRoom] = "robotRoom_topHorizontal_wall";
+            fullMap[0, topOfRoom] = TileType.wall;
             room[1, topOfRoom] = "robotRoom_topHorizontal_wall";
+            fullMap[1 , topOfRoom] = TileType.wall;
             room[2, topOfRoom] = "robotRoom_leftVertical_wall";
+            fullMap[2, topOfRoom] = TileType.wall;
 
             room[5, topOfRoom] = "robotRoom_rightBlind_wall";
+            fullMap[5, topOfRoom] = TileType.wall;
             for (int i = 6; i <columns; i++)
             {
                 room[i, topOfRoom] = "robotRoom_topHorizontal_wall";
+                fullMap[i,topOfRoom] = TileType.wall;
             }
 
             room[2, 2] = "robotRoom_downCorner_wall";
             for (int i = 3; i < topOfRoom; i ++) {
                 room[2, i] = "robotRoom_leftVertical_wall";
+                fullMap[2, i] = TileType.wall;
             }
 
             for (int i = 0; i < 5; i++)
             {
                 room[5, i] = "robotRoom_leftVertical_wall";
+                fullMap[5, i] = TileType.wall;
             }
             room[5, 5] = "robotRoom_topBlind_wall";
+            fullMap[5,5] = TileType.wall;
 
             room[5, 2] = "robotRoom_leftDown_wall";
+            fullMap[5, 2] = TileType.wall;
 
             room[6, 2] = "robotRoom_topHorizontal_wall";
+            fullMap[6, 2] = TileType.wall;
             room[7, 2] = "robotRoom_leftCorner_wall";
-            
+            fullMap[7,2] = TileType.wall;
+
             room[8, 5] = "robotRoom_rightBlind_wall";
+            fullMap[8, 5] = TileType.wall;
             for (int i = 9; i < columns; i++)
             {
                 room[i, 5] = "robotRoom_topHorizontal_wall";
+                fullMap[i , 5] = TileType.wall;
             }
 
 
