@@ -18,7 +18,6 @@ public class GameState : MonoBehaviour {
     public GameObject robotGame;
     public Boolean currentlyRobotGame;
 
-    public Text controlSwitchText;
     Animator anim;
     public float restartDelay = 5f;
     float restartTimer;
@@ -94,7 +93,6 @@ public class GameState : MonoBehaviour {
     {
         Cursor.visible = false;
 
-        controlSwitchText.text = "Controlling Robot";
         //TODO: set up activate && deactivate
         //hackController.SetActive(false);
         //robotController.SetActive(true);
