@@ -20,7 +20,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4110344946141256}
   m_Layer: 0
-  m_Name: robotRoom_rightCorner
+  m_Name: robotRoom_rightCorner_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4742812474777006}
   - component: {fileID: 212349476322211590}
   m_Layer: 0
-  m_Name: robotRoom_rightCorner
+  m_Name: robotRoom_rightCorner_wall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -63,7 +63,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1770688968662676}
   m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
-  m_LocalPosition: {x: -1.9623935, y: 0.038478315, z: 9.842972}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4110344946141256}
@@ -100,8 +100,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: -914358869
+  m_SortingLayer: 2
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300008, guid: 3b9cba40349ce2a4cb1ac7141c8c0322, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

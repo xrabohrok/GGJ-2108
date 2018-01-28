@@ -1,0 +1,31 @@
+<TextureAtlas imagePath="clanky.png">
+	<SubTexture name="bb_1.png" x="34" y="102" width="32" height="32"/>
+	<SubTexture name="bb_away1.png" x="68" y="204" width="32" height="32"/>
+	<SubTexture name="bb_away2.png" x="68" y="170" width="32" height="32"/>
+	<SubTexture name="bb_away3.png" x="68" y="136" width="32" height="32"/>
+	<SubTexture name="bb_away4.png" x="68" y="204" width="32" height="32"/>
+	<SubTexture name="bb_away5.png" x="68" y="102" width="32" height="32"/>
+	<SubTexture name="bb_away6.png" x="68" y="68" width="32" height="32"/>
+	<SubTexture name="bb_forward1.png" x="34" y="102" width="32" height="32"/>
+	<SubTexture name="bb_forward2.png" x="68" y="34" width="32" height="32"/>
+	<SubTexture name="bb_forward3.png" x="68" y="0" width="32" height="32"/>
+	<SubTexture name="bb_forward4.png" x="34" y="102" width="32" height="32"/>
+	<SubTexture name="bb_forward5.png" x="34" y="204" width="32" height="32"/>
+	<SubTexture name="bb_forward6.png" x="34" y="170" width="32" height="32"/>
+	<SubTexture name="bb_idle2.png" x="34" y="136" width="32" height="32"/>
+	<SubTexture name="bb_idle3.png" x="102" y="0" width="32" height="32"/>
+	<SubTexture name="bb_idle4.png" x="34" y="102" width="32" height="32"/>
+	<SubTexture name="bb_idle5.png" x="34" y="68" width="32" height="32"/>
+	<SubTexture name="bb_idle6.png" x="34" y="34" width="32" height="32"/>
+	<SubTexture name="bb_ouch1.png" x="34" y="0" width="32" height="32"/>
+	<SubTexture name="bb_ouch2.png" x="0" y="204" width="32" height="32"/>
+	<SubTexture name="bb_ouch3.png" x="0" y="170" width="32" height="32"/>
+	<SubTexture name="bb_ouch4.png" x="0" y="136" width="32" height="32"/>
+	<SubTexture name="bb_ouch5.png" x="0" y="102" width="32" height="32"/>
+	<SubTexture name="bb_side1.png" x="0" y="68" width="32" height="32"/>
+	<SubTexture name="bb_side2.png" x="0" y="34" width="32" height="32"/>
+	<SubTexture name="bb_side3.png" x="0" y="0" width="32" height="32"/>
+	<SubTexture name="bb_side4.png" x="0" y="68" width="32" height="32"/>
+	<SubTexture name="bb_side5.png" x="0" y="34" width="32" height="32"/>
+	<SubTexture name="bb_side6.png" x="0" y="0" width="32" height="32"/>
+</TextureAtlas>
