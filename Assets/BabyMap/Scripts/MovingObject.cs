@@ -44,9 +44,8 @@ namespace BabyMap
                 StartCoroutine(SmoothMovement(new Vector3(end.x, end.y, 0f)));
                 if (GameObject.Find("GameManager").GetComponent<GameState>().currentlyRobotGame)
                 {
-//                    GameObject.Find("GameManager").GetComponent<GameState>().PlayerMoved();
+                     GameObject.Find("GameManager").GetComponent<GameState>().PlayerMoved();
                 }
-//                GameObject.Find("GameManager").GetComponent<GameState>().PlayerMoved();
             }
 
             return board.fullMap[end.x, end.y];
