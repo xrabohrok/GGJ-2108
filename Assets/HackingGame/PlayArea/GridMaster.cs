@@ -148,6 +148,12 @@ public class GridMaster : MonoBehaviour
 
     // Update is called once per frame
     void Update () {
+
+        if (source == null || sink == null)
+        {
+            resetBoard();
+        }
+
         handleTileSpawner();
 
         //initial pass (clear trees)
