@@ -69,23 +69,42 @@ namespace BabyMap
 
             else if(!GameState.instance.currentlyRobotGame && !this.busyHandlingInput)
             {
-                if (this.moveList.Count == 0)
-                {
-                    IntVector2 exit = GameManager.instance.boardScript.exit;
-                    IntVector2 exitPos = new IntVector2(Mathf.RoundToInt(exit.x), Mathf.RoundToInt(exit.y));
-                    IntVector2 position = new IntVector2(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
+                // Djikstras:
+                //if (this.moveList.Count == 0)
+                //{
+                //    IntVector2 exit = GameManager.instance.boardScript.exit;
+                //    IntVector2 exitPos = new IntVector2(Mathf.RoundToInt(exit.x), Mathf.RoundToInt(exit.y));
+                //    IntVector2 position = new IntVector2(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
 
-                    // Djikstras:
-                    //List<Vector3> djikstrasResult = GameManager.instance.boardScript.Djikstras(position, exitPos);
-                    //moveList = GameManager.instance.boardScript.ConvertPathToMoves(djikstrasResult);
-                    MoveRandomly();
+                //    List<Vector3> djikstrasResult = GameManager.instance.boardScript.Djikstras(position, exitPos);
+                //    moveList = GameManager.instance.boardScript.ConvertPathToMoves(djikstrasResult);
 
-                }
-                else
+                //}
+                //else
+                //{
+                //    AttemptMove(moveList[0].x, moveList[0].y);
+                //    moveList.RemoveAt(0);
+                //}
+
+                //Move Randomly:
+                IntVector2 direction;
+                TileType nextTile = TileType.Wall;
+
+                while (nextTile == TileType.Wall)
                 {
-                    //AttemptMove(moveList[0].x, moveList[0].y);
-                    //moveList.RemoveAt(0);
+                    direction = new IntVector2(Random.Range(-1, 2), Random.Range(-1, 2));
+                    // Don't move diagonally.
+                    if (direction.x != 0)
+                        direction.y = 0;
+
+                    IntVector2 end = this.position + direction;
+                    if (end.x >= 0 && end.x < board.columns && end.y >= 0 && end.y < board.rows)
+                        //Set canMove to true if Move was successful, false if failed.
+                        nextTile = Move(direction);
                 }
+
+                if (nextTile != TileType.Floor)
+                    OnCantMove(nextTile);
             }
 
         }
