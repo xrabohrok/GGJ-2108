@@ -47,6 +47,11 @@ public class Clickable : MonoBehaviour
 	    clickMaster.register(this);
 	}
 
+    void OnDestroy()
+    {
+        die();
+    }
+
     public void ReportHover()
     {
         hoveredOver = true;
@@ -80,7 +85,7 @@ public class Clickable : MonoBehaviour
         return clickMaster.hoverElements;
     }
 
-    public void die()
+    private void die()
     {
         clickMaster.deRegister(this);
     }

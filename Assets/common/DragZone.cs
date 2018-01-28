@@ -42,7 +42,6 @@ public class DragZone : MonoBehaviour
         //overlap destruction
         if (currentDraggable != null && currentDraggable != draggable && draggable != null)
         {
-            currentDraggable.funeralRites();
             GameObject.Destroy(currentDraggable.gameObject);
             currentDraggable = null;
         }

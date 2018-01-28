@@ -22,7 +22,6 @@ public class GameState : MonoBehaviour {
     Animator anim;
     public float restartDelay = 5f;
     float restartTimer;
-    float timeLeft = 5.0f;
 
     //Used for music change
     public AudioClip robotMusic;
@@ -33,16 +32,7 @@ public class GameState : MonoBehaviour {
     //Player moves
     private int playerMoves = 5;
 
-    //Decrement player movement
-    public void PlayerMoved()
-    {
-        playerMoves--;
 
-        if (playerMoves <= 0)
-        {
-            ChangeToHack();
-        }
-    }
 
     //Awake is always called before
     void Awake()
@@ -78,17 +68,26 @@ public class GameState : MonoBehaviour {
 		
 	if (GameObject.Find("HackingGame").GetComponent<GridMaster>().FunctioningCircuit)
         {
-            playerMoves = GameObject.Find("HackingGame").GetComponent<GridMaster>().Misses + 15;
+            playerMoves = GameObject.Find("HackingGame").GetComponent<GridMaster>().Misses;
             ChangeToRobot();
-            timeLeft = 5.0f;
+        }
+
+        if (!GameObject.Find("HackingGame").GetComponent<GridMaster>().FunctioningCircuit)
+        {
+    
+            ChangeToHack();
         }
 
 
-            if (robotHealth <= 0)
+        if (robotHealth <= 0)
         {
             GameOver();
         }
 
+        if (playerMoves <= 0)
+        {
+            ChangeToHack();
+        }
 	}
 
     void ChangeToRobot()
@@ -109,8 +108,8 @@ public class GameState : MonoBehaviour {
     {
 
         Cursor.visible = true;
-        GameObject.Find("HackingGame").GetComponent<GridMaster>().resetBoard();
-        controlSwitchText.text = "Hacking";
+
+//        controlSwitchText.text = "Hacking";
         //TODO: set up activate && deactivate
         //hackController.SetActive(true);
         //robotController.SetActive(false);
