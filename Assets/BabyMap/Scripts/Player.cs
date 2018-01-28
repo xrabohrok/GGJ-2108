@@ -67,20 +67,25 @@ namespace BabyMap
                 }
             }
 
-            else if(!GameState.instance.currentlyRobotGame)
+            else if(!GameState.instance.currentlyRobotGame && !this.busyHandlingInput)
             {
                 if (this.moveList.Count == 0)
                 {
                     IntVector2 exit = GameManager.instance.boardScript.exit;
                     IntVector2 exitPos = new IntVector2(Mathf.RoundToInt(exit.x), Mathf.RoundToInt(exit.y));
                     IntVector2 position = new IntVector2(Mathf.RoundToInt(this.transform.position.x), Mathf.RoundToInt(this.transform.position.y));
-                    
+
                     // Djikstras:
-                    moveList = GameManager.instance.boardScript.ConvertPathToMoves(
-                        GameManager.instance.boardScript.Djikstras(position, exitPos));
+                    //List<Vector3> djikstrasResult = GameManager.instance.boardScript.Djikstras(position, exitPos);
+                    //moveList = GameManager.instance.boardScript.ConvertPathToMoves(djikstrasResult);
+                    MoveRandomly();
+
                 }
-                AttemptMove(moveList[0].x, moveList[0].y);
-                moveList.RemoveAt(0);
+                else
+                {
+                    //AttemptMove(moveList[0].x, moveList[0].y);
+                    //moveList.RemoveAt(0);
+                }
             }
 
         }

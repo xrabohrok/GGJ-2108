@@ -176,8 +176,9 @@ namespace BabyMap
             while (nodes.Count > 0)
             {
                 nodes.Sort((x, y) => distances[x] - distances[y]);
-                while (this.fullMap[nodes[0].X, nodes[0].Y] != TileType.Floor
-                    && nodes.Count > 0)
+                Debug.Log(nodes[0].x + " " + nodes[0].y);
+                while ((this.fullMap[nodes[0].X, nodes[0].Y] != TileType.Floor)
+                    && (nodes.Count > 0))
                 {
                     nodes.RemoveAt(0);
                 }
