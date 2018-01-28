@@ -15,7 +15,12 @@ namespace BabyMap
 
         private Rigidbody2D rb2D;               //The Rigidbody2D component attached to this object.
         private float inverseMoveTime;          //Used to make movement more efficient.
+        public bool busyHandlingInput = false;
 
+        protected void Awake()
+        {
+            
+        }
 
         //Protected, virtual functions can be overridden by inheriting classes.
         protected virtual void Start()
@@ -23,6 +28,8 @@ namespace BabyMap
             inverseMoveTime = 1f / moveTime;
             board = BoardManager.instance;
             this.position = board.start;
+            rb2D = gameObject.GetComponent<Rigidbody2D>();
+            this.rb2D.position = new Vector2(this.position.x, this.position.y);
         }
 
 
@@ -31,13 +38,12 @@ namespace BabyMap
         protected TileType Move(IntVector2 direction)
         {
             // Calculate end position based on the direction parameters passed in when calling Move.
-            Debug.Log(this.position + " " + direction);
             IntVector2 end = this.position + direction;
 
-            if(board.fullMap[end.x, end.y] == TileType.Floor)
+            if((end.x < board.columns && end.y < board.rows) && (board.fullMap[end.x, end.y] == TileType.Floor))
             {
-                StartCoroutine(SmoothMovement(new Vector3(end.x, end.y, 0f)));
                 this.position = end;
+                StartCoroutine(SmoothMovement(new Vector3(end.x, end.y, 0f)));
             }
 
             return board.fullMap[end.x, end.y];
@@ -70,6 +76,7 @@ namespace BabyMap
         //Co-routine for moving units from one space to next, takes a parameter end to specify where to move to.
         protected IEnumerator SmoothMovement(Vector3 end)
         {
+            this.busyHandlingInput = true;
             //Calculate the remaining distance to move based on the square magnitude of the difference between current position and end parameter. 
             //Square magnitude is used instead of magnitude because it's computationally cheaper.
             float sqrRemainingDistance = (transform.position - end).sqrMagnitude;
@@ -89,6 +96,7 @@ namespace BabyMap
                 //Return and loop until sqrRemainingDistance is close enough to zero to end the function
                 yield return null;
             }
+            this.busyHandlingInput = false;
         }
 
 
@@ -102,7 +110,6 @@ namespace BabyMap
             if (direction.x != 0)
                 direction.y = 0;
 
-            //Set canMove to true if Move was successful, false if failed.
             TileType nextTile = Move(direction);
 
             // Handle if we walked into a hazard or goal.

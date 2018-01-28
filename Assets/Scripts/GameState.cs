@@ -41,6 +41,8 @@ public class GameState : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
+
+        this.currentlyRobotGame = true;
     }
 
 	// Use this for initialization
@@ -52,8 +54,9 @@ public class GameState : MonoBehaviour {
         //hackGame = GameObject.Find("<HACKING BOARD>");
         //TODO add in reference to hacking minigame
         //robotGame = GameObject.Find("<ROBOT GAME>");
-        this.currentlyRobotGame = true;
-        controlSwitchText.text = "Controlling Robot";
+        
+        //Text needs initialized before this will work and I don't know how to do that. -mw
+        //controlSwitchText.text = "Controlling Robot";
        
 
 

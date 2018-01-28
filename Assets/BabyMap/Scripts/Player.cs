@@ -25,6 +25,7 @@ namespace BabyMap
                 instance = this;
             else if (instance != this)
                 Destroy(gameObject);
+            
         }
 
         //Start overrides the Start function of MovingObject
@@ -47,9 +48,8 @@ namespace BabyMap
         private void Update()
         {
             //If it's not the player's turn, exit the function.
-            if (GameState.instance.currentlyRobotGame)
+            if (GameState.instance.currentlyRobotGame && !this.busyHandlingInput)
             {
-
                 int horizontal = 0;
                 int vertical = 0;
 
@@ -67,7 +67,7 @@ namespace BabyMap
                 }
             }
 
-            else
+            else if(!GameState.instance.currentlyRobotGame)
             {
                 if (this.moveList.Count == 0)
                 {

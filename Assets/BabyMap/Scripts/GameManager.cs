@@ -17,8 +17,7 @@ namespace BabyMap
         //private Text levelText;                                 //Text to display current level number.
        // private GameObject levelImage;                          //Image to block out level as levels are being set up, background for levelText.
         public BoardManager boardScript;                        //Store a reference to our BoardManager which will set up the level.
-
-
+        
 
         //Awake is always called before any Start functions
         void Awake()

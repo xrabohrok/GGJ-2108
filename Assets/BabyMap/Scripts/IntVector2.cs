@@ -131,7 +131,6 @@ namespace BabyMap
             this._y = y;
         }
 
-
         /*
          * PUBLIC FUNCTIONS
          */

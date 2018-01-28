@@ -53,7 +53,7 @@ namespace BabyMap
 
             int topOfRoom = rows - 1;
             int rightOfRoom = columns - 1;
-
+            
             room[0, topOfRoom] = "robotRoom_topHorizontal_wall";
             fullMap[0, topOfRoom] = TileType.Wall;
             room[1, topOfRoom] = "robotRoom_topHorizontal_wall";
@@ -183,7 +183,6 @@ namespace BabyMap
                 }
 
                 IntVector2 smallest = nodes[0];
-                Debug.Log("Adding: " + smallest);
                 nodes.Remove(smallest);
 
                 if (smallest == endPos) // Then we're done and have a completed path.
