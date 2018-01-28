@@ -50,4 +50,12 @@ public class DragZone : MonoBehaviour
         currentDraggable = draggable;
 
     }
+
+    public void nukeStuff()
+    {
+        if (currentDraggable != null)
+        {
+            GameObject.Destroy(currentDraggable.gameObject);
+        }
+    }
 }
