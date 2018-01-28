@@ -44,7 +44,8 @@ public class Draggable : MonoBehaviour
             {
                 if (clicker.selectionSet().All(c => c.GetComponent<DragZone>() == null))
                 {
-                    if (requireDragZone)
+                    var zone = clicker.selectionSet().First(c => c.GetComponent<DragZone>() != null);
+                    if (requireDragZone || !zone.GetComponent<DragZone>().Locked)
                     {
                         this.transform.position = lastGoodPos;
                     }

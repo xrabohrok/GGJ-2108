@@ -131,8 +131,10 @@ public class GridMaster : MonoBehaviour
     {
         var sourcePos = arrayedRefs[indexX][indexY].GetComponent<DragZone>();
         var currPiece = tile;
+        sourcePos.UnlockDraggable();
         sourcePos.setDraggable(currPiece);
         currPiece.snapTo(sourcePos.transform.position, sourcePos);
+        sourcePos.LockDraggable();
         var currTile = poweredSet[dir];
         var circuit = currPiece.GetComponent<CircuitTile>();
         circuit.Initializer(currTile.left, currTile.right, currTile.top, currTile.down,
