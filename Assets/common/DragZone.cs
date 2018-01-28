@@ -7,7 +7,8 @@ public class DragZone : MonoBehaviour
 {
     private bool lastClick;
     private Clickable clicker;
-    private Draggable currentDraggable;
+    public Draggable currentDraggable;
+//    private Draggable currentDraggable;
 
     public Draggable CurrentDraggable
     {
@@ -30,7 +31,10 @@ public class DragZone : MonoBehaviour
             var draggable = clicked.GetComponent<Draggable>();
             if (draggable != null)
             {
-                draggable.CurrentDragZone.setDraggable(null);
+                if (draggable != CurrentDraggable)
+                {
+                    draggable.CurrentDragZone.setDraggable(null);
+                }
                 draggable.snapTo(this.transform.position, this);
             }
         }

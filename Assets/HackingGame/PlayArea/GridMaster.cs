@@ -34,6 +34,8 @@ public class GridMaster : MonoBehaviour
     private float lastSpacing;
     private Vector3 offset;
     private bool functioning;
+    private int sourceY;
+    private int sourceX;
     public bool FunctioningCircuit
     {
         get { return functioning; }
@@ -71,8 +73,8 @@ public class GridMaster : MonoBehaviour
         }
 
         //of these, choose two that are not on the edge, these are the points that will be connected
-        var sourceY = Mathf.FloorToInt( Random.value * (verticalCount - 2)) + 1;
-        var sourceX = Mathf.FloorToInt(Random.value * (horizontalCount - 2)) + 1;
+        sourceY = Mathf.FloorToInt( Random.value * (verticalCount - 2)) + 1;
+        sourceX = Mathf.FloorToInt(Random.value * (horizontalCount - 2)) + 1;
 
         int sinkX = sourceX;
         while (sinkX == sourceX)
@@ -118,7 +120,7 @@ public class GridMaster : MonoBehaviour
         {
             for (int i = 0; i < horizontalCount; i++)
             {
-                var thingy = getCircuitRef(j, i);
+                var thingy = getCircuitRef(i, j);
                 if (thingy != null)
                 {
                     thingy.clearLinks();
@@ -132,7 +134,7 @@ public class GridMaster : MonoBehaviour
         {
             for (int i = 0; i < horizontalCount; i++)
             {
-                var thisTile = getCircuitRef(j, i);
+                var thisTile = getCircuitRef(i, j);
                 if(thisTile != null)
                 {
 
@@ -147,12 +149,12 @@ public class GridMaster : MonoBehaviour
                         linkNeighbors(thisTile, i + 1, j);
                     }                
                     //down
-                    if (thisTile.ports[1] && j > 0)
+                    if (thisTile.ports[2] && j > 0)
                     {
                         linkNeighbors(thisTile, i, j-1);
                     }                
                     //left
-                    if (thisTile.ports[1] && i > 0)
+                    if (thisTile.ports[3] && i > 0)
                     {
                         linkNeighbors(thisTile, i- 1, j);
                     }
@@ -190,7 +192,7 @@ public class GridMaster : MonoBehaviour
 
             foreach (var neighbor in current.neighbors)
             {
-                if (!unprocessed.Contains(neighbor) && !processed.Contains(neighbor))
+                if (!unprocessed.Contains(neighbor) && !processed.Contains(neighbor) && neighbor.neighbors.Contains(current))
                 {
                     unprocessed.Add(neighbor);
                 }
@@ -207,7 +209,6 @@ public class GridMaster : MonoBehaviour
         {
             for (int j = 0; j < verticalCount; j++)
             {
-                arrayedRefs.Add(new List<GameObject>());
                 for (int i = 0; i < horizontalCount; i++)
                 {
                     var relativePos = new Vector3(
@@ -232,14 +233,13 @@ public class GridMaster : MonoBehaviour
     private void linkNeighbors(CircuitTile thisTile, int i, int j)
     {
         var neighbor = getCircuitRef(i, j);
-        if (neighbor != null)
+        if (neighbor != null )
         {
             thisTile.addLink(neighbor);
-            neighbor.addLink(thisTile);
         }
     }
 
-    private CircuitTile getCircuitRef(int j, int i)
+    private CircuitTile getCircuitRef(int i, int j)
     {
         var thisDraggable = arrayedRefs[j][i].GetComponent<DragZone>().CurrentDraggable;
         if (thisDraggable != null)

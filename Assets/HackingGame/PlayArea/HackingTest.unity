@@ -313,7 +313,7 @@ MonoBehaviour:
     left: 1
     leak: 1
     tile: {fileID: 21300014, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
-    poweredTile: {fileID: 21300014, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+    poweredTile: {fileID: 21300012, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
   - top: 1
     right: 1
     down: 1
@@ -411,7 +411,7 @@ MonoBehaviour:
     down: 0
     left: 1
     leak: 0
-    tile: {fileID: 21300058, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
+    tile: {fileID: 21300062, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
     poweredTile: {fileID: 21300060, guid: 31c033526b53a7c4eab2154f02692b66, type: 3}
   - top: 0
     right: 0
