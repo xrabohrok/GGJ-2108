@@ -54,35 +54,29 @@ public class GridMaster : MonoBehaviour
 	    var hoffset = (size * horizontalCount + spacing * (horizontalCount - 1))/2;
         offset = new Vector3(hoffset, voffset, 0);
 
+        GenerateTiles();
         generateBoard();
     }
 
     public void resetBoard()
     {
-        //I thought there was going to be some garbage collection, but I guess not?
-        //Garbage collecter stuff here?
+        nukeBoard();
         generateBoard();
+    }
+
+    private void nukeBoard()
+    {
+        for (int j = 0; j < verticalCount; j++)
+        {
+            for (int i = 0; i < horizontalCount; i++)
+            {
+                arrayedRefs[j][i].GetComponent<DragZone>().nukeStuff();
+            }
+        }
     }
 
     private void generateBoard()
     {
-        arrayedRefs = new List<List<GameObject>>();
-        for (int j = 0; j < verticalCount; j++)
-        {
-            arrayedRefs.Add(new List<GameObject>());
-            for (int i = 0; i < horizontalCount; i++)
-            {
-                var relativePos = new Vector3(
-                    size * i + spacing * i,
-                    size * j + spacing * j,
-                    0
-                );
-                var tilePos = relativePos + this.transform.position - offset;
-                var thingy = GameObject.Instantiate(GoodSlotPrefab, tilePos, Quaternion.identity);
-                thingy.name = "tile:(" + i.ToString() + " , " + j.ToString() + ")";
-                arrayedRefs[j].Add(thingy.gameObject);
-            }
-        }
 
         //of these, choose two that are not on the edge, these are the points that will be connected
         sourceY = Mathf.FloorToInt( Random.value * (verticalCount - 2)) + 1;
@@ -110,6 +104,27 @@ public class GridMaster : MonoBehaviour
         setupSourcedTile(sinkY, sinkX, dir, sink.GetComponent<Draggable>(), false);
         sink.GetComponent<Draggable>().draggableDisable();
 
+    }
+
+    private void GenerateTiles()
+    {
+        arrayedRefs = new List<List<GameObject>>();
+        for (int j = 0; j < verticalCount; j++)
+        {
+            arrayedRefs.Add(new List<GameObject>());
+            for (int i = 0; i < horizontalCount; i++)
+            {
+                var relativePos = new Vector3(
+                    size * i + spacing * i,
+                    size * j + spacing * j,
+                    0
+                );
+                var tilePos = relativePos + this.transform.position - offset;
+                var thingy = GameObject.Instantiate(GoodSlotPrefab, tilePos, Quaternion.identity);
+                thingy.name = "tile:(" + i.ToString() + " , " + j.ToString() + ")";
+                arrayedRefs[j].Add(thingy.gameObject);
+            }
+        }
     }
 
     private void setupSourcedTile(int indexX, int indexY, int dir, Draggable tile, bool sourcePowered)

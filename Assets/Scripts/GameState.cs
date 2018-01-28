@@ -42,7 +42,7 @@ public class GameState : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        this.currentlyRobotGame = true;
+        this.currentlyRobotGame = false;
     }
 
 	// Use this for initialization
