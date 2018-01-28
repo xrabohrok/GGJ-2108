@@ -34,10 +34,16 @@ public class GridMaster : MonoBehaviour
     private bool functioning;
     private int sourceY;
     private int sourceX;
+    private int misses;
 
     public bool FunctioningCircuit
     {
         get { return functioning; }
+    }
+
+    public int Misses
+    {
+        get { return misses; }
     }
 #endif
 
@@ -48,6 +54,13 @@ public class GridMaster : MonoBehaviour
 	    var hoffset = (size * horizontalCount + spacing * (horizontalCount - 1))/2;
         offset = new Vector3(hoffset, voffset, 0);
 
+        generateBoard();
+    }
+
+    public void resetBoard()
+    {
+        //I thought there was going to be some garbage collection, but I guess not?
+        //Garbage collecter stuff here?
         generateBoard();
     }
 
@@ -169,7 +182,7 @@ public class GridMaster : MonoBehaviour
         var unprocessed = new List<CircuitTile>();
         var processed = new List<CircuitTile>();
         unprocessed.Add(source.GetComponent<CircuitTile>());
-        var misses = 0;
+        misses = 0;
         functioning = false;
         while (unprocessed.Any())
         {
