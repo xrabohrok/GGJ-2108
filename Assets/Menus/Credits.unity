@@ -344,8 +344,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6e5d6e3cd450f234a9889e42147badf1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startAnimationDelay: 0.5
-  nextSceneDelay: 1.8
+  startAnimationDelay: 0.1
+  nextSceneDelay: 0.1
   gameStartSceneIndex: 2
   creditsSceneIndex: 1
   sceneJumpAIndex: 0
