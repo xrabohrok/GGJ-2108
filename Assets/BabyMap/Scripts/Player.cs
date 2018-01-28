@@ -101,6 +101,22 @@ namespace BabyMap
         protected override void AttemptMove(int xDir, int yDir)
         {
             //Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
+            if(xDir == 1)
+            {
+                animator.SetTrigger("BBWalkSide");
+            }
+            else if (xDir == -1)
+            {
+                animator.SetTrigger("BBWalkSide");
+            }
+            else  if (yDir == -1)
+            {
+                animator.SetTrigger("BBWalkUp");
+            }
+            else if (yDir == 1)
+            {
+                animator.SetTrigger("BBWalkAway");
+            }
             base.AttemptMove(xDir, yDir);
         }
 
