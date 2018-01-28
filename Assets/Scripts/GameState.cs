@@ -116,7 +116,7 @@ public class GameState : MonoBehaviour {
         Cursor.visible = false;
 
         
-         playerMoves = GameObject.Find("HackingGame").GetComponent<GridMaster>().Misses + 5;
+         playerMoves = 10 - GameObject.Find("HackingGame").GetComponent<GridMaster>().Misses;
         //TODO: set up activate && deactivate
         //hackController.SetActive(false);
         //robotController.SetActive(true);
