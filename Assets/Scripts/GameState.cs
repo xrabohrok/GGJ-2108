@@ -31,7 +31,7 @@ public class GameState : MonoBehaviour {
     //Health before robot dies
     private int robotHealth = 5;
     //Player moves
-    private int playerMoves = 5;
+    private int playerMoves = 20;
 
 
 
@@ -63,7 +63,15 @@ public class GameState : MonoBehaviour {
 
     }
 
-	
+	public void PlayerMoved()
+    {
+        playerMoves--;
+        if (playerMoves <= 0)
+        {
+            ChangeToHack();
+        }
+
+    }
 	// Update is called once per frame
 	void Update ()
     {
@@ -72,13 +80,6 @@ public class GameState : MonoBehaviour {
         {
             ChangeToRobot();
         }
-
-        if (!GameObject.Find("HackingGame").GetComponent<GridMaster>().FunctioningCircuit)
-        {
-    
-            ChangeToHack();
-        }
-
 
         if (robotHealth <= 0)
         {
