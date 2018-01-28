@@ -42,7 +42,7 @@ namespace BabyMap
             }
 
 
-           // this.BoardSetup();
+            this.BoardSetup();
         }
 
 
