@@ -38,7 +38,7 @@ namespace BabyMap
             IntVector2 end = this.position + direction;
             
             if((end.x >= 0 && end.x < board.columns && end.y >= 0 && end.y < board.rows) 
-                && (board.fullMap[end.x, end.y] == TileType.Floor))
+                && (board.fullMap[end.x, end.y] != TileType.Wall))
             {
                 this.position = end;
                 StartCoroutine(SmoothMovement(new Vector3(end.x, end.y, 0f)));

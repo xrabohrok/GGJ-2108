@@ -31,8 +31,13 @@ public class GameState : MonoBehaviour {
     //Health before robot dies
     private int robotHealth = 5;
     //Player moves
-    private int playerMoves = 20;
+    private int playerMoves = 2;
 
+    Text clankyHP;
+    Text movesLeft;
+
+    SpriteRenderer robotDim;
+    SpriteRenderer hackerDim;
 
 
 
@@ -44,7 +49,7 @@ public class GameState : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        this.currentlyRobotGame = false;
+        this.currentlyRobotGame = true;
     }
 
 	// Use this for initialization
@@ -60,13 +65,18 @@ public class GameState : MonoBehaviour {
         //controlSwitchText.text = "Controlling Robot";
 
 
+        robotDim = GameObject.Find("gradientRobotRoom").GetComponent<SpriteRenderer>(); 
+        hackerDim = GameObject.Find("gradientHackerRoom").GetComponent<SpriteRenderer>();
+
+         clankyHP = GameObject.Find("BBIntegrityValueText").GetComponent<Text>();
+         movesLeft = GameObject.Find("MovesLeftValueText").GetComponent<Text>();
 
     }
 
-	public void PlayerMoved()
+    public void PlayerMoved()
     {
         playerMoves--;
-        if (playerMoves <= 0)
+        if (playerMoves <= 0 && currentlyRobotGame)
         {
             ChangeToHack();
         }
@@ -75,8 +85,10 @@ public class GameState : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		
-	if (GameObject.Find("HackingGame").GetComponent<GridMaster>().FunctioningCircuit)
+        movesLeft.text = playerMoves.ToString();
+        clankyHP.text = robotHealth.ToString();
+
+    if (GameObject.Find("HackingGame").GetComponent<GridMaster>().FunctioningCircuit)
         {
             ChangeToRobot();
         }
@@ -86,14 +98,14 @@ public class GameState : MonoBehaviour {
             GameOver();
         }
 
-        if (playerMoves <= 0)
-        {
-            ChangeToHack();
-        }
+       
 	}
 
     void ChangeToRobot()
     {
+        robotDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Default";
+        hackerDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Player";
+
         Cursor.visible = false;
 
         this.currentlyRobotGame = true;
@@ -108,7 +120,8 @@ public class GameState : MonoBehaviour {
 
     void ChangeToHack()
     {
-
+        hackerDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Default";
+        robotDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Player";
         Cursor.visible = true;
         GameObject.Find("HackingGame").GetComponent<GridMaster>().resetBoard();
   
