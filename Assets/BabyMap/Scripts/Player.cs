@@ -143,13 +143,19 @@ namespace BabyMap
 
         }
 
+        public void TriggerClankyHurtAnimation()
+        {
+                animator.SetTrigger("BBHurt");
+
+        }
+
 
         //AttemptMove overrides the AttemptMove function in the base class MovingObject
         //AttemptMove takes a generic parameter T which for Player will be of the type Wall, it also takes integers for x and y direction to move in.
         protected override void AttemptMove(int xDir, int yDir)
         {
             //Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
-
+            TriggerClankyWalkAnimation(xDir, yDir);
             base.AttemptMove(xDir, yDir);
         }
 
@@ -181,6 +187,12 @@ namespace BabyMap
                 //Disable the player object since level is over.
                 enabled = false;
             }
+            else if(other.tag == "Hazard")
+            {
+                TriggerClankyHurtAnimation();
+                GameState.instance.RobotHurt(GameState.instance.GetHazardDmg());
+                other.gameObject.SetActive(false);
+            }
 
         }
 
@@ -194,5 +206,6 @@ namespace BabyMap
         }
 
     }
+
 }
 

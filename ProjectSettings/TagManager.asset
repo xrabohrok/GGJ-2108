@@ -47,6 +47,12 @@ TagManager:
   - name: Wall
     uniqueID: 3380608427
     locked: 0
+  - name: Hazards
+    uniqueID: 196717099
+    locked: 0
+  - name: Goal
+    uniqueID: 3096796951
+    locked: 0
   - name: Player
     uniqueID: 1913815201
     locked: 0

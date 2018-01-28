@@ -31,10 +31,16 @@ public class GameState : MonoBehaviour {
     //Health before robot dies
     private int robotHealth = 5;
     //Player moves
-    private int playerMoves = 20;
+    private int playerMoves = 2;
 
+    private int dmgPerHazard = 1;
 
+    public Text BBIntegrityValueText;
 
+    public Text MovesLeftValueText;
+
+    GameObject robotDim;
+    GameObject hackDim;
 
     //Awake is always called before
     void Awake()
@@ -44,7 +50,7 @@ public class GameState : MonoBehaviour {
         else if (instance != this)
             Destroy(gameObject);
 
-        this.currentlyRobotGame = false;
+        //this.currentlyRobotGame = false;
     }
 
 	// Use this for initialization
@@ -59,14 +65,17 @@ public class GameState : MonoBehaviour {
         //Text needs initialized before this will work and I don't know how to do that. -mw
         //controlSwitchText.text = "Controlling Robot";
 
+        BBIntegrityValueText = GameObject.Find("BBIntegrityValueText").GetComponent<Text>();
+        MovesLeftValueText = GameObject.Find("MovesLeftValueText").GetComponent<Text>();
 
-
+        robotDim = GameObject.Find("gradientRobotRoom");
+        hackDim = GameObject.Find("gradientHackerRoom");
     }
 
 	public void PlayerMoved()
     {
         playerMoves--;
-        if (playerMoves <= 0)
+        if (playerMoves <= 0 && currentlyRobotGame)
         {
             ChangeToHack();
         }
@@ -75,8 +84,10 @@ public class GameState : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-		
-	if (GameObject.Find("HackingGame").GetComponent<GridMaster>().FunctioningCircuit)
+        BBIntegrityValueText.text = robotHealth.ToString();
+        MovesLeftValueText.text = playerMoves.ToString();
+
+        if (GameObject.Find("HackingGame").GetComponent<GridMaster>().FunctioningCircuit)
         {
             ChangeToRobot();
         }
@@ -86,14 +97,12 @@ public class GameState : MonoBehaviour {
             GameOver();
         }
 
-        if (playerMoves <= 0)
-        {
-            ChangeToHack();
-        }
-	}
+    }
 
     void ChangeToRobot()
     {
+        robotDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Default";
+        hackDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Player";
         Cursor.visible = false;
 
         this.currentlyRobotGame = true;
@@ -108,7 +117,8 @@ public class GameState : MonoBehaviour {
 
     void ChangeToHack()
     {
-
+        robotDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Player";
+        hackDim.GetComponentInChildren<SpriteRenderer>().sortingLayerName = "Default";
         Cursor.visible = true;
         GameObject.Find("HackingGame").GetComponent<GridMaster>().resetBoard();
   
@@ -131,6 +141,26 @@ public class GameState : MonoBehaviour {
             SceneManager.LoadScene("Game");
         }
 
+    }
+
+    public void RobotHurt(int dmg)
+    {
+        robotHealth -= dmg;
+        CheckIfGameOver();
+    }
+
+    public void CheckIfGameOver()
+    {
+        if(robotHealth < 1)
+        {
+            GameOver();
+        }
+
+    }
+
+    public int GetHazardDmg()
+    {
+        return dmgPerHazard;
     }
 
 }
