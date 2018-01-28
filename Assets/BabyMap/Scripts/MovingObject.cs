@@ -35,19 +35,19 @@ namespace BabyMap
             board = GameManager.instance.GetComponent<BoardManager>();
         }
 
-        protected TileType Move(int xDir, int yDir)
+        protected BoardManager.TileType Move(int xDir, int yDir)
         {
             return this.Move(new IntVector2(xDir, yDir));
         }
 
         //Move returns true if it is able to move and false if not. 
         //Move takes parameters for x direction, y direction and a RaycastHit2D to check collision.
-        protected TileType Move(IntVector2 direction)
+        protected BoardManager.TileType Move(IntVector2 direction)
         {
             // Calculate end position based on the direction parameters passed in when calling Move.
             IntVector2 end = this.position + direction;
 
-            if(board.fullMap[end.x, end.y] == TileType.Floor)
+            if(board.fullMap[end.x, end.y] == BoardManager.TileType.floor)
             {
                 StartCoroutine(SmoothMovement(new Vector3(end.x, end.y, 0f)));
                 this.position = end;
@@ -59,10 +59,10 @@ namespace BabyMap
         public void MoveRandomly()
         {
             IntVector2 direction;
-            TileType nextTile = TileType.Wall;
+            BoardManager.TileType nextTile = BoardManager.TileType.wall;
 
             // While we can't move (because of walls)
-            while (nextTile == TileType.Wall)
+            while (nextTile == BoardManager.TileType.wall)
             {
                 direction = new IntVector2(Random.Range(-1, 2), Random.Range(-1, 2));
 
@@ -75,7 +75,7 @@ namespace BabyMap
             }
             
             // Handle if we walked into a hazard or goal.
-            if (nextTile != TileType.Floor)
+            if (nextTile != BoardManager.TileType.floor)
                 OnCantMove(nextTile);
         }
 
@@ -115,16 +115,16 @@ namespace BabyMap
                 direction.y = 0;
 
             //Set canMove to true if Move was successful, false if failed.
-            TileType nextTile = Move(direction);
+            BoardManager.TileType nextTile = Move(direction);
 
             // Handle if we walked into a hazard or goal.
-            if (nextTile != TileType.Floor)
+            if (nextTile != BoardManager.TileType.floor)
                 OnCantMove(nextTile);
         }
 
 
         //The abstract modifier indicates that the thing being modified has a missing or incomplete implementation.
         //OnCantMove will be overriden by functions in the inheriting classes.
-        protected abstract void OnCantMove(TileType type);
+        protected abstract void OnCantMove(BoardManager.TileType type);
     }
 }
