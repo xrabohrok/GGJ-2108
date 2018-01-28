@@ -59,6 +59,7 @@ namespace BabyMap
 
         public static IntVector2 operator +(IntVector2 a, IntVector2 b)
         {
+            Debug.Log("a:" + a + ", b:" + b);
             if (!object.ReferenceEquals(a, null) && !object.ReferenceEquals(b, null))
                 return new IntVector2(a.X + b.X, a.Y + b.Y);
             else
