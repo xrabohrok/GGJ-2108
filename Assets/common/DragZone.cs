@@ -6,10 +6,16 @@ public class DragZone : MonoBehaviour
     private bool lastClick;
     private Clickable clicker;
     private Draggable currentDraggable;
+    private bool locked;
 
     public Draggable CurrentDraggable
     {
         get { return currentDraggable; }
+    }
+
+    public bool Locked
+    {
+        get { return locked; }
     }
 
     // Use this for initialization
@@ -22,17 +28,20 @@ public class DragZone : MonoBehaviour
 
     private void SnapDraggablesToPos()
     {
-//if there is a tile that is draggable in the mouse set, take it and grab it
-        foreach (var clicked in clicker.selectionSet())
+        //if there is a tile that is draggable in the mouse set, take it and grab it
+        if (!locked)
         {
-            var draggable = clicked.GetComponent<Draggable>();
-            if (draggable != null)
+            foreach (var clicked in clicker.selectionSet())
             {
-                if (draggable != CurrentDraggable)
+                var draggable = clicked.GetComponent<Draggable>();
+                if (draggable != null)
                 {
-                    draggable.CurrentDragZone.setDraggable(null);
+                    if (draggable != CurrentDraggable)
+                    {
+                        draggable.CurrentDragZone.setDraggable(null);
+                    }
+                    draggable.snapTo(this.transform.position, this);
                 }
-                draggable.snapTo(this.transform.position, this);
             }
         }
     }
@@ -56,5 +65,15 @@ public class DragZone : MonoBehaviour
         {
             GameObject.Destroy(currentDraggable.gameObject);
         }
+    }
+
+    public void lockDraggable()
+    {
+        locked = true;
+    }
+
+    public void unlockDraggable()
+    {
+        locked = false;
     }
 }
