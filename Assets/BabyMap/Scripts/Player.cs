@@ -101,10 +101,12 @@ namespace BabyMap
 
                     IntVector2 end = this.position + direction;
                     if (end.x >= 0 && end.x < board.columns && end.y >= 0 && end.y < board.rows)
+                    {
                         //Set canMove to true if Move was successful, false if failed.
 
-                       TriggerClankyWalkAnimation(direction);
-                       nextTile = Move(direction);
+                        TriggerClankyWalkAnimation(direction);
+                        nextTile = Move(direction);
+                    }
                 }
 
                 if (nextTile != TileType.Floor)
