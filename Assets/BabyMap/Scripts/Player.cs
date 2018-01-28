@@ -16,6 +16,7 @@ namespace BabyMap
         public AudioClip gameOverSound;             //Audio clip to play when player dies.
 
         private Animator animator;                  //Used to store a reference to the Player's animator component
+        private SpriteRenderer spriteRenderer;
         List<IntVector2> moveList;
         float timer;
 
@@ -32,6 +33,7 @@ namespace BabyMap
         {
             //Get a component reference to the Player's animator component
             animator = GetComponent<Animator>();
+            spriteRenderer = GetComponent<SpriteRenderer>();
             this.moveList = new List<IntVector2>();
             timer = Time.time;
 
@@ -103,11 +105,14 @@ namespace BabyMap
             //Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
             if(xDir == 1)
             {
+                spriteRenderer.flipX = true;
                 animator.SetTrigger("BBWalkSide");
             }
             else if (xDir == -1)
             {
+                spriteRenderer.flipX = false;
                 animator.SetTrigger("BBWalkSide");
+                
             }
             else  if (yDir == -1)
             {
