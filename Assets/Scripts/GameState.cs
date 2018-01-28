@@ -31,7 +31,9 @@ public class GameState : MonoBehaviour {
     //Health before robot dies
     private int robotHealth = 5;
     //Player moves
-    private int playerMoves = 2;
+    private int playerMoves = 10;
+
+    public int hazardDmg = 1;
 
     Text clankyHP;
     Text movesLeft;
@@ -152,6 +154,11 @@ public class GameState : MonoBehaviour {
             SceneManager.LoadScene("Game");
         }
 
+    }
+
+    public void PlayerHurt(int dmg)
+    {
+        robotHealth -= dmg;
     }
 
 }

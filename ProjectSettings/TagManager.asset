@@ -3,7 +3,8 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Hazard
   layers:
   - Default
   - TransparentFX
@@ -46,6 +47,12 @@ TagManager:
     locked: 0
   - name: Wall
     uniqueID: 3380608427
+    locked: 0
+  - name: Hazards
+    uniqueID: 2661694607
+    locked: 0
+  - name: Goals
+    uniqueID: 3561420515
     locked: 0
   - name: Player
     uniqueID: 1913815201
