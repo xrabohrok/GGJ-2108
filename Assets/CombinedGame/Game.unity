@@ -221,7 +221,7 @@ SpriteRenderer:
   m_Size: {x: 2.48, y: 2.38}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!4 &92355340
 Transform:
@@ -385,7 +385,7 @@ SpriteRenderer:
   m_Size: {x: 3.33, y: 3.35}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!4 &870315513
 Transform:
@@ -508,7 +508,7 @@ SpriteRenderer:
   m_Size: {x: 2.48, y: 2.38}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
 --- !u!4 &1031496379
 Transform:
@@ -533,6 +533,7 @@ GameObject:
   - component: {fileID: 1246907192}
   - component: {fileID: 1246907191}
   - component: {fileID: 1246907190}
+  - component: {fileID: 1246907193}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -581,6 +582,31 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1246907193
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1246907189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc57ce64553d30046aae9183c30f638b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  board: {fileID: 0}
+  moveTime: 0.1
+  blockingLayer:
+    serializedVersion: 2
+    m_Bits: 0
+  restartLevelDelay: 1
+  wallDamage: 1
+  moveSound1: {fileID: 0}
+  moveSound2: {fileID: 0}
+  eatSound1: {fileID: 0}
+  eatSound2: {fileID: 0}
+  drinkSound1: {fileID: 0}
+  drinkSound2: {fileID: 0}
+  gameOverSound: {fileID: 0}
 --- !u!1 &1671711817
 GameObject:
   m_ObjectHideFlags: 0

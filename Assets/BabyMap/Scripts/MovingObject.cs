@@ -47,7 +47,7 @@ namespace BabyMap
             // Calculate end position based on the direction parameters passed in when calling Move.
             IntVector2 end = this.position + direction;
 
-            if(board.fullMap[end.x, end.y] == BoardManager.TileType.floor)
+            if(board.fullMap[end.x, end.y] == BoardManager.TileType.Floor)
             {
                 StartCoroutine(SmoothMovement(new Vector3(end.x, end.y, 0f)));
                 this.position = end;
@@ -59,10 +59,10 @@ namespace BabyMap
         public void MoveRandomly()
         {
             IntVector2 direction;
-            BoardManager.TileType nextTile = BoardManager.TileType.wall;
+            BoardManager.TileType nextTile = BoardManager.TileType.Wall;
 
             // While we can't move (because of walls)
-            while (nextTile == BoardManager.TileType.wall)
+            while (nextTile == BoardManager.TileType.Wall)
             {
                 direction = new IntVector2(Random.Range(-1, 2), Random.Range(-1, 2));
 
@@ -75,7 +75,7 @@ namespace BabyMap
             }
             
             // Handle if we walked into a hazard or goal.
-            if (nextTile != BoardManager.TileType.floor)
+            if (nextTile != BoardManager.TileType.Floor)
                 OnCantMove(nextTile);
         }
 
@@ -118,7 +118,7 @@ namespace BabyMap
             BoardManager.TileType nextTile = Move(direction);
 
             // Handle if we walked into a hazard or goal.
-            if (nextTile != BoardManager.TileType.floor)
+            if (nextTile != BoardManager.TileType.Floor)
                 OnCantMove(nextTile);
         }
 
