@@ -90,9 +90,6 @@ public class GameState : MonoBehaviour {
         }
 	}
 
-
-
-    //TODO
     void ChangeToRobot()
     {
         Cursor.visible = false;
