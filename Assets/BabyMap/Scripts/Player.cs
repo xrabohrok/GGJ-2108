@@ -102,7 +102,9 @@ namespace BabyMap
                     IntVector2 end = this.position + direction;
                     if (end.x >= 0 && end.x < board.columns && end.y >= 0 && end.y < board.rows)
                         //Set canMove to true if Move was successful, false if failed.
-                        nextTile = Move(direction);
+
+                       TriggerClankyWalkAnimation(direction);
+                       nextTile = Move(direction);
                 }
 
                 if (nextTile != TileType.Floor)
@@ -111,31 +113,42 @@ namespace BabyMap
 
         }
 
+        private void TriggerClankyWalkAnimation(IntVector2 direction)
+        {
+            TriggerClankyWalkAnimation(direction.X, direction.Y);
+
+        }
+
+        private void TriggerClankyWalkAnimation(int x, int y)
+        {
+            if (x == 1)
+            {
+                spriteRenderer.flipX = true;
+                animator.SetTrigger("BBWalkSide");
+            }
+            else if (x == -1)
+            {
+                spriteRenderer.flipX = false;
+                animator.SetTrigger("BBWalkSide");
+
+            }
+            else if (y == -1)
+            {
+                animator.SetTrigger("BBWalkUp");
+            }
+            else if (y == 1)
+            {
+                animator.SetTrigger("BBWalkAway");
+            }
+
+        }
+
+
         //AttemptMove overrides the AttemptMove function in the base class MovingObject
         //AttemptMove takes a generic parameter T which for Player will be of the type Wall, it also takes integers for x and y direction to move in.
         protected override void AttemptMove(int xDir, int yDir)
         {
             //Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
-
-            if(xDir == 1)
-            {
-                spriteRenderer.flipX = true;
-                animator.SetTrigger("BBWalkSide");
-            }
-            else if (xDir == -1)
-            {
-                spriteRenderer.flipX = false;
-                animator.SetTrigger("BBWalkSide");
-                
-            }
-            else  if (yDir == -1)
-            {
-                animator.SetTrigger("BBWalkUp");
-            }
-            else if (yDir == 1)
-            {
-                animator.SetTrigger("BBWalkAway");
-            }
 
             base.AttemptMove(xDir, yDir);
         }
