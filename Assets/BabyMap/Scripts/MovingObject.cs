@@ -12,7 +12,7 @@ namespace BabyMap
         public IntVector2 position;
 
         private Rigidbody2D rb2D;               //The Rigidbody2D component attached to this object.
-        private float inverseMoveTime = 2f;
+        private float inverseMoveTime = 3.3f;
         public bool busyHandlingInput = false;
 
         protected void Awake()
@@ -36,8 +36,9 @@ namespace BabyMap
         {
             // Calculate end position based on the direction parameters passed in when calling Move.
             IntVector2 end = this.position + direction;
-
-            if(board.fullMap[end.x, end.y] == TileType.Floor)
+            
+            if((board.fullMap[end.x, end.y] == TileType.Floor)
+                && (end.x >= 0 && end.x < board.columns && end.y >= 0 && end.y < board.rows))
             {
                 this.position = end;
                 StartCoroutine(SmoothMovement(new Vector3(end.x, end.y, 0f)));
