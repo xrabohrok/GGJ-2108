@@ -64,8 +64,11 @@ namespace BabyMap
                 if (direction.x != 0)
                     direction.y = 0;
 
-                //Set canMove to true if Move was successful, false if failed.
-                nextTile = Move(direction);
+                // TODO: There's a lot of duplication between this and AttemptedMove that could probably be simplified later. -mw
+                IntVector2 end = this.position + direction;
+                if (end.x >= 0 && end.x < board.columns && end.y >= 0 && end.y < board.rows)
+                    //Set canMove to true if Move was successful, false if failed.
+                    nextTile = Move(direction);
             }
             
             // Handle if we walked into a hazard or goal.
