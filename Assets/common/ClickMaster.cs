@@ -10,6 +10,8 @@ public class ClickMaster : MonoBehaviour {
     private List<Clickable> lastHovered;
     private List<Clickable> clickables { get; set;  }
 
+    private AudioSource soundPlayer;
+
     private List<Clickable> hovered;
 
     public List<Clickable> hoverElements
@@ -22,6 +24,7 @@ public class ClickMaster : MonoBehaviour {
     {
         clickables = new List<Clickable>();
         hovered = new List<Clickable>();
+        soundPlayer = this.GetComponent<AudioSource>();
     }
 	
 	// Update is called once per frame
@@ -73,6 +76,15 @@ public class ClickMaster : MonoBehaviour {
     public void register(Clickable clickable)
     {
         clickables.Add(clickable);
+    }
+
+    public void playSound(AudioClip clip)
+    {
+        if (soundPlayer != null)
+        {
+            soundPlayer.clip = clip;
+            soundPlayer.Play();
+        }
     }
 
     public void deRegister(Clickable clickable)

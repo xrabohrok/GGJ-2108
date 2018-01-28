@@ -8,7 +8,9 @@ public class Clickable : MonoBehaviour
     private static ClickMaster masterClicker; 
 
     private Collider2D collider;
-    private ClickMaster clickMaster;
+
+    public AudioClip clickDownSound;
+    public AudioClip clickUpSound;
 
     private Action clickDownCallback;
     public void setClickDownCallback(Action thing)
@@ -41,10 +43,10 @@ public class Clickable : MonoBehaviour
 	    collider = GetComponent<Collider2D>();
         if(masterClicker == null)
         {
-            clickMaster = FindObjectOfType<ClickMaster>();
+            masterClicker = FindObjectOfType<ClickMaster>();
         }
 
-	    clickMaster.register(this);
+	    masterClicker.register(this);
 	}
 
     void OnDestroy()
@@ -65,6 +67,12 @@ public class Clickable : MonoBehaviour
     public void ReportMouseDown()
     {
         clicked = true;
+
+        if (clickDownSound != null)
+        {
+            masterClicker.playSound(clickDownSound);
+        }
+
         if(clickDownCallback != null)
         {
             clickDownCallback.Invoke();
@@ -74,6 +82,12 @@ public class Clickable : MonoBehaviour
     public void ReportMouseUp()
     {
         clicked = false;
+
+        if (clickUpSound != null)
+        {
+            masterClicker.playSound(clickUpSound);
+        }
+
         if (clickReleaseCallback != null)
         {
             clickReleaseCallback.Invoke();
@@ -82,11 +96,11 @@ public class Clickable : MonoBehaviour
 
     public List<Clickable> selectionSet()
     {
-        return clickMaster.hoverElements;
+        return masterClicker.hoverElements;
     }
 
     private void die()
     {
-        clickMaster.deRegister(this);
+        masterClicker.deRegister(this);
     }
 }

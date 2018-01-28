@@ -12,9 +12,9 @@ namespace BabyMap
         public static Player instance;
 
         public float restartLevelDelay = 1f;        //Delay time in seconds to restart level.
-        public AudioClip moveSound1;                //1 of 2 Audio clips to play when player moves.
-        public AudioClip moveSound2;                //2 of 2 Audio clips to play when player moves.
-        public AudioClip gameOverSound;             //Audio clip to play when player dies.
+        public AudioClip moveSound1;                //1 of 2 Audio clips to play when soundPlayer moves.
+        public AudioClip moveSound2;                //2 of 2 Audio clips to play when soundPlayer moves.
+        public AudioClip gameOverSound;             //Audio clip to play when soundPlayer dies.
 
         private Animator animator;                  //Used to store a reference to the Player's animator component
         private SpriteRenderer spriteRenderer;
@@ -49,7 +49,7 @@ namespace BabyMap
 
         private void Update()
         {
-            //If it's not the player's turn, exit the function.
+            //If it's not the soundPlayer's turn, exit the function.
             if (GameState.instance.currentlyRobotGame && !this.busyHandlingInput)
             {
                 int horizontal = 0;
@@ -65,7 +65,7 @@ namespace BabyMap
                 if (horizontal != 0 || vertical != 0)
                 {
                     AttemptMove(horizontal, vertical);
-                    // Possibly loop and don't count the input if the player moved into a wall.
+                    // Possibly loop and don't count the input if the soundPlayer moved into a wall.
                 }
             }
 
@@ -180,7 +180,7 @@ namespace BabyMap
                 //Invoke the Restart function to start the next level with a delay of restartLevelDelay (default 1 second).
                 Invoke("Restart", restartLevelDelay);
 
-                //Disable the player object since level is over.
+                //Disable the soundPlayer object since level is over.
                 enabled = false;
             }
 

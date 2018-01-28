@@ -71,6 +71,7 @@ public class GridMaster : MonoBehaviour
             for (int i = 0; i < horizontalCount; i++)
             {
                 arrayedRefs[j][i].GetComponent<DragZone>().nukeStuff();
+
             }
         }
     }

@@ -66,7 +66,7 @@ namespace BabyMap
         }
 
 
-        //GameOver is called when the player reaches 0 food points
+        //GameOver is called when the soundPlayer reaches 0 food points
         public void GameOver()
         { 
             enabled = false;
