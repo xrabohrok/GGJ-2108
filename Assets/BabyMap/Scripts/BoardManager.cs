@@ -100,6 +100,9 @@ namespace BabyMap
                 fullMap[i , 5] = TileType.Wall;
             }
 
+            room[7, 7] = "wireHazard";
+            fullMap[7, 7] = TileType.Hazard;
+
 
             for (int y = 0; y < rows; y++)
             {
