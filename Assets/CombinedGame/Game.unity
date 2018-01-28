@@ -551,14 +551,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b713f1ac5f49e2247937323a705eb058, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  columns: 7
-  rows: 7
-  wallCount:
-    minimum: 5
-    maximum: 9
-  foodCount:
-    minimum: 1
-    maximum: 5
+  columns: 12
+  rows: 10
 --- !u!114 &1246907191
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -572,7 +566,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   levelStartDelay: 2
   turnDelay: 0.1
-  playerFoodPoints: 100
   playersTurn: 1
   boardScript: {fileID: 0}
 --- !u!4 &1246907192
