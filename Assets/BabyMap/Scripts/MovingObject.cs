@@ -41,14 +41,14 @@ namespace BabyMap
             {
                 this.position = end;
                 StartCoroutine(SmoothMovement(new Vector3(end.x, end.y, 0f)));
-                GameObject.Find("GameManager").GetComponent<GameState>().PlayerMoved();
+//                GameObject.Find("GameManager").GetComponent<GameState>().PlayerMoved();
             }
 
             return board.fullMap[end.x, end.y];
         }
 
         //Co-routine for moving units from one space to next, takes a parameter end to specify where to move to.
-        protected IEnumerator SmoothMovement(Vector3 end)
+        protected IEnumerator  SmoothMovement(Vector3 end)
         {
             this.busyHandlingInput = true;
             //Calculate the remaining distance to move based on the square magnitude of the difference between current position and end parameter. 

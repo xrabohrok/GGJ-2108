@@ -79,8 +79,4 @@ public class Draggable : MonoBehaviour
 	    }
 	}
 
-    public void funeralRites()
-    {
-        clicker.die();
-    }
 }
