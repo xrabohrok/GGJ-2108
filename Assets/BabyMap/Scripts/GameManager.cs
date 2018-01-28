@@ -49,7 +49,10 @@ namespace BabyMap
         //This is called each time a scene is loaded.
         static private void OnSceneLoaded(Scene arg0, LoadSceneMode arg1)
         {
-            instance.InitGame();
+            if (instance != null)
+            {
+                instance.InitGame();
+            }
         }
 
 
