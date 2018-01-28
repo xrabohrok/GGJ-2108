@@ -105,13 +105,13 @@ namespace BabyMap
 
 
         //OnCantMove overrides the abstract function OnCantMove in MovingObject.
-        protected override void OnCantMove(BoardManager.TileType tile)
+        protected override void OnCantMove(TileType tile)
         {
-            if (tile == BoardManager.TileType.Goal)
+            if (tile == TileType.Goal)
             {
                 // good shit
             }
-            else if (tile == BoardManager.TileType.Hazard)
+            else if (tile == TileType.Hazard)
             {
                 GameManager.instance.GameOver();
             }

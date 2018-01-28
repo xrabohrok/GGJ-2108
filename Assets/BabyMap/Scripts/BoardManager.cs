@@ -7,8 +7,16 @@ namespace BabyMap
 
 {
 
+
+    public enum TileType
+    {
+        Floor, Wall, Hazard, Goal
+    }
+
+
     public class BoardManager : MonoBehaviour
     {
+
 
         public static BoardManager instance = null;
 
@@ -38,7 +46,7 @@ namespace BabyMap
             //Instantiate Board and set boardHolder to its transform.
             boardHolder = new GameObject("Board").transform;
 
-            GameObject instance;
+            GameObject instance = null;
 
             room = new String[columns, rows];
 
@@ -112,16 +120,12 @@ namespace BabyMap
         //SetupScene initializes our level and calls the previous functions to lay out the game board
         public void SetupScene()
         {
+            this.InitializeFullMap();
             this.BoardSetup();
                         
             this.exit = new IntVector2(columns - 1, rows - 1);
 
             Create2DTileArray();
-        }
-
-        public enum TileType
-        {
-            Floor, Wall, Hazard, Goal
         }
 
         public void Create2DTileArray()
@@ -131,6 +135,20 @@ namespace BabyMap
                 for (int j = 0; j < rows; j++)
                 {
                     this.CreateVertices(new IntVector2(i, j));
+                }
+            }
+        }
+
+        // Currently the fullMap is used for Djikstras and collisions, and room is used for displaying sprites.
+        // Obviously this should change in the future. -mw
+        public void InitializeFullMap()
+        {
+            this.fullMap = new TileType[this.columns, this.rows];
+            for (int i = 0; i < columns; i++)
+            {
+                for (int j = 0; j < rows; j++)
+                {
+                    this.fullMap[i, j] = TileType.Floor;
                 }
             }
         }
