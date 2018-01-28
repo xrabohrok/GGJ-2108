@@ -151,7 +151,7 @@ namespace BabyMap
         protected override void AttemptMove(int xDir, int yDir)
         {
             //Call the AttemptMove method of the base class, passing in the component T (in this case Wall) and x and y direction to move.
-
+            TriggerClankyWalkAnimation(xDir, yDir);
             base.AttemptMove(xDir, yDir);
         }
 
