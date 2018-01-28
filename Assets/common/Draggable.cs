@@ -41,24 +41,33 @@ public class Draggable : MonoBehaviour
             lastGoodPos = this.transform.position;
         });
         clicker.setClickReleaseCallback(() =>
-        {
-            currentDragZone = null;
-            if (requireDragZone)
             {
                 if (clicker.selectionSet().All(c => c.GetComponent<DragZone>() == null))
                 {
-                    this.transform.position = lastGoodPos;
+                    if (requireDragZone)
+                    {
+                        this.transform.position = lastGoodPos;
+                    }
                 }
+
             }
-        });
-	    draggable = true;
+        );
+//	    draggable = true;
 
 	}
 
     public void snapTo(Vector3 newPos, DragZone dragZone)
     {
         this.transform.position = new Vector3(newPos.x, newPos.y, this.transform.position.z);
-        currentDragZone = dragZone;
+        if(dragZone != currentDragZone || currentDragZone == null)
+        {
+            if (currentDragZone != null)
+            {
+                currentDragZone.setDraggable(null);
+            }
+            currentDragZone = dragZone;
+            dragZone.setDraggable(this);
+        }
     }
 	
 	// Update is called once per frame
@@ -69,4 +78,9 @@ public class Draggable : MonoBehaviour
 	        this.transform.position = new Vector3( mouseWorldPoint.x, mouseWorldPoint.y, 0);
 	    }
 	}
+
+    public void funeralRites()
+    {
+        clicker.die();
+    }
 }

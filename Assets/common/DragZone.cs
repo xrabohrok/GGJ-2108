@@ -1,12 +1,16 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(Clickable))]
 public class DragZone : MonoBehaviour
 {
     private bool lastClick;
     private Clickable clicker;
+    private Draggable currentDraggable;
+
+    public Draggable CurrentDraggable
+    {
+        get { return currentDraggable; }
+    }
 
     // Use this for initialization
 	void Start ()
@@ -24,8 +28,26 @@ public class DragZone : MonoBehaviour
             var draggable = clicked.GetComponent<Draggable>();
             if (draggable != null)
             {
+                if (draggable != CurrentDraggable)
+                {
+                    draggable.CurrentDragZone.setDraggable(null);
+                }
                 draggable.snapTo(this.transform.position, this);
             }
         }
+    }
+
+    public void setDraggable(Draggable draggable)
+    {
+        //overlap destruction
+        if (currentDraggable != null && currentDraggable != draggable && draggable != null)
+        {
+            currentDraggable.funeralRites();
+            GameObject.Destroy(currentDraggable.gameObject);
+            currentDraggable = null;
+        }
+
+        currentDraggable = draggable;
+
     }
 }
