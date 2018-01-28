@@ -36,7 +36,7 @@ GameObject:
   - component: {fileID: 4670602161410252}
   - component: {fileID: 212609058369910982}
   m_Layer: 0
-  m_Name: Obstacles_0001_Wires.png
+  m_Name: wireHazard
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
