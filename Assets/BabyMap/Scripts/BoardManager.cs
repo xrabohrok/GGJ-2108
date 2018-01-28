@@ -70,6 +70,7 @@ namespace BabyMap
             }
 
             room[2, 2] = "robotRoom_downCorner_wall";
+            fullMap[2, 2] = TileType.Wall;
             for (int i = 3; i < topOfRoom; i ++) {
                 room[2, i] = "robotRoom_leftVertical_wall";
                 fullMap[2, i] = TileType.Wall;
