@@ -12,10 +12,7 @@ namespace BabyMap
         public IntVector2 position;
 
         public float moveTime = 0.1f;           //Time it will take object to move, in seconds.
-        public LayerMask blockingLayer;         //Layer on which collision will be checked.
 
-
-        private BoxCollider2D boxCollider;      //The BoxCollider2D component attached to this object.
         private Rigidbody2D rb2D;               //The Rigidbody2D component attached to this object.
         private float inverseMoveTime;          //Used to make movement more efficient.
 
@@ -23,28 +20,18 @@ namespace BabyMap
         //Protected, virtual functions can be overridden by inheriting classes.
         protected virtual void Start()
         {
-            //Get a component reference to this object's BoxCollider2D
-            boxCollider = GetComponent<BoxCollider2D>();
-
-            //Get a component reference to this object's Rigidbody2D
-            rb2D = GetComponent<Rigidbody2D>();
-
-            //By storing the reciprocal of the move time we can use it by multiplying instead of dividing, this is more efficient.
             inverseMoveTime = 1f / moveTime;
-            
-            board = GameManager.instance.GetComponent<BoardManager>();
+            board = BoardManager.instance;
+            this.position = board.start;
         }
 
-        protected TileType Move(int xDir, int yDir)
-        {
-            return this.Move(new IntVector2(xDir, yDir));
-        }
 
         //Move returns true if it is able to move and false if not. 
         //Move takes parameters for x direction, y direction and a RaycastHit2D to check collision.
         protected TileType Move(IntVector2 direction)
         {
             // Calculate end position based on the direction parameters passed in when calling Move.
+            Debug.Log(this.position + " " + direction);
             IntVector2 end = this.position + direction;
 
             if(board.fullMap[end.x, end.y] == TileType.Floor)
@@ -55,6 +42,7 @@ namespace BabyMap
 
             return board.fullMap[end.x, end.y];
         }
+
 
         public void MoveRandomly()
         {

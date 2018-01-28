@@ -23,6 +23,7 @@ namespace BabyMap
 
         public int columns;                                         //Number of columns in our game board.
         public int rows;                                            //Number of rows in our game board.
+        public IntVector2 start;
         public IntVector2 exit;
 
         private Transform boardHolder;                                  //A variable to store a reference to the transform of our Board object.
@@ -113,8 +114,10 @@ namespace BabyMap
                         instance.transform.SetParent(boardHolder);
                     }
                 }
-
             }
+
+            fullMap[3, topOfRoom] = TileType.Goal;
+            fullMap[4, topOfRoom] = TileType.Goal;
         }
         
         //SetupScene initializes our level and calls the previous functions to lay out the game board
@@ -122,8 +125,9 @@ namespace BabyMap
         {
             this.InitializeFullMap();
             this.BoardSetup();
-                        
-            this.exit = new IntVector2(columns - 1, rows - 1);
+
+            this.start = new IntVector2(this.columns - 2, this.rows - 2);
+            this.exit = new IntVector2(3, rows - 1);
 
             Create2DTileArray();
         }

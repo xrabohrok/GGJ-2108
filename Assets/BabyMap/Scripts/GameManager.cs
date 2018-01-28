@@ -12,8 +12,6 @@ namespace BabyMap
         public float levelStartDelay = 2f;                      //Time to wait before starting level, in seconds.
         public float turnDelay = 0.1f;                          //Delay between each Player turn.
         public static GameManager instance = null;              //Static instance of GameManager which allows it to be accessed by any other script.
-        [HideInInspector]
-        public bool playersTurn = true;     //Boolean to check if it's players turn, hidden in inspector but public.
 
 
         //private Text levelText;                                 //Text to display current level number.
@@ -71,14 +69,7 @@ namespace BabyMap
 
         //GameOver is called when the player reaches 0 food points
         public void GameOver()
-        {
-            //Set levelText to display number of levels passed and game over message
-            //levelText.text = "After " + level + " days, you starved.";
-
-            //Enable black background image gameObject.
-           // levelImage.SetActive(true);
-
-            //Disable this GameManager.
+        { 
             enabled = false;
         }
     }
