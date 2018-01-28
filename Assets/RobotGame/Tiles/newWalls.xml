@@ -1,0 +1,12 @@
+<TextureAtlas imagePath="newWalls.png">
+	<SubTexture name="robo-room-wall-tiles_0000_floor.png" x="34" y="34" width="32" height="32"/>
+	<SubTexture name="robo-room-wall-tiles_0001_vert-wall.png" x="68" y="68" width="32" height="32"/>
+	<SubTexture name="robo-room-wall-tiles_0002_hori-wlal.png" x="68" y="34" width="32" height="32"/>
+	<SubTexture name="robo-room-wall-tiles_0003_vvv.png" x="68" y="0" width="32" height="32"/>
+	<SubTexture name="robo-room-wall-tiles_0004____.png" x="34" y="68" width="32" height="32"/>
+	<SubTexture name="robo-room-wall-tiles_0005_^^^.png" x="102" y="0" width="32" height="32"/>
+	<SubTexture name="robo-room-wall-tiles_0006____.png" x="34" y="0" width="32" height="32"/>
+	<SubTexture name="robo-room-wall-tiles_0007_left-and-down.png" x="0" y="68" width="32" height="32"/>
+	<SubTexture name="robo-room-wall-tiles_0008_corner-open.png" x="0" y="34" width="32" height="32"/>
+	<SubTexture name="robo-room-wall-tiles_0009_corner-open-copy.png" x="0" y="0" width="32" height="32"/>
+</TextureAtlas>

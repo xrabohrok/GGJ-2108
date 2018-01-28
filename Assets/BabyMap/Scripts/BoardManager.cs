@@ -58,7 +58,7 @@ namespace BabyMap
             fullMap[0, topOfRoom] = TileType.Wall;
             room[1, topOfRoom] = "robotRoom_topHorizontal_wall";
             fullMap[1 , topOfRoom] = TileType.Wall;
-            room[2, topOfRoom] = "robotRoom_leftVertical_wall";
+            room[2, topOfRoom] = "robotRoom_leftDown_wall";
             fullMap[2, topOfRoom] = TileType.Wall;
 
             room[5, topOfRoom] = "robotRoom_rightBlind_wall";
@@ -84,7 +84,7 @@ namespace BabyMap
             room[5, 5] = "robotRoom_topBlind_wall";
             fullMap[5,5] = TileType.Wall;
 
-            room[5, 2] = "robotRoom_leftDown_wall";
+            room[5, 2] = "robotRoom_openCornerLeft_wall";
             fullMap[5, 2] = TileType.Wall;
 
             room[6, 2] = "robotRoom_topHorizontal_wall";
@@ -102,6 +102,9 @@ namespace BabyMap
 
             room[7, 7] = "wireHazard";
             fullMap[7, 7] = TileType.Hazard;
+
+            room[1, 1] = "wireHazard";
+            fullMap[1, 1] = TileType.Hazard;
 
 
             for (int y = 0; y < rows; y++)
