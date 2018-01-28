@@ -11,7 +11,7 @@ namespace BabyMap
         public BoardManager board;
         public IntVector2 position;
 
-        public float moveTime = 0.0001f;           //Time it will take object to move, in seconds.
+        public float moveTime = 0.1f;           //Time it will take object to move, in seconds.
 
         private Rigidbody2D rb2D;               //The Rigidbody2D component attached to this object.
         private float inverseMoveTime;          //Used to make movement more efficient.
