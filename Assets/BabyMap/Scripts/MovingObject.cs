@@ -11,10 +11,8 @@ namespace BabyMap
         public BoardManager board;
         public IntVector2 position;
 
-        public float moveTime = 0.1f;           //Time it will take object to move, in seconds.
-
         private Rigidbody2D rb2D;               //The Rigidbody2D component attached to this object.
-        private float inverseMoveTime;          //Used to make movement more efficient.
+        private float inverseMoveTime = 2f;
         public bool busyHandlingInput = false;
 
         protected void Awake()
@@ -25,7 +23,6 @@ namespace BabyMap
         //Protected, virtual functions can be overridden by inheriting classes.
         protected virtual void Start()
         {
-            inverseMoveTime = 1f / moveTime;
             board = BoardManager.instance;
             this.position = board.start;
             rb2D = gameObject.GetComponent<Rigidbody2D>();
@@ -47,33 +44,6 @@ namespace BabyMap
             }
 
             return board.fullMap[end.x, end.y];
-        }
-
-
-        public void MoveRandomly()
-        {
-            IntVector2 direction;
-            TileType nextTile = TileType.Wall;
-
-            // While we can't move (because of walls)
-            while (nextTile == TileType.Wall)
-            {
-                direction = new IntVector2(Random.Range(-1, 2), Random.Range(-1, 2));
-
-                // Don't move diagonally.
-                if (direction.x != 0)
-                    direction.y = 0;
-
-                // TODO: There's a lot of duplication between this and AttemptedMove that could probably be simplified later. -mw
-                IntVector2 end = this.position + direction;
-                if (end.x >= 0 && end.x < board.columns && end.y >= 0 && end.y < board.rows)
-                    //Set canMove to true if Move was successful, false if failed.
-                    nextTile = Move(direction);
-            }
-            
-            // Handle if we walked into a hazard or goal.
-            if (nextTile != TileType.Floor)
-                OnCantMove(nextTile);
         }
 
         //Co-routine for moving units from one space to next, takes a parameter end to specify where to move to.
