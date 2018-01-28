@@ -67,12 +67,12 @@ public class DragZone : MonoBehaviour
         }
     }
 
-    public void lockDraggable()
+    public void LockDraggable()
     {
         locked = true;
     }
 
-    public void unlockDraggable()
+    public void UnlockDraggable()
     {
         locked = false;
     }
