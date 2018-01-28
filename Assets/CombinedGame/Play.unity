@@ -164,12 +164,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 101353449}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.6916819, y: 2.1569963, z: -9.834785}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -8.947499, y: -1.4653404, z: -9.803535}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_Father: {fileID: 1549059355}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &101353453
 MonoBehaviour:
@@ -182,13 +182,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2dd6a895055a1c244b19f6d076995840, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hackGame: {fileID: 0}
+  hackGame: {fileID: 1166442670}
   robotGame: {fileID: 0}
   currentlyRobotGame: 0
   controlSwitchText: {fileID: 0}
   restartDelay: 5
   robotMusic: {fileID: 0}
   hackMusic: {fileID: 0}
+--- !u!1 &1166442670 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1942265872907532, guid: 5b318e4ac869fa54999d6aa6e396ab1b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1540654868}
 --- !u!1 &1222635029
 GameObject:
   m_ObjectHideFlags: 0
@@ -222,7 +227,6 @@ MonoBehaviour:
   board: {fileID: 0}
   moveTime: 0.1
   busyHandlingInput: 0
-  restartLevelDelay: 1
   moveSound1: {fileID: 0}
   moveSound2: {fileID: 0}
   gameOverSound: {fileID: 0}
@@ -313,12 +317,12 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1222635029}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.62, y: 5.78, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -4.0191813, y: 2.1576636, z: 0.03125}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 1549059355}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1540654868
 Prefab:
@@ -362,6 +366,36 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b318e4ac869fa54999d6aa6e396ab1b, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1549059354
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1549059355}
+  m_Layer: 0
+  m_Name: RobotGame
+  m_TagString: Untagged
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1549059355
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1549059354}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 11.639181, y: 3.6223366, z: -0.03125}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 101353452}
+  - {fileID: 1222635034}
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1709008859
 GameObject:
   m_ObjectHideFlags: 0
@@ -439,7 +473,8 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 12.57, y: 3.38, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1032228501}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
