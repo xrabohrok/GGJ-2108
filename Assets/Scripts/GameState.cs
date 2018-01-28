@@ -10,14 +10,13 @@ using UnityEngine.SceneManagement;
 
 public class GameState : MonoBehaviour {
 
+   // enum Control {Robot, Hack};
 
     public static GameState instance = null;
     //refers to the Hacking Game Board
     public GameObject hackGame;
     //refers to the Robot Game Board
     public GameObject robotGame;
-    public Boolean currentlyRobotGame;
-
     public Text controlSwitchText;
     Animator anim;
     public float restartDelay = 5f;
@@ -52,7 +51,7 @@ public class GameState : MonoBehaviour {
         //hackGame = GameObject.Find("<HACKING BOARD>");
         //TODO add in reference to hacking minigame
         //robotGame = GameObject.Find("<ROBOT GAME>");
-        this.currentlyRobotGame = true;
+
         controlSwitchText.text = "Controlling Robot";
        
 
@@ -88,8 +87,6 @@ public class GameState : MonoBehaviour {
         //robotController.SetActive(true);
         // hackGame.SetActive(true);
 
-        this.currentlyRobotGame = true;
-
     }
 
     void ChangeToHack()
@@ -103,7 +100,6 @@ public class GameState : MonoBehaviour {
         //robotController.SetActive(false);
 
         //robotGame.SetActive(true);
-        this.currentlyRobotGame = false;
 
     }
 
