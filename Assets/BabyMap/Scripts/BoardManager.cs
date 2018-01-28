@@ -9,29 +9,13 @@ namespace BabyMap
 
     public class BoardManager : MonoBehaviour
     {
-        // Using Serializable allows us to embed a class with sub properties in the inspector.
-        [Serializable]
-        public class Count
-        {
-            public int minimum;             //Minimum value for our Count class.
-            public int maximum;             //Maximum value for our Count class.
 
-
-            //Assignment constructor.
-            public Count(int min, int max)
-            {
-                minimum = min;
-                maximum = max;
-            }
-        }
+        public static BoardManager instance = null;
 
 
         public int columns;                                         //Number of columns in our game board.
         public int rows;                                            //Number of rows in our game board.
-        public Count wallCount = new Count(5, 9);                       //Lower and upper limit for our random number of walls per level.
-        public Count foodCount = new Count(1, 5);                       //Lower and upper limit for our random number of food items per level.
         public IntVector2 exit;
-        //public GameObject[] floorTiles;                                 //Array of floor prefabs.
 
         private Transform boardHolder;                                  //A variable to store a reference to the transform of our Board object.
         private List<Vector3> gridPositions = new List<Vector3>();	//A list of possible locations to place tiles.
@@ -39,7 +23,17 @@ namespace BabyMap
         public TileType[,] fullMap;
         private Dictionary<IntVector2, Dictionary<IntVector2, int>> vertices = new Dictionary<IntVector2, Dictionary<IntVector2, int>>();
 
-        private String[,] room; 
+        private String[,] room;
+
+        public void Awake()
+        {
+            if (instance == null)
+                instance = this;
+            else if (instance != this)
+                Destroy(gameObject);
+
+            this.BoardSetup();
+        }
 
 
         //Clears our list gridPositions and prepares it to generate a new board.
@@ -62,7 +56,7 @@ namespace BabyMap
 
 
         //Sets up the outer walls and floor (background) of the game board.
-        void BoardSetup()
+        public void BoardSetup()
         {
             //Instantiate Board and set boardHolder to its transform.
             boardHolder = new GameObject("Board").transform;
@@ -99,7 +93,7 @@ namespace BabyMap
 
             room[6, 2] = "robotRoom_topHorizontal_wall";
             room[7, 2] = "robotRoom_leftCorner_wall";
-
+            
             room[8, 5] = "robotRoom_rightBlind_wall";
             for (int i = 9; i < columns; i++)
             {
@@ -188,7 +182,7 @@ namespace BabyMap
 
         public void Create2DTileArray()
         {
-            this.fullMap = new TileType[this.rows, this.columns];
+            this.fullMap = new TileType[this.columns, this.rows];
 
             // When Rich is done with creating the map manually, pull the info from it to here.
             //foreach (GameObject tile in this.floorTiles)
@@ -283,14 +277,14 @@ namespace BabyMap
         {
             //Location, cost of edge.
             Dictionary<IntVector2, int> edges = new Dictionary<IntVector2, int>();
-            if (location.X > 0 && fullMap[location.x - 1, location.y] == TileType.floor)
+            if (location.X > 0 && (fullMap[location.x - 1, location.y] == TileType.floor))
                 edges.Add(new IntVector2(location.X - 1, location.Y), 10);
-            if (location.X < this.columns - 1 && fullMap[location.x + 1, location.y] == TileType.floor)
+            if ((location.x < this.columns - 1) && (fullMap[location.x + 1, location.y] == TileType.floor))
                 edges.Add(new IntVector2(location.X + 1, location.Y), 10);
 
-            if (location.Y > 0 && fullMap[location.x, location.y - 1] == TileType.floor)
+            if (location.Y > 0 && (fullMap[location.x, location.y - 1] == TileType.floor))
                 edges.Add(new IntVector2(location.X, location.Y - 1), 10);
-            if (location.Y < this.rows - 1 && fullMap[location.x, location.y + 1] == TileType.floor)
+            if ((location.Y < this.rows - 1) && (fullMap[location.x, location.y + 1] == TileType.floor))
                 edges.Add(new IntVector2(location.X, location.Y + 1), 10);
 
             this.vertices[location] = edges;
