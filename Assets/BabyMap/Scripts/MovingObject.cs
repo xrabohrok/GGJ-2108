@@ -37,8 +37,8 @@ namespace BabyMap
             // Calculate end position based on the direction parameters passed in when calling Move.
             IntVector2 end = this.position + direction;
             
-            if((board.fullMap[end.x, end.y] == TileType.Floor)
-                && (end.x >= 0 && end.x < board.columns && end.y >= 0 && end.y < board.rows))
+            if((end.x >= 0 && end.x < board.columns && end.y >= 0 && end.y < board.rows) 
+                && (board.fullMap[end.x, end.y] == TileType.Floor))
             {
                 this.position = end;
                 StartCoroutine(SmoothMovement(new Vector3(end.x, end.y, 0f)));
