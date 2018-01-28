@@ -40,7 +40,7 @@ namespace BabyMap
             // Calculate end position based on the direction parameters passed in when calling Move.
             IntVector2 end = this.position + direction;
 
-            if((end.x < board.columns && end.y < board.rows) && (board.fullMap[end.x, end.y] == TileType.Floor))
+            if(board.fullMap[end.x, end.y] == TileType.Floor)
             {
                 this.position = end;
                 StartCoroutine(SmoothMovement(new Vector3(end.x, end.y, 0f)));
@@ -105,16 +105,22 @@ namespace BabyMap
         protected virtual void AttemptMove(int xDir, int yDir)
         {
             IntVector2 direction = new IntVector2(xDir, yDir);
+            IntVector2 end = this.position + direction;
+            TileType nextTile;
 
             // Don't move diagonally.
             if (direction.x != 0)
                 direction.y = 0;
 
-            TileType nextTile = Move(direction);
+            // Ignore any moves that push us off the map.
+            if (end.x >= 0 && end.x < board.columns && end.y >= 0 && end.y < board.rows)
+            {
+                nextTile = Move(direction);
 
-            // Handle if we walked into a hazard or goal.
-            if (nextTile != TileType.Floor)
-                OnCantMove(nextTile);
+                // Handle if we walked into a hazard or goal.
+                if (nextTile != TileType.Floor)
+                    OnCantMove(nextTile);
+            }
         }
 
 
