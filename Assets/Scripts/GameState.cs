@@ -17,18 +17,12 @@ public class GameState : MonoBehaviour {
     //refers to the Robot Game Board
     public GameObject robotGame;
     public Boolean currentlyRobotGame;
-
-<<<<<<< HEAD
    
     Animator anim;
     public float restartDelay = 5f;
     float restartTimer;
     float timeLeft = 10.0f;
-=======
-    Animator anim;
-    public float restartDelay = 5f;
-    float restartTimer;
->>>>>>> 04dd282968a519110d452fad328ce55f00d47d75
+
 
     //Used for music change
     public AudioClip robotMusic;
@@ -76,11 +70,6 @@ public class GameState : MonoBehaviour {
 		
 	if (GameObject.Find("HackingGame").GetComponent<GridMaster>().FunctioningCircuit)
         {
-<<<<<<< HEAD
-           // playerMoves = GameObject.Find("HackingGame").GetComponent<GridMaster>().Misses + 5;
-            ChangeToRobot();
-=======
-            playerMoves = GameObject.Find("HackingGame").GetComponent<GridMaster>().Misses;
             ChangeToRobot();
         }
 
@@ -88,7 +77,6 @@ public class GameState : MonoBehaviour {
         {
     
             ChangeToHack();
->>>>>>> 04dd282968a519110d452fad328ce55f00d47d75
         }
 
 
@@ -106,12 +94,10 @@ public class GameState : MonoBehaviour {
     void ChangeToRobot()
     {
         Cursor.visible = false;
-<<<<<<< HEAD
+
         this.currentlyRobotGame = true;
         playerMoves = GameObject.Find("HackingGame").GetComponent<GridMaster>().Misses + 5;
-=======
 
->>>>>>> 04dd282968a519110d452fad328ce55f00d47d75
         //TODO: set up activate && deactivate
         //hackController.SetActive(false);
         //robotController.SetActive(true);
@@ -123,13 +109,8 @@ public class GameState : MonoBehaviour {
     {
 
         Cursor.visible = true;
-<<<<<<< HEAD
         GameObject.Find("HackingGame").GetComponent<GridMaster>().resetBoard();
   
-=======
-
-//        controlSwitchText.text = "Hacking";
->>>>>>> 04dd282968a519110d452fad328ce55f00d47d75
         //TODO: set up activate && deactivate
         //hackController.SetActive(true);
         //robotController.SetActive(false);
