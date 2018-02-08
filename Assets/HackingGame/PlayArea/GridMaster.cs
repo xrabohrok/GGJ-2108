@@ -60,7 +60,7 @@ public class GridMaster : MonoBehaviour
         rand = new RandomSpinner<TileDef>();
         foreach (var tileDef in drawSet)
         {
-            rand.addNewPossibility(tileDef.spawnChance.GetValueOrDefault(10), tileDef);
+            rand.addNewPossibility(tileDef.spawnChance <= 0 ? 10 : tileDef.spawnChance, tileDef);
         }
 
         GenerateTiles();
@@ -69,7 +69,6 @@ public class GridMaster : MonoBehaviour
 
     public void resetBoard()
     {
-  
         nukeBoard();
         generateBoard();
     }
@@ -329,6 +328,6 @@ public class GridMaster : MonoBehaviour
         public bool leak;
         public Sprite tile;
         public Sprite poweredTile;
-        public int? spawnChance;
+        public int spawnChance;
     }
 }
