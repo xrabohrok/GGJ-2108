@@ -25,6 +25,8 @@ public class GridMaster : MonoBehaviour
     private GameObject source;
     private GameObject sink;
 
+    private RandomSpinner rand;
+
 #if UNITY_EDITOR
     private float lastSize;
     private int lastVCount;
@@ -320,5 +322,6 @@ public class GridMaster : MonoBehaviour
         public bool leak;
         public Sprite tile;
         public Sprite poweredTile;
+        public float? spawnChance;
     }
 }
