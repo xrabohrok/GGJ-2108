@@ -34,11 +34,11 @@ namespace Assets.common
                 return default(T);
             }
 
-            int draw = Mathf.FloorToInt(Random.value* totalSize);
+            int spin = Mathf.FloorToInt(Random.value* totalSize);
 
             foreach (var dropZone in dropZones)
             {
-                if (draw < dropZone.cumulativePosition)
+                if (spin < dropZone.cumulativePosition)
                 {
                     return dropZone.returnVal;
                 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Assets.common;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -25,7 +26,7 @@ public class GridMaster : MonoBehaviour
     private GameObject source;
     private GameObject sink;
 
-    private RandomSpinner rand;
+    private RandomSpinner<TileDef> rand;
 
 #if UNITY_EDITOR
     private float lastSize;
@@ -55,6 +56,12 @@ public class GridMaster : MonoBehaviour
 	    var voffset = (size * verticalCount + spacing * (verticalCount - 1))/2;
 	    var hoffset = (size * horizontalCount + spacing * (horizontalCount - 1))/2;
         offset = new Vector3(hoffset, voffset, 0);
+
+        rand = new RandomSpinner<TileDef>();
+        foreach (var tileDef in drawSet)
+        {
+            rand.addNewPossibility(tileDef.spawnChance.GetValueOrDefault(10), tileDef);
+        }
 
         GenerateTiles();
         generateBoard();
@@ -298,8 +305,8 @@ public class GridMaster : MonoBehaviour
         {
             if (spawn.CurrentDraggable == null)
             {
-                var ind = Mathf.FloorToInt(Random.value * drawSet.Count);
-                var draw = drawSet[ind];
+                var draw = rand.getRandom();
+
                 var newTile = GameObject.Instantiate(tilePrefab, spawn.transform.position, Quaternion.identity);
                 var tile = newTile.GetComponent<CircuitTile>();
                 spawn.setDraggable(tile.gameObject.GetComponent<Draggable>());
@@ -322,6 +329,6 @@ public class GridMaster : MonoBehaviour
         public bool leak;
         public Sprite tile;
         public Sprite poweredTile;
-        public float? spawnChance;
+        public int? spawnChance;
     }
 }
