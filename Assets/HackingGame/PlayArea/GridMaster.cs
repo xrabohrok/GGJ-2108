@@ -26,6 +26,8 @@ public class GridMaster : MonoBehaviour
     public List<TileDef> drawSet;
     public List<TileDef> poweredSet;
 
+    public Clickable refreshButton;
+
     public List<DragZone> spawns;
 
     private GameObject source;
@@ -75,6 +77,19 @@ public class GridMaster : MonoBehaviour
 
         GenerateTiles();
         generateBoard();
+
+        refreshButton.setClickReleaseCallback(resetSpawnTiles);
+    }
+
+    public void resetSpawnTiles()
+    {
+        foreach (var spawn in spawns)
+        {
+            if (spawn.CurrentDraggable != null)
+            {
+                Destroy(spawn.CurrentDraggable.gameObject);
+            }
+        }
     }
 
     public void resetBoard()
