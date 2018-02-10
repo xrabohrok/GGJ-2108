@@ -15,6 +15,6 @@ public class Obstacle : MonoBehaviour {
 	}
 
     // do a thing, presumably speed up or slow down the map or whatever
-    public abstract void onCollide();
+    //public abstract void onCollide();
 
 }

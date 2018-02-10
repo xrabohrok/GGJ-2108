@@ -22,6 +22,15 @@ public class GameState : MonoBehaviour {
     //Player moves
     private int playerMoves = 0;
 
+    //Health before robot dies
+    private int robotHealth = 5;
+   
+
+    public int hazardDmg = 1;
+
+
+
+    public bool currentlyRobotGame  = false;
 
     delegate void HackingConcludedFn();
     HackingConcludedFn hackingConcluded;
@@ -35,8 +44,24 @@ public class GameState : MonoBehaviour {
             Destroy(gameObject);
     }
 
-	// Use this for initialization
-	void Start ()
+    public void PlayerMoved()
+    {
+        playerMoves--;
+        //if (playerMoves <= 0 && currentlyRobotGame)
+        //{
+        //   ChangeToHack();
+        //}
+
+
+    }
+
+    public void PlayerHurt(int dmg)
+    {
+        robotHealth -= dmg;
+    }
+
+    // Use this for initialization
+    void Start ()
     {
         this.hackingConcluded = HackingConcluded;
         // If the hacking game exists, pass this.hackingConcluded to it.

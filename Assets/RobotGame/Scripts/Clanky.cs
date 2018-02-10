@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 namespace RobotGame
 {
-    //Player inherits from MovingObject, our base class for objects that can move, Enemy also inherits from this.
+    //Clanky inherits from RobotObject, our base class for robots.
     public class Clanky : RobotObject
     {
         public static Clanky instance;
