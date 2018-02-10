@@ -29,7 +29,6 @@ public class DragZone : MonoBehaviour
 
     private void SnapDraggablesToPos()
     {
-        //if there is a tile that is draggable in the mouse set, take it and grab it
         if (!locked)
         {
             foreach (var clicked in clicker.selectionSet())

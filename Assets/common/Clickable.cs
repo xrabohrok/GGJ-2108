@@ -9,6 +9,8 @@ public class Clickable : MonoBehaviour
 
     private Collider2D collider;
 
+    public int priority;
+
     public AudioClip clickDownSound;
     public AudioClip clickUpSound;
 
@@ -97,6 +99,11 @@ public class Clickable : MonoBehaviour
     public List<Clickable> selectionSet()
     {
         return masterClicker.hoverElements;
+    }
+
+    public Clickable selected()
+    {
+        return masterClicker.CurrClickable;
     }
 
     private void die()
