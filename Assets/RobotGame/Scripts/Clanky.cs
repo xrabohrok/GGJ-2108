@@ -94,11 +94,11 @@ namespace RobotGame
                 //Disable the soundPlayer object since level is over.
                 enabled = false;
             }
-            else if (other.tag == "Hazard")
+            else if (other.tag == "Event")
             {
                 TriggerClankyHurt();
-                GameState.instance.PlayerHurt(GameState.instance.hazardDmg);
-                other.gameObject.SetActive(false);
+                
+               // other.gameObject.SetActive(false);
             }
 
         }
