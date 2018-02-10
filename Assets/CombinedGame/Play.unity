@@ -408,6 +408,34 @@ SpriteRenderer:
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
+--- !u!1 &866281620
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 866281621}
+  m_Layer: 0
+  m_Name: TipSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &866281621
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 866281620}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 3.9900017, y: -10.73, z: -0.09375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1166442672}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &937447907
 GameObject:
   m_ObjectHideFlags: 0
@@ -1043,6 +1071,11 @@ Prefab:
       propertyPath: horizontalCount
       value: 7
       objectReference: {fileID: 0}
+    - target: {fileID: 114051825100207928, guid: 5b318e4ac869fa54999d6aa6e396ab1b,
+        type: 2}
+      propertyPath: ToolTipSpawnLocation
+      value: 
+      objectReference: {fileID: 866281621}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b318e4ac869fa54999d6aa6e396ab1b, type: 2}
   m_IsPrefabParent: 0
