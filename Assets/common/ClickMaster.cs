@@ -14,9 +14,16 @@ public class ClickMaster : MonoBehaviour {
 
     private List<Clickable> hovered;
 
+    private Clickable currClickable;
+
     public List<Clickable> hoverElements
     {
         get { return hovered; }
+    }
+
+    public Clickable CurrClickable
+    {
+        get { return currClickable; }
     }
 
     // Use this for initialization
@@ -30,6 +37,8 @@ public class ClickMaster : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
+//        Debug.Log(this.currClickable != null ? this.currClickable.name : "nothing!");
+
 	    lastHovered = hovered;
         hovered = new List<Clickable>();
 
@@ -60,12 +69,17 @@ public class ClickMaster : MonoBehaviour {
 	    {
 	        foreach (var clicked in hovered)
 	        {
+	            if (currClickable == null || clicked.priority > currClickable.priority)
+	            {
+	                currClickable = clicked;
+	            }
 	            clicked.ReportMouseDown();
 	        }
 	    }
 
 	    if (Input.GetMouseButtonUp(0))
 	    {
+	        currClickable = null;
 	        foreach (var clicked in hovered)
 	        {
 	            clicked.ReportMouseUp();

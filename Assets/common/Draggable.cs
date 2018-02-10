@@ -12,6 +12,11 @@ public class Draggable : MonoBehaviour
     private Vector3 lastGoodPos;
     private DragZone currentDragZone;
 
+    public int Priority
+    {
+        get { return clicker.priority; }
+    }
+
     public bool isDraggable
     {
         get { return draggable; }
@@ -73,7 +78,7 @@ public class Draggable : MonoBehaviour
 	
 	// Update is called once per frame
 	void Update () {
-	    if (clicker.Clicked && draggable)
+	    if (clicker.Clicked && draggable && clicker.selected() == this.clicker)
 	    {
 	        var mouseWorldPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 	        this.transform.position = new Vector3( mouseWorldPoint.x, mouseWorldPoint.y, 0);

@@ -92,6 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65fcd083802c7e84d93c40ea5057a6ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ports: 
+  sourcedPower: 0
+  neighbors: []
 --- !u!114 &114647180357824666
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -103,6 +106,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868842eb2b32c6046b608afb61c431dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  priority: 1
+  clickDownSound: {fileID: 0}
+  clickUpSound: {fileID: 0}
 --- !u!212 &212293391185999004
 SpriteRenderer:
   m_ObjectHideFlags: 1

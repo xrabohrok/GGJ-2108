@@ -10,6 +10,11 @@ public class GridMaster : MonoBehaviour
     //whatever this is, it needs a CircuitTile on it somewhere
     public Transform GoodSlotPrefab;
 
+    public Transform ToolTipPrefab;
+    public Transform ToolTipSpawnLocation;
+    public float minimumTooltipWaitTimeSec = 10;
+    public float tooltipTimeFlux = 10;
+
     public int verticalCount = 10;
     public int horizontalCount = 10;
 
@@ -27,6 +32,9 @@ public class GridMaster : MonoBehaviour
     private GameObject sink;
 
     private RandomSpinner<TileDef> rand;
+
+    private float tipTimeRemaining;
+    private Transform currentToolTip;
 
 #if UNITY_EDITOR
     private float lastSize;
@@ -62,6 +70,8 @@ public class GridMaster : MonoBehaviour
         {
             rand.addNewPossibility(tileDef.spawnChance <= 0 ? 10 : tileDef.spawnChance, tileDef);
         }
+
+        tipTimeRemaining = minimumTooltipWaitTimeSec + Random.value * tooltipTimeFlux;
 
         GenerateTiles();
         generateBoard();
@@ -164,7 +174,23 @@ public class GridMaster : MonoBehaviour
 
         handleTileSpawner();
 
-        //initial pass (clear trees)
+        processBoard();
+
+        if (currentToolTip == null)
+        {
+            if(tipTimeRemaining < 0)
+            {
+                tipTimeRemaining = minimumTooltipWaitTimeSec + Random.value * tooltipTimeFlux;
+                currentToolTip = Instantiate(ToolTipPrefab, ToolTipSpawnLocation.transform.position, Quaternion.identity);
+            }
+
+            tipTimeRemaining -= Time.deltaTime;
+        }
+    }
+
+    private void processBoard()
+    {
+//initial pass (clear trees)
         for (int j = 0; j < verticalCount; j++)
         {
             for (int i = 0; i < horizontalCount; i++)
@@ -184,28 +210,27 @@ public class GridMaster : MonoBehaviour
             for (int i = 0; i < horizontalCount; i++)
             {
                 var thisTile = getCircuitRef(i, j);
-                if(thisTile != null)
+                if (thisTile != null)
                 {
-
                     //up
                     if (thisTile.ports[0] && j < verticalCount - 1)
                     {
                         linkNeighbors(thisTile, i, j + 1);
-                    }                
+                    }
                     //right
                     if (thisTile.ports[1] && i < horizontalCount - 1)
                     {
                         linkNeighbors(thisTile, i + 1, j);
-                    }                
+                    }
                     //down
                     if (thisTile.ports[2] && j > 0)
                     {
-                        linkNeighbors(thisTile, i, j-1);
-                    }                
+                        linkNeighbors(thisTile, i, j - 1);
+                    }
                     //left
                     if (thisTile.ports[3] && i > 0)
                     {
-                        linkNeighbors(thisTile, i- 1, j);
+                        linkNeighbors(thisTile, i - 1, j);
                     }
                 }
             }
@@ -241,7 +266,8 @@ public class GridMaster : MonoBehaviour
 
             foreach (var neighbor in current.neighbors)
             {
-                if (!unprocessed.Contains(neighbor) && !processed.Contains(neighbor) && neighbor.neighbors.Contains(current))
+                if (!unprocessed.Contains(neighbor) && !processed.Contains(neighbor) &&
+                    neighbor.neighbors.Contains(current))
                 {
                     unprocessed.Add(neighbor);
                 }
@@ -276,7 +302,6 @@ public class GridMaster : MonoBehaviour
         lastHCount = horizontalCount;
         lastSpacing = spacing;
 #endif
-
     }
 
     private void linkNeighbors(CircuitTile thisTile, int i, int j)

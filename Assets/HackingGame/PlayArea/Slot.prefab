@@ -91,6 +91,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868842eb2b32c6046b608afb61c431dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  priority: -2
   clickDownSound: {fileID: 8300000, guid: 8eaac6d46b46d9c46aaa0c136dc3a8c3, type: 3}
   clickUpSound: {fileID: 8300000, guid: f9716140c217b8f41aa3c967eebce102, type: 3}
 --- !u!212 &212955452270969152
