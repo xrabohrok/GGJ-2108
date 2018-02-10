@@ -49,7 +49,7 @@ TagManager:
   - name: Wall
     uniqueID: 3380608427
     locked: 0
-  - name: Hazards
+  - name: Event
     uniqueID: 2661694607
     locked: 0
   - name: Goals
