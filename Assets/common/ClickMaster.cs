@@ -37,7 +37,7 @@ public class ClickMaster : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
 	{
-        Debug.Log(this.currClickable != null ? this.currClickable.name : "nothing!");
+//        Debug.Log(this.currClickable != null ? this.currClickable.name : "nothing!");
 
 	    lastHovered = hovered;
         hovered = new List<Clickable>();
