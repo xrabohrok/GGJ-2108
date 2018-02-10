@@ -16,7 +16,8 @@ public class GameState : MonoBehaviour {
     Animator anim;
     public float restartDelay = 5f;
     float restartTimer;
-    float timeLeft = 10.0f;
+    //Time till player death
+    float timeLeft = 100.0f;
 
     //Player moves
     private int playerMoves = 0;
@@ -44,8 +45,12 @@ public class GameState : MonoBehaviour {
 	// Update is called once per frame
 	void Update ()
     {
-        //movesLeft.text = playerMoves.ToString();
-        //clankyHP.text = robotHealth.ToString();
+
+        timeLeft -= Time.deltaTime;
+        if (timeLeft < 0)
+        {
+            GameOver();
+        }
     }
 
     void GameOver()
@@ -59,14 +64,11 @@ public class GameState : MonoBehaviour {
         }
     }
 
-    public void PlayerHurt(int dmg)
-    {
-
-    }
 
     public void HackingConcluded()
     {
-
+        //TODO: Mod timeLeft
+        //timeLeft = timeLeft + timeMod;
     }
 
 }
