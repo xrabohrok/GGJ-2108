@@ -280,6 +280,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   GoodSlotPrefab: {fileID: 4322635313884770, guid: 3b5d1e15560b13542b198881bac6f1f8,
     type: 2}
+  ToolTipPrefab: {fileID: 4531143897876632, guid: 006949d6d19df074b8f7c045d25189b1,
+    type: 2}
+  ToolTipSpawnLocation: {fileID: 0}
+  minimumTooltipWaitTimeSec: 10
+  tooltipTimeFlux: 10
   verticalCount: 6
   horizontalCount: 6
   spacing: 1.5
@@ -465,6 +470,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868842eb2b32c6046b608afb61c431dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  priority: 0
   clickDownSound: {fileID: 0}
   clickUpSound: {fileID: 0}
 --- !u!114 &114613310588600992
@@ -490,6 +496,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 868842eb2b32c6046b608afb61c431dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  priority: 0
   clickDownSound: {fileID: 0}
   clickUpSound: {fileID: 0}
 --- !u!114 &114966405215193826
