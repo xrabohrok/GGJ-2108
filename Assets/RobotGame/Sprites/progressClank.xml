@@ -1,0 +1,20 @@
+<TextureAtlas imagePath="progressClank.png">
+	<SubTexture name="bb_negRxn1.png" x="34" y="34" width="32" height="32"/>
+	<SubTexture name="bb_negRxn2.png" x="68" y="34" width="32" height="32"/>
+	<SubTexture name="bb_negRxn3.png" x="68" y="0" width="32" height="32"/>
+	<SubTexture name="bb_negRxn4.png" x="34" y="204" width="32" height="32"/>
+	<SubTexture name="bb_negRxn5.png" x="34" y="170" width="32" height="32"/>
+	<SubTexture name="bb_negRxn6.png" x="34" y="136" width="32" height="32"/>
+	<SubTexture name="bb_posRxn1.png" x="34" y="102" width="32" height="32"/>
+	<SubTexture name="bb_posRxn2.png" x="34" y="68" width="32" height="32"/>
+	<SubTexture name="bb_posRxn3.png" x="68" y="68" width="32" height="32"/>
+	<SubTexture name="bb_posRxn4.png" x="34" y="0" width="32" height="32"/>
+	<SubTexture name="bb_posRxn5.png" x="0" y="204" width="32" height="32"/>
+	<SubTexture name="bb_posRxn6.png" x="0" y="170" width="32" height="32"/>
+	<SubTexture name="bb_walkin1.png" x="0" y="136" width="32" height="32"/>
+	<SubTexture name="bb_walkin2.png" x="0" y="102" width="32" height="32"/>
+	<SubTexture name="bb_walkin3.png" x="0" y="68" width="32" height="32"/>
+	<SubTexture name="bb_walkin4.png" x="0" y="136" width="32" height="32"/>
+	<SubTexture name="bb_walkin5.png" x="0" y="34" width="32" height="32"/>
+	<SubTexture name="bb_walkin6.png" x="0" y="0" width="32" height="32"/>
+</TextureAtlas>
