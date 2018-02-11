@@ -20,8 +20,17 @@ namespace RobotGame
         private SpriteRenderer spriteRenderer;
         List<Vector2Int> moveList;
 
+        //Is Clanky Powered up or down?
+        private bool powered = false;
 
-        public float speed = 5;
+        //Time in seconds
+        private int powerTimer = 2;
+
+        public float currentSpeed = 5;
+
+        private float normalSpeed = 5;
+        private float reducedSpeed = 2.5f;
+        private float increasedSpeed = 10;
 
         public void Awake()
         {
@@ -51,7 +60,10 @@ namespace RobotGame
 
         private void Update()
         {
-            
+            if (!powered)
+            {
+                currentSpeed = normalSpeed;
+            }
 
         }
 
@@ -81,6 +93,9 @@ namespace RobotGame
         {
 
             animator.SetTrigger("ClankyPositive");
+            currentSpeed = increasedSpeed;
+            powered = true;
+            StartCoroutine(PoweredRoutine(powerTimer));
 
         }
 
@@ -88,7 +103,7 @@ namespace RobotGame
         public void SetClankyNegative()
         {
 
-           // animator.SetTrigger("BBHurt");
+            // animator.SetTrigger("BBHurt");
 
         }
 
@@ -97,13 +112,31 @@ namespace RobotGame
         {
 
             animator.SetTrigger("ClankyNegative");
+            currentSpeed = reducedSpeed;
+            powered = true;
+            StartCoroutine(PoweredRoutine(powerTimer));
 
         }
 
-       
+        public void SetNormalSpeed(float newSpeed)
+        {
+            normalSpeed = newSpeed;
+        }
 
+        public void SetIncreasedSpeed(float newSpeed)
+        {
+            increasedSpeed = newSpeed;
+        }
 
-       
+        public void SetReducedSpeed(float newSpeed)
+        {
+            reducedSpeed = newSpeed;
+        }
+
+        public void SetPowerTimer(int newTimer)
+        {
+            powerTimer = newTimer;
+        }
 
         //OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
         private void OnTriggerEnter2D(Collider2D other)
@@ -120,8 +153,8 @@ namespace RobotGame
             else if (other.tag == "NegativeEvent")
             {
                 TriggerClankyNegative();
-                
-               // other.gameObject.SetActive(false);
+
+                // other.gameObject.SetActive(false);
             }
             else if (other.tag == "PositiveEvent")
             {
@@ -130,6 +163,12 @@ namespace RobotGame
                 // other.gameObject.SetActive(false);
             }
 
+        }
+
+        IEnumerator PoweredRoutine(float powerTimer)
+        {
+            yield return new WaitForSeconds(powerTimer);
+            powered = false;
         }
 
     }
