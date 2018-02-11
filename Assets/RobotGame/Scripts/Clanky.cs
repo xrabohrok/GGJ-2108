@@ -98,6 +98,7 @@ namespace RobotGame
             currentSpeed = increasedSpeed;
             powered = true;
             StartCoroutine(PoweredRoutine(powerTimer));
+
         }
 
         //This will set clanky to hurt instead of just triggering 
@@ -111,12 +112,10 @@ namespace RobotGame
         //This will trigger the hurt animation which will revert to the "default" state
         public void TriggerClankyNegative()
         {
-
             animator.SetTrigger("ClankyNegative");
             currentSpeed = reducedSpeed;
             powered = true;
-
-            StartCoroutine(PoweredRoutine(powerTimer));
+            StartCoroutine(PoweredRoutine());
         }
 
         public void SetNormalSpeed(float newSpeed)
@@ -166,7 +165,7 @@ namespace RobotGame
 
         }
 
-        IEnumerator PoweredRoutine(float powerTimer)
+        IEnumerator PoweredRoutine()
         {
             yield return new WaitForSeconds(powerTimer);
             powered = false;
