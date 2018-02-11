@@ -30,8 +30,12 @@ public class ObjectSpawner : MonoBehaviour {
         else
         { Destroy(this.gameObject); }
 
+        // This list will unfortunately need to be updated with each added prefab.
+        // The total number (for randomly picking one) does NOT need updated. -mw
         this.allPrefabs.Add(GameObject.Find("Wires"));
         this.allPrefabs.Add(GameObject.Find("TeddyBear"));
+
+
 
         this.randomObjects = new List<IncomingObject>();
 	}
@@ -53,23 +57,30 @@ public class ObjectSpawner : MonoBehaviour {
         }
 
         // If there's less than two objects ready to spawn, queue up a new one.
-		if (this.randomObjects.Count < 2)
+        if (this.randomObjects.Count < 2)
         {
-            IncomingObject nextObj = new IncomingObject() ;
-
-            // Decide how long until it spawns.
-            float addedWait = 0f;
-            if(this.randomObjects.Count != 0)
-            {
-                addedWait = this.randomObjects[this.randomObjects.Count - 1].timeUntilSpawn;
-            }
-            nextObj.timeUntilSpawn = addedWait + Random.Range(minTimeToNextSpawn, maxTimeToNextSpawn);
-
-            // Decide randomly which prefab to use.
-            nextObj.objectScroller = this.allPrefabs[Random.Range(0, this.allPrefabs.Count)];
-
-            this.randomObjects.Add(nextObj);
-            Debug.Log("Object added: " + nextObj.timeUntilSpawn + ", " + nextObj.objectScroller.name);
-        }
+            this.AddNewObject();
+        }   
 	}
+
+
+
+    void AddNewObject()
+    {
+        IncomingObject nextObj = new IncomingObject();
+
+        // Decide how long until it spawns.
+        float addedWait = 0f;
+        if (this.randomObjects.Count != 0)
+        {
+            addedWait = this.randomObjects[this.randomObjects.Count - 1].timeUntilSpawn;
+        }
+        nextObj.timeUntilSpawn = addedWait + Random.Range(minTimeToNextSpawn, maxTimeToNextSpawn);
+
+        // Decide randomly which prefab to use.
+        nextObj.objectScroller = this.allPrefabs[Random.Range(0, this.allPrefabs.Count)];
+
+        this.randomObjects.Add(nextObj);
+        Debug.Log("Object added: " + nextObj.timeUntilSpawn + ", " + nextObj.objectScroller.name);
+    }
 }
