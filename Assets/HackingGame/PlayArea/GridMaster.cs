@@ -48,6 +48,7 @@ public class GridMaster : MonoBehaviour
     private int sourceY;
     private int sourceX;
     private int misses;
+    private Action winCallBack;
 
     public bool FunctioningCircuit
     {
@@ -79,6 +80,11 @@ public class GridMaster : MonoBehaviour
         generateBoard();
 
         refreshButton.setClickReleaseCallback(resetSpawnTiles);
+    }
+
+    public void setWinCallBack(Action newCallback)
+    {
+        winCallBack = newCallback;
     }
 
     public void resetSpawnTiles()
@@ -266,6 +272,10 @@ public class GridMaster : MonoBehaviour
             if (current == goal)
             {
                 functioning = true;
+                if (winCallBack != null)
+                {
+                    winCallBack.Invoke();
+                }
             }
 
             //count busted links
