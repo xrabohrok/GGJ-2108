@@ -32,6 +32,8 @@ namespace RobotGame
         private float reducedSpeed = 2.5f;
         private float increasedSpeed = 10;
 
+        public float speed = 5;
+
         public void Awake()
         {
             if (instance == null)
