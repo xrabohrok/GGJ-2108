@@ -22,7 +22,7 @@ public class ObjectSpawner : MonoBehaviour {
     public List<IncomingObject> randomObjects;
     public const float minTimeToNextSpawn = 2f;
     public const float maxTimeToNextSpawn = 4f;
-    public GameObject[] allPrefabs;
+    public List<GameObject> allPrefabs;
 
     void Awake() {
         if (instance == null)
@@ -30,7 +30,8 @@ public class ObjectSpawner : MonoBehaviour {
         else
         { Destroy(this.gameObject); }
 
-        this.allPrefabs = GameObject.FindGameObjectsWithTag("obstacle");
+        this.allPrefabs.Add(GameObject.Find("Wires"));
+        this.allPrefabs.Add(GameObject.Find("TeddyBear"));
 	}
 	
 	void Update ()
@@ -63,7 +64,7 @@ public class ObjectSpawner : MonoBehaviour {
             nextObj.timeUntilSpawn = addedWait + Random.Range(minTimeToNextSpawn, maxTimeToNextSpawn);
 
             // Decide randomly which prefab to use.
-            nextObj.objectScroller = this.allPrefabs[Random.Range(0, this.allPrefabs.Length)];
+            nextObj.objectScroller = this.allPrefabs[Random.Range(0, this.allPrefabs.Count)];
         }
 	}
 }
