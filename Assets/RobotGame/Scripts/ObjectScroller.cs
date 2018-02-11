@@ -9,11 +9,15 @@ namespace RobotGame
 
         public float startAtY = 0;
 
-        void Update()
-        {
-  
 
-            Renderer objectRenderer = GetComponent<Renderer>();
+    public void Awake()
+    {
+        gameObject.tag = "obstacle"; 
+    }
+
+    void Update()
+    {
+        Renderer objectRenderer = GetComponent<Renderer>();
 
             // Value of Y change from 0 to resetAtY by time. return to 0 if it becomes greater then resetAtY.
             //float offsetY = Mathf.Repeat(Time.time * speed, resetAtY);
