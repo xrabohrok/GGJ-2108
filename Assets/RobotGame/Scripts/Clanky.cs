@@ -85,6 +85,8 @@ namespace RobotGame
         {
 
             // animator.SetTrigger("BBHurt");
+            animator.SetTrigger("ClankyPositive");
+
 
         }
 
@@ -124,12 +126,12 @@ namespace RobotGame
         }
 
         public void SetIncreasedSpeed(float newSpeed)
-        {
-            increasedSpeed = newSpeed;
+        { 
         }
 
         public void SetReducedSpeed(float newSpeed)
         {
+            animator.SetTrigger("ClankyNegative");
             reducedSpeed = newSpeed;
         }
 
@@ -137,6 +139,7 @@ namespace RobotGame
         {
             powerTimer = newTimer;
         }
+
 
         //OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
         private void OnTriggerEnter2D(Collider2D other)
@@ -153,6 +156,11 @@ namespace RobotGame
             else if (other.tag == "NegativeEvent")
             {
                 TriggerClankyNegative();
+                // other.gameObject.SetActive(false);
+            }
+            else if (other.tag == "PositiveEvent")
+            {
+                TriggerClankyPositive();
 
                 // other.gameObject.SetActive(false);
             }
