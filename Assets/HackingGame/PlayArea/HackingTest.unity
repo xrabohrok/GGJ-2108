@@ -166,8 +166,65 @@ Prefab:
       propertyPath: ToolTipSpawnLocation
       value: 
       objectReference: {fileID: 1983617890}
+    - target: {fileID: 114051825100207928, guid: 5b318e4ac869fa54999d6aa6e396ab1b,
+        type: 2}
+      propertyPath: refreshButton
+      value: 
+      objectReference: {fileID: 732593218}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 5b318e4ac869fa54999d6aa6e396ab1b, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &732593218 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114431810053918220, guid: faa2675253293c447ba908cdfbc3018d,
+    type: 2}
+  m_PrefabInternal: {fileID: 838406703}
+  m_Script: {fileID: 11500000, guid: 868842eb2b32c6046b608afb61c431dd, type: 3}
+--- !u!1001 &838406703
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4130883012927632, guid: faa2675253293c447ba908cdfbc3018d, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -3.38
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130883012927632, guid: faa2675253293c447ba908cdfbc3018d, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130883012927632, guid: faa2675253293c447ba908cdfbc3018d, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130883012927632, guid: faa2675253293c447ba908cdfbc3018d, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130883012927632, guid: faa2675253293c447ba908cdfbc3018d, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130883012927632, guid: faa2675253293c447ba908cdfbc3018d, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130883012927632, guid: faa2675253293c447ba908cdfbc3018d, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4130883012927632, guid: faa2675253293c447ba908cdfbc3018d, type: 2}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1001795207339146, guid: faa2675253293c447ba908cdfbc3018d, type: 2}
+      propertyPath: m_Name
+      value: refreshButton
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: faa2675253293c447ba908cdfbc3018d, type: 2}
   m_IsPrefabParent: 0
 --- !u!1 &1152397033
 GameObject:
