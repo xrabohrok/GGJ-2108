@@ -32,8 +32,6 @@ namespace RobotGame
         private float reducedSpeed = 2.5f;
         private float increasedSpeed = 10;
 
-        public float speed = 5;
-
         public void Awake()
         {
             if (instance == null)
@@ -99,8 +97,7 @@ namespace RobotGame
             animator.SetTrigger("ClankyPositive");
             currentSpeed = increasedSpeed;
             powered = true;
-            StartCoroutine(PoweredRoutine());
-
+            StartCoroutine(PoweredRoutine(powerTimer));
         }
 
         //This will set clanky to hurt instead of just triggering 
@@ -118,8 +115,8 @@ namespace RobotGame
             animator.SetTrigger("ClankyNegative");
             currentSpeed = reducedSpeed;
             powered = true;
-            StartCoroutine(PoweredRoutine());
 
+            StartCoroutine(PoweredRoutine(powerTimer));
         }
 
         public void SetNormalSpeed(float newSpeed)
@@ -128,12 +125,12 @@ namespace RobotGame
         }
 
         public void SetIncreasedSpeed(float newSpeed)
-        { 
+        {
+            increasedSpeed = newSpeed;
         }
 
         public void SetReducedSpeed(float newSpeed)
         {
-            animator.SetTrigger("ClankyNegative");
             reducedSpeed = newSpeed;
         }
 
@@ -141,7 +138,6 @@ namespace RobotGame
         {
             powerTimer = newTimer;
         }
-
 
         //OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
         private void OnTriggerEnter2D(Collider2D other)
@@ -158,11 +154,6 @@ namespace RobotGame
             else if (other.tag == "NegativeEvent")
             {
                 TriggerClankyNegative();
-                // other.gameObject.SetActive(false);
-            }
-            else if (other.tag == "PositiveEvent")
-            {
-                TriggerClankyPositive();
 
                 // other.gameObject.SetActive(false);
             }
@@ -175,7 +166,7 @@ namespace RobotGame
 
         }
 
-        IEnumerator PoweredRoutine()
+        IEnumerator PoweredRoutine(float powerTimer)
         {
             yield return new WaitForSeconds(powerTimer);
             powered = false;

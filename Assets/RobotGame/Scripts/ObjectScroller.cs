@@ -44,7 +44,7 @@ namespace RobotGame
 
         public float GetSpeed()
         {
-            return GameObject.Find("Clanky").GetComponent<Clanky>().speed;
+            return GameObject.Find("Clanky").GetComponent<Clanky>().currentSpeed;
         }
     }
 }
