@@ -20,8 +20,8 @@ public class ObjectSpawner : MonoBehaviour {
 
     public static ObjectSpawner instance;
     public List<IncomingObject> randomObjects;
-    public const float minTimeToNextSpawn = 2f;
-    public const float maxTimeToNextSpawn = 4f;
+    public const float minTimeToNextSpawn = 4f;
+    public const float maxTimeToNextSpawn = 8f;
     public List<GameObject> allPrefabs;
 
     void Awake() {
@@ -32,6 +32,8 @@ public class ObjectSpawner : MonoBehaviour {
 
         this.allPrefabs.Add(GameObject.Find("Wires"));
         this.allPrefabs.Add(GameObject.Find("TeddyBear"));
+
+        this.randomObjects = new List<IncomingObject>();
 	}
 	
 	void Update ()
@@ -65,6 +67,9 @@ public class ObjectSpawner : MonoBehaviour {
 
             // Decide randomly which prefab to use.
             nextObj.objectScroller = this.allPrefabs[Random.Range(0, this.allPrefabs.Count)];
+
+            this.randomObjects.Add(nextObj);
+            Debug.Log("Object added: " + nextObj.timeUntilSpawn + ", " + nextObj.objectScroller.name);
         }
 	}
 }
