@@ -7,6 +7,8 @@ TagManager:
   - Hazard
   - Exit
   - Event
+  - NegativeEvent
+  - PositiveEvent
   layers:
   - Default
   - TransparentFX

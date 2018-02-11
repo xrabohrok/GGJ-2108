@@ -52,35 +52,55 @@ namespace RobotGame
 
         }
 
-        //This will set clanky to idle instead of just triggering 
-        public void SetClankyIdle()
+        ////This will set clanky to idle instead of just triggering 
+        //public void SetClankyIdle()
+        //{
+        //    animator.SetTrigger("");
+        //   // animator.SetTrigger("BBIdle");
+        //}
+
+        ////This will trigger the idle animation which will revert to the "default" state
+        //public void TriggerClankyIdle()
+        //{
+        //    animator.SetTrigger("BBIdle");
+        //}
+
+        //This will set clanky to positive instead of just triggering 
+        public void SetClankyPositive()
         {
-            animator.SetTrigger("");
-           // animator.SetTrigger("BBIdle");
+
+            // animator.SetTrigger("BBHurt");
+
+        }
+
+        //This will trigger the positive animation which will revert to the "default" state
+        public void TriggerClankyPositive()
+        {
+
+            animator.SetTrigger("ClankyPositive");
+
         }
 
         //This will set clanky to hurt instead of just triggering 
-        public void SetClankyHurt()
+        public void SetClankyNegative()
         {
 
            // animator.SetTrigger("BBHurt");
 
         }
 
-        //This will trigger the idle animation which will revert to the "default" state
-        public void TriggerClankyIdle()
-        {
-            animator.SetTrigger("BBIdle");
-        }
-
-
         //This will trigger the hurt animation which will revert to the "default" state
-        public void TriggerClankyHurt()
+        public void TriggerClankyNegative()
         {
 
-            animator.SetTrigger("BBHurt");
+            animator.SetTrigger("ClankyNegative");
 
         }
+
+       
+
+
+       
 
         //OnTriggerEnter2D is sent when another object enters a trigger collider attached to this object (2D physics only).
         private void OnTriggerEnter2D(Collider2D other)
@@ -94,11 +114,17 @@ namespace RobotGame
                 //Disable the soundPlayer object since level is over.
                 enabled = false;
             }
-            else if (other.tag == "Event")
+            else if (other.tag == "NegativeEvent")
             {
-                TriggerClankyHurt();
+                TriggerClankyNegative();
                 
                // other.gameObject.SetActive(false);
+            }
+            else if (other.tag == "PositiveEvent")
+            {
+                TriggerClankyPositive();
+
+                // other.gameObject.SetActive(false);
             }
 
         }
