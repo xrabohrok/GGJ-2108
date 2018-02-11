@@ -9,7 +9,7 @@ namespace RobotGame
     public class IncomingObject
     {
         public GameObject objectScroller;
-        public float timeUntilSpawn;    // In seconds.
+        public float timeUntilSpawn; // In seconds.
 
         public IncomingObject()
         {
@@ -23,25 +23,23 @@ namespace RobotGame
 
         public static ObjectSpawner instance;
         public List<IncomingObject> randomObjects;
-        public const float minTimeToNextSpawn = 4f;
-        public const float maxTimeToNextSpawn = 8f;
+        public const float minTimeToNextSpawn = 2f;
+        public const float maxTimeToNextSpawn = 4f;
         public List<GameObject> allPrefabs;
 
         void Awake()
         {
             if (instance == null)
-            { instance = this; }
+            {
+                instance = this;
+            }
             else
-            { Destroy(this.gameObject); }
+            {
+                Destroy(this.gameObject);
+            }
 
-            // This list will unfortunately need to be updated with each added prefab.
-            // The total number (for randomly picking one) does NOT need updated. -mw
             this.allPrefabs.Add(GameObject.Find("Wires"));
             this.allPrefabs.Add(GameObject.Find("TeddyBear"));
-
-
-
-            this.randomObjects = new List<IncomingObject>();
         }
 
         void Update()
@@ -64,29 +62,19 @@ namespace RobotGame
             // If there's less than two objects ready to spawn, queue up a new one.
             if (this.randomObjects.Count < 2)
             {
-                this.AddNewObject();
+                IncomingObject nextObj = new IncomingObject();
+
+                // Decide how long until it spawns.
+                float addedWait = 0f;
+                if (this.randomObjects.Count != 0)
+                {
+                    addedWait = this.randomObjects[this.randomObjects.Count - 1].timeUntilSpawn;
+                }
+                nextObj.timeUntilSpawn = addedWait + Random.Range(minTimeToNextSpawn, maxTimeToNextSpawn);
+
+                // Decide randomly which prefab to use.
+                nextObj.objectScroller = this.allPrefabs[Random.Range(0, this.allPrefabs.Count)];
             }
-        }
-
-
-
-        void AddNewObject()
-        {
-            IncomingObject nextObj = new IncomingObject();
-
-            // Decide how long until it spawns.
-            float addedWait = 0f;
-            if (this.randomObjects.Count != 0)
-            {
-                addedWait = this.randomObjects[this.randomObjects.Count - 1].timeUntilSpawn;
-            }
-            nextObj.timeUntilSpawn = addedWait + Random.Range(minTimeToNextSpawn, maxTimeToNextSpawn);
-
-            // Decide randomly which prefab to use.
-            nextObj.objectScroller = this.allPrefabs[Random.Range(0, this.allPrefabs.Count)];
-
-            this.randomObjects.Add(nextObj);
-            Debug.Log("Object added: " + nextObj.timeUntilSpawn + ", " + nextObj.objectScroller.name);
         }
     }
 }

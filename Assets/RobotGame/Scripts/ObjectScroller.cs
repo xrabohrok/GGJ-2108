@@ -10,11 +10,6 @@ public class ObjectScroller : MonoBehaviour
   
     public float startAtY = 0;
 
-    public void Awake()
-    {
-        gameObject.tag = "obstacle"; 
-    }
-
     void Update()
     {
         Renderer objectRenderer = GetComponent<Renderer>();
