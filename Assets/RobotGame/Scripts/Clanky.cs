@@ -95,7 +95,7 @@ namespace RobotGame
             animator.SetTrigger("ClankyPositive");
             currentSpeed = increasedSpeed;
             powered = true;
-            StartCoroutine(PoweredRoutine(powerTimer));
+            StartCoroutine(PoweredRoutine());
 
         }
 
@@ -114,7 +114,7 @@ namespace RobotGame
             animator.SetTrigger("ClankyNegative");
             currentSpeed = reducedSpeed;
             powered = true;
-            StartCoroutine(PoweredRoutine(powerTimer));
+            StartCoroutine(PoweredRoutine());
 
         }
 
@@ -165,7 +165,7 @@ namespace RobotGame
 
         }
 
-        IEnumerator PoweredRoutine(float powerTimer)
+        IEnumerator PoweredRoutine()
         {
             yield return new WaitForSeconds(powerTimer);
             powered = false;
