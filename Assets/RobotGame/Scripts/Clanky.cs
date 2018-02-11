@@ -9,7 +9,7 @@ namespace RobotGame
     //Clanky inherits from RobotObject, our base class for robots.
     public class Clanky : RobotObject
     {
-        public static Clanky instance;
+        public static Clanky instance = null;
 
         public float restartLevelDelay = 1f;        //Delay time in seconds to restart level.
         public AudioClip moveSound1;                //1 of 2 Audio clips to play when soundPlayer moves.
@@ -19,6 +19,9 @@ namespace RobotGame
         private Animator animator;                  //Used to store a reference to the Player's animator component
         private SpriteRenderer spriteRenderer;
         List<Vector2Int> moveList;
+
+
+        public float speed = 5;
 
         public void Awake()
         {
