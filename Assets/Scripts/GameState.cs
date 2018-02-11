@@ -18,20 +18,7 @@ public class GameState : MonoBehaviour {
     float restartTimer;
     //Time till player death
     float timeLeft = 100.0f;
-
-    //Player moves
-    private int playerMoves = 0;
-
-    //Health before robot dies
-    private int robotHealth = 5;
-   
-
-    public int hazardDmg = 1;
-
-
-
-    public bool currentlyRobotGame  = false;
-
+    
     delegate void HackingConcludedFn();
     HackingConcludedFn hackingConcluded;
 
@@ -42,22 +29,6 @@ public class GameState : MonoBehaviour {
             instance = this;
         else if (instance != this)
             Destroy(gameObject);
-    }
-
-    public void PlayerMoved()
-    {
-        playerMoves--;
-        //if (playerMoves <= 0 && currentlyRobotGame)
-        //{
-        //   ChangeToHack();
-        //}
-
-
-    }
-
-    public void PlayerHurt(int dmg)
-    {
-        robotHealth -= dmg;
     }
 
     // Use this for initialization
