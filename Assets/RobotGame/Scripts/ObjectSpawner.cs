@@ -19,7 +19,7 @@ namespace RobotGame
 
 
     public class ObjectSpawner : MonoBehaviour
-    {
+    { 
 
         public static ObjectSpawner instance;
         public List<IncomingObject> randomObjects;
@@ -59,22 +59,11 @@ namespace RobotGame
                 this.randomObjects.RemoveAt(0);
             }
 
-            // If there's less than two objects ready to spawn, queue up a new one.
-            if (this.randomObjects.Count < 2)
-            {
-                IncomingObject nextObj = new IncomingObject();
+            // Decide randomly which prefab to use.
+            nextObj.objectScroller = this.allPrefabs[Random.Range(0, this.allPrefabs.Count)];
 
-                // Decide how long until it spawns.
-                float addedWait = 0f;
-                if (this.randomObjects.Count != 0)
-                {
-                    addedWait = this.randomObjects[this.randomObjects.Count - 1].timeUntilSpawn;
-                }
-                nextObj.timeUntilSpawn = addedWait + Random.Range(minTimeToNextSpawn, maxTimeToNextSpawn);
-
-                // Decide randomly which prefab to use.
-                nextObj.objectScroller = this.allPrefabs[Random.Range(0, this.allPrefabs.Count)];
-            }
+            this.randomObjects.Add(nextObj);
+            Debug.Log("Object added: " + nextObj.timeUntilSpawn + ", " + nextObj.objectScroller.name);
         }
     }
 }
