@@ -8,16 +8,6 @@ public class GUIDriver : MonoBehaviour
 
     public int quitLevelIndex;
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
-
     public void quit()
     {
         SceneManager.LoadScene(quitLevelIndex);
