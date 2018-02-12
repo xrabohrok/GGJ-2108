@@ -14,6 +14,10 @@ namespace RobotGame
         private void Start()
         {
             clanky = GameObject.Find("Clanky").GetComponent<Clanky>();
+            if(clanky == null)
+            {
+                clanky = GameObject.FindObjectOfType<Clanky>();
+            }
            
         }
 
