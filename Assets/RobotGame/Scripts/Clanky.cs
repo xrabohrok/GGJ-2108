@@ -97,7 +97,7 @@ namespace RobotGame
             animator.SetTrigger("ClankyPositive");
             currentSpeed = increasedSpeed;
             powered = true;
-            StartCoroutine(PoweredRoutine(powerTimer));
+            StartCoroutine(PoweredRoutine());
 
         }
 
